@@ -1,0 +1,19 @@
+<div class="editar-usuario form-card">
+	<h3>Editar Usuario</h3>
+
+	<div *ngIf="loading" class="loading-spinner">
+		<div class="spinner"></div>
+		<span>Cargando...</span>
+	</div>
+
+	<div *ngIf="!loading">
+		<app-dynamic-form 
+			[config]="userFormConfig"
+			[initialValues]="currentUser"
+			(formSubmit)="onFormSubmit($event)"
+			(formReset)="onFormReset()">
+		</app-dynamic-form>
+	</div>
+
+	<div class="error" *ngIf="error">{{ error }}</div>
+</div>

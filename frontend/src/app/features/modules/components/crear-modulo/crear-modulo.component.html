@@ -1,0 +1,28 @@
+<div class="crear-modulo form-card">
+	<h3>Crear Módulo</h3>
+	
+	<app-dynamic-form 
+		[config]="moduleFormConfig"
+		(formSubmit)="onFormSubmit($event)"
+		(formReset)="onFormReset()">
+	</app-dynamic-form>
+
+	<!-- Roles Permitidos Section (Custom) -->
+	<div class="form-section roles-section" *ngIf="roles.length > 0">
+		<h4>Roles Permitidos</h4>
+		<div class="roles-grid">
+			<div *ngFor="let role of roles" class="role-item">
+				<label class="checkbox-group">
+					<input 
+						type="checkbox" 
+						[checked]="isRoleSelected(role.id)"
+						(change)="toggleRole(role.id, $any($event.target).checked)">
+					<span class="checkmark"></span>
+					{{ role.nombre }}
+				</label>
+			</div>
+		</div>
+	</div>
+
+	<div class="error" *ngIf="error">{{ error }}</div>
+</div>

@@ -1,0 +1,132 @@
+<div class="usuario-container">
+  <div class="container-header">
+    <h2>Gestión de Usuarios</h2>
+  </div>
+
+  <!-- Search Filter Bar -->
+  <app-search-filter-bar
+    [config]="searchFilterConfig"
+    [currentView]="currentView"
+    [searchTerm]="searchTerm"
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (searchChange)="onSearchChange($event)"
+    (viewChange)="onViewChange($event)"
+    (createClick)="onCreateClick()"
+    (pageChange)="onPageChange($event)">
+  </app-search-filter-bar>
+
+  <!-- Form Section -->
+  <div class="form-section" *ngIf="showForm">
+    <div class="form-card">
+      <div class="form-header">
+        <h3>{{ editingId ? 'Editar Usuario' : 'Crear Nuevo Usuario' }}</h3>
+        <button type="button" class="btn-close" (click)="onFormReset()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+
+      <app-dynamic-form
+        [config]="userFormConfig"
+        (formSubmit)="onFormSubmit($event)"
+        (formReset)="onFormReset()">
+      </app-dynamic-form>
+
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+  </div>
+
+  <!-- Users List with View Toggle -->
+  <div class="list-section" *ngIf="users.length > 0">
+    <!-- Grid View -->
+    <div class="users-grid" *ngIf="currentView === 'grid'">
+      <div *ngFor="let user of paginatedUsers" class="user-card">
+        <div class="card-header">
+          <div class="user-avatar">
+            <span class="material-icons">person</span>
+          </div>
+          <div class="user-main-info">
+            <h4 class="user-name">{{ user.nombre }}</h4>
+            <p class="user-email">{{ user.email }}</p>
+          </div>
+          <div class="user-status" [class.active]="user.activo">
+            <span class="status-dot"></span>
+            <span class="status-text">{{ user.activo ? 'Activo' : 'Inactivo' }}</span>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="user-details">
+            <div class="detail-item">
+              <span class="detail-label">ID:</span>
+              <span class="detail-value">{{ user.id }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Rol:</span>
+              <span class="detail-value role-badge">{{ getRoleName(user.roleId) }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" class="btn btn-sm btn-outline" (click)="editUser(user)" title="Editar">
+            <span class="material-icons">edit</span>
+          </button>
+
+          <app-action-dropdown
+            [config]="actionDropdownConfig"
+            [actions]="getUserActions(user)"
+            (actionClick)="onUserAction($event, user)">
+          </app-action-dropdown>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table View -->
+    <app-generic-table
+      *ngIf="currentView === 'table'"
+      [columns]="tableColumns"
+      [data]="tableData"
+      [pageSize]="pageSize"
+      [enableSearch]="false"
+      [canEdit]="permissionChecker.hasPermission(modulePermissions, 'Editar')"
+      [canDelete]="permissionChecker.hasPermission(modulePermissions, 'Eliminar')"
+      [extraActions]="tableExtraActions"
+      (edit)="onTableEdit($event)"
+      (delete)="onTableDelete($event)"
+      (action)="onTableAction($event)">
+    </app-generic-table>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-section" *ngIf="loading">
+    <div class="spinner"></div>
+    <span>Cargando usuarios...</span>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!loading && filteredUsers.length === 0 && searchTerm">
+    <div class="empty-icon">
+      <span class="material-icons">search_off</span>
+    </div>
+    <h3>No se encontraron usuarios</h3>
+    <p>No hay usuarios que coincidan con "{{ searchTerm }}".</p>
+    <button type="button" class="btn btn-secondary" (click)="onSearchChange('')">
+      <span class="material-icons">clear</span>
+      Limpiar búsqueda
+    </button>
+  </div>
+
+  <!-- No Users State -->
+  <div class="empty-state" *ngIf="!loading && users.length === 0">
+    <div class="empty-icon">
+      <span class="material-icons">person</span>
+    </div>
+    <h3>No hay usuarios creados</h3>
+    <p>Comienza creando tu primer usuario para gestionar el acceso.</p>
+    <button type="button" class="btn btn-primary" (click)="navigateToCreate()">
+      <span class="material-icons">person_add</span>
+      Crear Primer Usuario
+    </button>
+  </div>
+</div>

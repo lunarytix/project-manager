@@ -1,0 +1,11 @@
+<div class="crear-usuario form-card">
+	<h3>Crear Usuario</h3>
+	
+	<app-dynamic-form 
+		[config]="userFormConfig"
+		(formSubmit)="onFormSubmit($event)"
+		(formReset)="onFormReset()">
+	</app-dynamic-form>
+
+	<div class="error" *ngIf="error">{{ error }}</div>
+</div>

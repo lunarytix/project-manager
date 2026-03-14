@@ -1,0 +1,76 @@
+<div class="action-dropdown" [class]="dropdownPositionClass">
+  <!-- Trigger Button -->
+  <button 
+    type="button"
+    class="dropdown-trigger btn"
+    [class]="buttonVariantClass"
+    [class.disabled]="disabled"
+    [disabled]="disabled"
+    (click)="toggleDropdown()">
+    
+    <span class="material-icons" *ngIf="config.buttonIcon">
+      {{ config.buttonIcon }}
+    </span>
+    
+    <span class="button-text" *ngIf="config.buttonText">
+      {{ config.buttonText }}
+    </span>
+    
+    <!-- Default icon if no custom icon -->
+    <span class="material-icons dropdown-arrow" *ngIf="!config.buttonIcon">
+      {{ isOpen ? 'expand_less' : 'more_vert' }}
+    </span>
+  </button>
+
+  <!-- Dropdown Menu -->
+  <div class="dropdown-menu" *ngIf="isOpen" [style.max-height]="config.maxHeight || '300px'">
+    <!-- Search Input -->
+    <div class="dropdown-search" *ngIf="config.searchable && actions.length > 5">
+      <div class="search-input-wrapper">
+        <span class="material-icons search-icon">search</span>
+        <input
+          type="text"
+          class="search-input"
+          [placeholder]="config.searchPlaceholder || 'Buscar acción...'"
+          [value]="searchTerm"
+          (input)="onSearchChange($any($event.target).value)"
+          (click)="$event.stopPropagation()">
+      </div>
+    </div>
+
+    <!-- Actions List -->
+    <div class="dropdown-content" *ngIf="filteredActions.length > 0">
+      <div *ngFor="let action of filteredActions; trackBy: trackByKey">
+        
+        <!-- Separator -->
+        <div class="dropdown-separator" *ngIf="action.separator"></div>
+        
+        <!-- Action Item -->
+        <button 
+          type="button"
+          class="dropdown-item"
+          [class]="'item-' + (action.color || 'secondary')"
+          [class.disabled]="action.disabled"
+          [disabled]="action.disabled"
+          (click)="onActionClick(action)"
+          *ngIf="!action.separator">
+          
+          <span class="material-icons item-icon" *ngIf="action.icon">
+            {{ action.icon }}
+          </span>
+          
+          <span class="item-label">{{ action.label }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- No Results -->
+    <div class="dropdown-empty" *ngIf="filteredActions.length === 0">
+      <span class="material-icons">search_off</span>
+      <span class="empty-text">No se encontraron acciones</span>
+    </div>
+  </div>
+
+  <!-- Backdrop for mobile -->
+  <div class="dropdown-backdrop" *ngIf="isOpen" (click)="isOpen = false"></div>
+</div>

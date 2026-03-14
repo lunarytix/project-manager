@@ -1,0 +1,6 @@
+# Normalize line endings
+* text=auto
+
+# Do not treat node_modules as text
+node_modules/** -text
+frontend/node_modules/** -text

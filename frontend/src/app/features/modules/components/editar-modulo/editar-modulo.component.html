@@ -1,0 +1,40 @@
+<div class="editar-modulo form-card">
+	<h3>Editar Módulo</h3>
+	<div *ngIf="loading">Cargando...</div>
+	<form *ngIf="!loading" [formGroup]="form" (ngSubmit)="submit()">
+		<mat-form-field appearance="outline" class="form-group">
+			<mat-label>Nombre</mat-label>
+			<input matInput formControlName="nombre" />
+		</mat-form-field>
+
+		<mat-form-field appearance="outline" class="form-group">
+			<mat-label>Descripción</mat-label>
+			<input matInput formControlName="descripcion" />
+		</mat-form-field>
+
+		<mat-form-field appearance="outline" class="form-group">
+			<mat-label>Icono</mat-label>
+			<input matInput formControlName="icono" />
+		</mat-form-field>
+
+		<mat-form-field appearance="outline" class="form-group">
+			<mat-label>Ruta</mat-label>
+			<input matInput formControlName="ruta" />
+		</mat-form-field>
+
+		<div class="form-group">
+			<label class="form-label">Roles Permitidos</label>
+			<div *ngFor="let r of roles">
+				<mat-checkbox (change)="toggleRole(r.id, $any($event).checked)" [checked]="form.value.rolesPermitidos?.includes(r.id)"> {{ r.nombre }}</mat-checkbox>
+			</div>
+		</div>
+
+		<mat-checkbox formControlName="activo">Activo</mat-checkbox>
+
+		<div class="form-actions">
+			<button mat-raised-button class="btn-primary" type="submit" [disabled]="submitting">{{ submitting ? 'Guardando...' : 'Guardar' }}</button>
+		</div>
+
+		<div class="error" *ngIf="error">{{ error }}</div>
+	</form>
+</div>

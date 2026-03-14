@@ -1,0 +1,12 @@
+<div class="eliminar-modulo">
+	<h3>Eliminar Módulo</h3>
+	<div *ngIf="loading">Cargando...</div>
+	<div *ngIf="!loading && module">
+		<p>¿Eliminar módulo <strong>{{ module.nombre }}</strong> ({{ module.ruta }})?</p>
+		<div class="actions">
+			<button (click)="confirmDelete()">Eliminar</button>
+			<button (click)="cancel()">Cancelar</button>
+		</div>
+	</div>
+	<div *ngIf="error" class="error">{{ error }}</div>
+</div>

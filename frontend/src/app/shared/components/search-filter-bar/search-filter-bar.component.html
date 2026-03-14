@@ -1,0 +1,106 @@
+<div class="search-filter-bar">
+  <!-- Search and Actions Row -->
+  <div class="search-actions-row">
+    <!-- Search Input -->
+    <div class="search-container">
+      <div class="search-input-wrapper">
+        <span class="material-icons search-icon">search</span>
+        <input
+          type="text"
+          class="search-input"
+          [placeholder]="config.placeholder || 'Buscar...'"
+          [value]="searchTerm"
+          (input)="onSearchChange($any($event.target).value)">
+        <button 
+          *ngIf="searchTerm" 
+          class="clear-search" 
+          (click)="onSearchChange('')">
+          <span class="material-icons">clear</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- View Toggle -->
+    <div class="view-toggle-container" *ngIf="config.showViewToggle !== false">
+      <app-view-toggle
+        [config]="viewConfig"
+        [currentView]="currentView"
+        (viewChange)="onViewChange($event)">
+      </app-view-toggle>
+    </div>
+
+    <!-- Create Button -->
+    <div class="create-button-container" *ngIf="config.showCreateButton !== false">
+      <button 
+        type="button" 
+        class="btn btn-primary create-btn"
+        (click)="onCreateClick()">
+        <span class="material-icons">{{ config.createButtonIcon || 'add' }}</span>
+        {{ config.createButtonText || 'Crear Nuevo' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Pagination Row -->
+  <div class="pagination-row" *ngIf="config.showPagination && totalPages > 1">
+    <div class="pagination-info">
+      <span class="pagination-text">
+        Página {{ currentPage }} de {{ totalPages }}
+        <span *ngIf="config.totalItems">({{ config.totalItems }} elementos)</span>
+      </span>
+    </div>
+
+    <div class="pagination-controls">
+      <!-- First Page -->
+      <button 
+        class="pagination-btn"
+        [class.disabled]="currentPage === 1"
+        (click)="onPageChange(1)"
+        [disabled]="currentPage === 1">
+        <span class="material-icons">first_page</span>
+      </button>
+
+      <!-- Previous Page -->
+      <button 
+        class="pagination-btn"
+        [class.disabled]="currentPage === 1"
+        (click)="onPageChange(currentPage - 1)"
+        [disabled]="currentPage === 1">
+        <span class="material-icons">chevron_left</span>
+      </button>
+
+      <!-- Previous Ellipsis -->
+      <span class="pagination-ellipsis" *ngIf="showPrevEllipsis">...</span>
+
+      <!-- Page Numbers -->
+      <button 
+        *ngFor="let page of pageNumbers"
+        class="pagination-btn page-number"
+        [class.active]="page === currentPage"
+        (click)="onPageChange(page)">
+        {{ page }}
+      </button>
+
+      <!-- Next Ellipsis -->
+      <span class="pagination-ellipsis" *ngIf="showNextEllipsis">...</span>
+
+      <!-- Next Page -->
+      <button 
+        class="pagination-btn"
+        [class.disabled]="currentPage === totalPages"
+        (click)="onPageChange(currentPage + 1)"
+        [disabled]="currentPage === totalPages">
+        <span class="material-icons">chevron_right</span>
+      </button>
+
+      <!-- Last Page -->
+      <button 
+        class="pagination-btn"
+        [class.disabled]="currentPage === totalPages"
+        (click)="onPageChange(totalPages)"
+        [disabled]="currentPage === totalPages">
+        <span class="material-icons">last_page</span>
+      </button>
+    </div>
+  </div>
+</div>

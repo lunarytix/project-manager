@@ -1,0 +1,61 @@
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs, 4px);
+  width: 100%;
+
+  .input-label {
+    font-family: var(--font-family);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight, 500);
+    color: var(--text-primary-color);
+    margin-bottom: var(--spacing-xs, 4px);
+  }
+
+  .form-input {
+    padding: var(--input-padding);
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius);
+    background: var(--input-background-color);
+    color: var(--text-primary-color);
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    letter-spacing: var(--letter-spacing);
+    transition: all 0.2s ease;
+    box-shadow: var(--box-shadow);
+    
+    &:focus {
+      outline: none;
+      border-color: var(--input-focus-color);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    }
+    
+    &.error {
+      border-color: var(--danger-color);
+    }
+    
+    &:disabled {
+      opacity: 0.6;
+      background: var(--background-secondary-color);
+      cursor: not-allowed;
+    }
+    
+    &:readonly {
+      background: var(--background-secondary-color);
+    }
+  }
+
+  .error-message {
+    font-size: var(--font-size-small);
+    color: var(--danger-color);
+    margin-top: var(--spacing-xs, 4px);
+  }
+}
+
+// Glass effect when enabled
+:host-context(.glass-theme) .form-input {
+  background: rgba(255, 255, 255, var(--background-opacity, 0.1));
+  backdrop-filter: blur(var(--backdrop-blur, 10px));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}

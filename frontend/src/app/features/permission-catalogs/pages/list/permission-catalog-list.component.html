@@ -1,0 +1,110 @@
+<!-- Loading State -->
+<div *ngIf="loading" class="loading-state">
+  <div class="loading-spinner">
+    <i class="fas fa-spinner fa-spin"></i>
+    <span>Cargando catálogos...</span>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div *ngIf="!loading" class="catalogs-container">
+  <!-- Search and Filter Bar -->
+  <app-search-filter-bar
+    [config]="searchFilterConfig"
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (searchChange)="onSearchChange($event)"
+    (pageChange)="onPageChange($event)"
+    (viewChange)="onViewChange($event)"
+    (createClick)="onCreateClick()">
+  </app-search-filter-bar>
+
+  <!-- Grid View -->
+  <app-standard-grid 
+    *ngIf="currentView === 'grid'"
+    [items]="gridItems"
+    [config]="gridConfig"
+    [actionsProvider]="getCatalogActionsForGrid"
+    (edit)="onGridEdit($event)"
+    (action)="onGridAction($event)">
+    
+    <!-- Custom content for each catalog -->
+    <ng-template #bodyContent let-item let-originalItem="originalItem">
+      <div class="catalog-info-section">
+        <div class="info-header">
+          <span class="material-icons">category</span>
+          <span class="info-title">Información del Catálogo</span>
+        </div>
+        
+        <div class="info-summary">
+          <div class="info-stat">
+            <span class="stat-label">Catálogo de Permisos</span>
+          </div>
+        </div>
+
+        <div class="catalog-type-preview">
+          <div class="type-header">Tipo de catálogo:</div>
+          <div class="type-badges">
+            <span class="type-badge system" *ngIf="originalItem.nombre?.toLowerCase().includes('sistema') || originalItem.nombre?.toLowerCase().includes('system')">
+              <span class="material-icons">settings</span>
+              Sistema
+            </span>
+            <span class="type-badge module" *ngIf="originalItem.nombre?.toLowerCase().includes('modulo') || originalItem.nombre?.toLowerCase().includes('module')">
+              <span class="material-icons">extension</span>
+              Módulo
+            </span>
+            <span class="type-badge user" *ngIf="originalItem.nombre?.toLowerCase().includes('usuario') || originalItem.nombre?.toLowerCase().includes('user')">
+              <span class="material-icons">people</span>
+              Usuario
+            </span>
+            <span class="type-badge admin" *ngIf="originalItem.nombre?.toLowerCase().includes('admin')">
+              <span class="material-icons">admin_panel_settings</span>
+              Administración
+            </span>
+            <span class="type-badge default" *ngIf="!originalItem.nombre?.toLowerCase().includes('sistema') && !originalItem.nombre?.toLowerCase().includes('system') && !originalItem.nombre?.toLowerCase().includes('modulo') && !originalItem.nombre?.toLowerCase().includes('module') && !originalItem.nombre?.toLowerCase().includes('usuario') && !originalItem.nombre?.toLowerCase().includes('user') && !originalItem.nombre?.toLowerCase().includes('admin')">
+              <span class="material-icons">folder</span>
+              Catálogo General
+            </span>
+          </div>
+        </div>
+
+        <div class="catalog-status">
+          <span class="material-icons">verified</span>
+          <span>Catálogo Disponible</span>
+        </div>
+      </div>
+    </ng-template>
+  </app-standard-grid>
+
+  <!-- Table View -->
+  <div *ngIf="currentView === 'table'" class="catalogs-table">
+    <app-generic-table 
+      [data]="paginatedCatalogs"
+      [columns]="tableColumns"
+      (edit)="edit($event.id)"
+      (delete)="remove($event.id)">
+    </app-generic-table>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && filteredCatalogs.length === 0" class="empty-state">
+    <div class="empty-content">
+      <i class="fas fa-folder-open empty-icon"></i>
+      <h3 *ngIf="searchTerm">No se encontraron catálogos</h3>
+      <h3 *ngIf="!searchTerm">No hay catálogos disponibles</h3>
+      <p *ngIf="searchTerm">
+        No hay catálogos que coincidan con "{{ searchTerm }}"
+      </p>
+      <p *ngIf="!searchTerm">
+        Comienza creando tu primer catálogo de permisos
+      </p>
+      <button *ngIf="!searchTerm && permissions.canCreate" 
+              type="button" 
+              class="btn btn-primary"
+              (click)="edit()">
+        <i class="fas fa-plus"></i>
+        Crear Catálogo
+      </button>
+    </div>
+  </div>
+</div>

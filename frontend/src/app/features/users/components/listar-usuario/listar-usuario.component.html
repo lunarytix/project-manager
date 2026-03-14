@@ -1,0 +1,16 @@
+	<div class="usuarios-list">
+	<header class="usuarios-header">
+		<h2>Usuarios</h2>
+		<button *ngIf="permissions.canCreate" (click)="onCreate()">Crear Usuario</button>
+	</header>
+
+	<div *ngIf="loading">Cargando usuarios...</div>
+	<div *ngIf="!loading && usuarios.length === 0">No hay usuarios registrados.</div>
+
+	<app-generic-table *ngIf="!loading" [columns]="cols" [data]="usuarios" [pageSize]="10" [enableSearch]="true"
+		[canEdit]="permissions.canUpdate" [canDelete]="permissions.canDelete" [useNgSelect]="true" [useRowIconForActions]="true"
+		(edit)="onEdit($event.id)" (delete)="onDelete($event.id)">
+	</app-generic-table>
+
+	<div class="error" *ngIf="error">{{ error }}</div>
+</div>

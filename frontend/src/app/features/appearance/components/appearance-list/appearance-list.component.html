@@ -1,0 +1,114 @@
+<div class="themes-list">
+  <div *ngIf="loading" class="loading">
+    <p>Cargando temas...</p>
+  </div>
+
+  <!-- Preview Actions Bar -->
+  <div *ngIf="isPreviewMode && previewTheme" class="preview-actions">
+    <div class="preview-info">
+      <span class="material-icons">visibility</span>
+      Vista previa: <strong>{{ previewTheme.name }}</strong>
+    </div>
+    <div class="preview-buttons">
+      <button class="btn btn-primary" (click)="applyTheme(previewTheme)">
+        <span class="material-icons">check</span>
+        Aplicar este tema
+      </button>
+      <button class="btn btn-outline" (click)="cancelPreview()">
+        <span class="material-icons">close</span>
+        Cancelar
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && themes.length === 0" class="no-themes">
+    <div class="empty-state">
+      <span class="material-icons">palette</span>
+      <h3>No hay temas disponibles</h3>
+      <p>Crea tu primer tema personalizado</p>
+      <button class="btn btn-primary" (click)="createNew()">
+        <span class="material-icons">add</span>
+        Crear Tema
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && themes.length > 0" class="themes-grid">
+    <div *ngFor="let theme of themes" class="theme-card" 
+         [class.active]="theme.id === previewTheme?.id" 
+         [class.default]="theme.isDefault"
+         [class.current]="theme.id === getDefaultTheme()?.id && !isPreviewMode">
+      
+      <!-- Theme Preview -->
+      <div class="theme-preview">
+        <div class="color-preview">
+          <div class="color-swatch primary" [style.background-color]="theme.primaryColor"></div>
+          <div class="color-swatch secondary" [style.background-color]="theme.secondaryColor"></div>
+          <div class="color-swatch tertiary" [style.background-color]="theme.tertiaryColor"></div>
+          <div class="color-swatch success" [style.background-color]="theme.successColor"></div>
+          <div class="color-swatch warning" [style.background-color]="theme.warningColor"></div>
+          <div class="color-swatch danger" [style.background-color]="theme.dangerColor"></div>
+        </div>
+        
+        <div class="theme-mock" [style.background-color]="theme.backgroundColor">
+          <div class="mock-header" [style.background-color]="theme.primaryColor"></div>
+          <div class="mock-content" [style.background-color]="theme.backgroundSecondaryColor">
+            <div class="mock-text primary" [style.color]="theme.textPrimaryColor"></div>
+            <div class="mock-text secondary" [style.color]="theme.textSecondaryColor"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme Info -->
+      <div class="theme-info">
+        <div class="theme-header">
+          <h3>{{ theme.name }}</h3>
+          <div class="theme-badges">
+            <span *ngIf="theme.isDefault" class="badge default">Por defecto</span>
+            <span *ngIf="theme.id === previewTheme?.id && isPreviewMode" class="badge active">Vista previa</span>
+          </div>
+        </div>
+        
+        <p class="theme-description" *ngIf="theme.description">{{ theme.description }}</p>
+        
+        <!-- Actions -->
+        <div class="theme-actions">
+          <!-- Vista previa: mostrar para temas no aplicados y cuando no estamos en modo preview -->
+          <button class="btn btn-outline" 
+                  (click)="startPreview(theme)" 
+                  *ngIf="!theme.isDefault && !isPreviewMode"
+                  [disabled]="loading">
+            <span class="material-icons">visibility</span>
+            Vista previa
+          </button>
+          
+          <!-- Aplicar: mostrar cuando no es el tema por defecto -->
+          <button class="btn btn-primary" 
+                  (click)="applyTheme(theme)" 
+                  *ngIf="!theme.isDefault"
+                  [disabled]="loading">
+            <span class="material-icons">check</span>
+            Aplicar
+          </button>
+          
+          <!-- Editar: siempre disponible -->
+          <button class="btn btn-outline" 
+                  (click)="editTheme(theme)"
+                  [disabled]="loading">
+            <span class="material-icons">edit</span>
+            Editar
+          </button>
+          
+          <!-- Eliminar: no permitir eliminar el tema por defecto -->
+          <button class="btn btn-danger" 
+                  (click)="deleteTheme(theme)" 
+                  *ngIf="!theme.isDefault"
+                  [disabled]="loading">
+            <span class="material-icons">delete</span>
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

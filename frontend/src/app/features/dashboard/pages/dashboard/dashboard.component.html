@@ -1,0 +1,33 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <div class="header-content">
+      <h1>Bienvenido{{ usuario ? (', ' + usuario.nombre) : '' }}</h1>
+      <button class="logout-btn" (click)="logout()">Salir</button>
+    </div>
+  </header>
+
+  <main class="dashboard-content">
+    <section class="modules-section">
+      <h2>Módulos disponibles</h2>
+
+      <div *ngIf="loading" class="loading">
+        <p>Cargando módulos...</p>
+      </div>
+
+      <div *ngIf="!loading && visibleModules.length === 0" class="no-modules">
+        <p>No hay módulos disponibles.</p>
+      </div>
+
+      <div *ngIf="!loading && visibleModules.length > 0" class="modules-grid">
+        <div *ngFor="let module of visibleModules" class="module-card" (click)="navigateTo(module.ruta)">
+          <div class="module-icon">
+            <span class="material-icons" aria-hidden="true">{{ module.icono }}</span>
+          </div>
+          <h3>{{ module.nombre }}</h3>
+          <p class="module-description">{{ module.descripcion }}</p>
+          <span class="module-link">Ir al módulo →</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

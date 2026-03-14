@@ -1,0 +1,142 @@
+<div class="modulo-container">
+  <div class="container-header">
+    <h2>Gestión de Módulos</h2>
+  </div>
+
+  <!-- Search Filter Bar -->
+  <app-search-filter-bar
+    [config]="searchFilterConfig"
+    [currentView]="currentView"
+    [searchTerm]="searchTerm"
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (searchChange)="onSearchChange($event)"
+    (viewChange)="onViewChange($event)"
+    (createClick)="onCreateClick()"
+    (pageChange)="onPageChange($event)">
+  </app-search-filter-bar>
+
+  <!-- Form Section -->
+  <div class="form-section" *ngIf="showForm">
+    <div class="form-card">
+      <div class="form-header">
+        <h3>{{ editingId ? 'Editar Módulo' : 'Crear Nuevo Módulo' }}</h3>
+        <button type="button" class="btn-close" (click)="onFormReset()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      
+      <app-dynamic-form 
+        [config]="moduleFormConfig"
+        (formSubmit)="onFormSubmit($event)"
+        (formReset)="onFormReset()">
+      </app-dynamic-form>
+
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+  </div>
+
+  <!-- Modules List with View Toggle -->
+  <div class="list-section" *ngIf="modules.length > 0">
+    <!-- Grid View -->
+    <div *ngIf="currentView === 'grid'">
+      <app-standard-grid
+        [items]="gridItems"
+        [config]="gridConfig"
+        [actionDropdownConfig]="actionDropdownConfig"
+        [actionsProvider]="getModuleActionsForGrid"
+        (edit)="onGridEdit($event)"
+        (action)="onGridAction($event)">
+        
+        <ng-template #bodyTemplate let-item>
+          <div class="module-details">
+            <div class="detail-item">
+              <span class="detail-label">Ruta:</span>
+              <span class="detail-value route-path">{{ item.route }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">ID:</span>
+              <span class="detail-value">{{ item.id }}</span>
+            </div>
+          </div>
+
+          <!-- Permissions Section -->
+          <div class="permissions-section" *ngIf="modulePermissions[item.id]">
+            <div class="permissions-header">
+              <span class="material-icons">security</span>
+              <span class="permissions-title">Permisos</span>
+            </div>
+            
+            <div class="permissions-summary">
+              <div class="permission-stat">
+                <span class="stat-label">{{ getPermissionSummary(item.id) }}</span>
+              </div>
+            </div>
+
+            <div class="roles-list" *ngIf="getModuleRoles(item.id).length > 0">
+              <div class="roles-header">Roles con acceso:</div>
+              <div class="role-badges">
+                <span 
+                  *ngFor="let role of getModuleRoles(item.id)" 
+                  class="role-badge"
+                  [title]="role.nombre">
+                  {{ role.nombre }}
+                </span>
+              </div>
+            </div>
+
+            <div class="no-permissions" *ngIf="getModulePermissionCount(item.id) === 0">
+              <span class="material-icons">security</span>
+              <span>Sin permisos configurados</span>
+            </div>
+          </div>
+        </ng-template>
+      </app-standard-grid>
+    </div>
+
+    <!-- Table View -->
+    <app-generic-table 
+      *ngIf="currentView === 'table'"
+      [columns]="tableColumns" 
+      [data]="tableData" 
+      [pageSize]="10" 
+      [enableSearch]="true"
+      [canEdit]="true" 
+      [canDelete]="true" 
+      (edit)="onTableEdit($event)" 
+      (delete)="onTableDelete($event)">
+    </app-generic-table>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-section" *ngIf="loading">
+    <div class="spinner"></div>
+    <span>Cargando módulos...</span>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!loading && filteredModules.length === 0 && searchTerm">
+    <div class="empty-icon">
+      <span class="material-icons">search_off</span>
+    </div>
+    <h3>No se encontraron módulos</h3>
+    <p>No hay módulos que coincidan con "{{ searchTerm }}".</p>
+    <button type="button" class="btn btn-secondary" (click)="onSearchChange('')">
+      <span class="material-icons">clear</span>
+      Limpiar búsqueda
+    </button>
+  </div>
+
+  <!-- No Modules State -->
+  <div class="empty-state" *ngIf="!loading && modules.length === 0">
+    <div class="empty-icon">
+      <span class="material-icons">extension</span>
+    </div>
+    <h3>No hay módulos creados</h3>
+    <p>Comienza creando tu primer módulo para organizar tu aplicación.</p>
+    <button type="button" class="btn btn-primary" (click)="navigateToCreate()">
+      <span class="material-icons">add</span>
+      Crear Primer Módulo
+    </button>
+  </div>
+</div>

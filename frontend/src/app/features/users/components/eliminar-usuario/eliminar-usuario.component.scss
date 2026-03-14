@@ -1,0 +1,5 @@
+.eliminar-usuario { padding: 12px; }
+.actions { display: flex; gap: 8px; }
+.actions button { padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd; background: #fff; cursor: pointer; }
+.actions button:first-child { background: #c53030; color: #fff; border: none; }
+.error { color: #c53030; margin-top: 8px; }

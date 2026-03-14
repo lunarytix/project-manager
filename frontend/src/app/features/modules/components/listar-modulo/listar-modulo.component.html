@@ -1,0 +1,16 @@
+<div class="modules-list">
+	<header class="modules-header">
+		<h2>Módulos</h2>
+		<button (click)="onCreate()">Crear Módulo</button>
+	</header>
+
+	<div *ngIf="loading">Cargando módulos...</div>
+	<div *ngIf="!loading && modules.length === 0">No hay módulos.</div>
+ 
+	<app-generic-table *ngIf="!loading && modules.length>0" [columns]="cols" [data]="modules" [pageSize]="10" [enableSearch]="true"
+	  [canEdit]="true" [canDelete]="true" [extraActions]="extraActions"
+	  (edit)="onEdit($event.id)" (delete)="onDelete($event.id)" (action)="handleAction($event)">
+	</app-generic-table>
+
+	<div class="error" *ngIf="error">{{ error }}</div>
+</div>

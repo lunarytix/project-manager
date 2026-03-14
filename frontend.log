@@ -1,0 +1,42 @@
+
+> project-manager@0.0.0 start
+> ng serve
+
+Node.js version v25.2.1 detected.
+Odd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/.
+Component HMR has been enabled, see https://angular.dev/hmr for more info.
+❯ Building...
+✔ Building...
+Initial chunk files | Names                                  |  Raw size
+polyfills.js        | polyfills                              |  89.77 kB | 
+main.js             | main                                   |  36.99 kB | 
+styles.css          | styles                                 |  20.86 kB | 
+chunk-X6X3Y735.js   | -                                      |   3.31 kB | 
+chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
+chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
+
+                    | Initial total                          | 153.83 kB
+
+Lazy chunk files    | Names                                  |  Raw size
+chunk-W6S2KOOC.js   | appearance-module                      | 171.57 kB | 
+chunk-H2BBNBV4.js   | modules-module                         | 146.51 kB | 
+chunk-ILEXJUET.js   | -                                      | 102.50 kB | 
+chunk-VVSIXH2F.js   | -                                      | 100.51 kB | 
+chunk-RYDWWCUM.js   | users-module                           | 100.39 kB | 
+chunk-IXW2KJI7.js   | role-permissions-component             |  43.67 kB | 
+chunk-4W2ICTKT.js   | roles-module                           |  39.73 kB | 
+chunk-NP2VO2IP.js   | permission-catalog-container-component |  33.54 kB | 
+chunk-D3NQN3PQ.js   | -                                      |  32.71 kB | 
+chunk-RV37SSLC.js   | permission-catalog-list-component      |  28.56 kB | 
+chunk-26G5MDQT.js   | dashboard-module                       |  20.44 kB | 
+chunk-DDTWDLHW.js   | auth-module                            |  12.34 kB | 
+chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
+chunk-TXMPJQLU.js   | -                                      |   5.54 kB | 
+chunk-HOCBOXEV.js   | -                                      |   4.24 kB | 
+...and 4 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [2.077 seconds]
+
+Watch mode enabled. Watching for file changes...
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+  ➜  Local:   http://localhost:4200/

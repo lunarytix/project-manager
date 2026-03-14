@@ -1,0 +1,50 @@
+<div class="generic-table">
+  <div class="toolbar">
+    <div *ngIf="enableSearch" class="search">
+      <input placeholder="Buscar..." [(ngModel)]="searchTerm" (ngModelChange)="goto(1)" />
+    </div>
+    <div class="pager-info">Mostrando {{ filtered.length }} registros</div>
+  </div>
+
+  <table class="gt-table">
+    <thead>
+      <tr>
+        <th *ngFor="let c of columns">{{ c.label }}</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of paged">
+        <td *ngFor="let c of columns">
+          <ng-container [ngSwitch]="c.format">
+            <span *ngSwitchCase="'bool'">{{ row[c.key] ? 'Sí' : 'No' }}</span>
+            <span *ngSwitchCase="'icon'">
+              <span class="material-icons" aria-hidden="true">{{ row[c.key] }}</span>
+            </span>
+            <span *ngSwitchDefault>{{ row[c.key] }}</span>
+          </ng-container>
+        </td>
+        <td class="actions">
+          <div class="actions-buttons">
+            <button *ngFor="let action of getAllActions(row)" 
+                    class="action-btn {{ action.cssClass }}" 
+                    [title]="action.label" 
+                    (click)="onDynamicAction(action, row)">
+              <span class="material-icons">{{ action.icon }}</span>
+              <span class="opt-label">{{ action.label }}</span>
+            </button>
+          </div>
+        </td>
+      </tr>
+      <tr *ngIf="paged.length === 0">
+        <td [attr.colspan]="columns.length + 1" class="empty">No hay registros.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button (click)="goto(currentPage - 1)" [disabled]="currentPage === 1">«</button>
+    <button *ngFor="let _ of getPages(); let i = index" (click)="goto(i+1)" [class.active]="currentPage === (i+1)">{{ i+1 }}</button>
+    <button (click)="goto(currentPage + 1)" [disabled]="currentPage === totalPages">»</button>
+  </div>
+</div>

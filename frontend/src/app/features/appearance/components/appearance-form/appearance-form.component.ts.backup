@@ -1,0 +1,471 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AppearanceService } from '../../../../core/services/appearance.service';
+import { Appearance } from '../../../../core/models/appearance.model';
+import { ColorHarmonyGenerator, ColorSuggestion } from '../../../../core/utils/color-harmony.util';
+
+@Component({
+  selector: 'app-appearance-form',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  templateUrl: './appearance-form.component.html',
+  styleUrls: ['./appearance-form.component.scss']
+})
+export class AppearanceFormComponent implements OnInit {
+  form: FormGroup;
+  isEdit = false;
+  themeId?: string;
+  loading = false;
+  saving = false;
+
+  colorCategories = [
+    {
+      name: 'Colores Primarios',
+      colors: [
+        { key: 'primaryColor', label: 'Primario', default: '#3B82F6' },
+        { key: 'primaryDarkColor', label: 'Primario Oscuro', default: '#1E3A8A' },
+        { key: 'primaryLightColor', label: 'Primario Claro', default: '#BFDBFE' }
+      ]
+    },
+    {
+      name: 'Colores Secundarios',
+      colors: [
+        { key: 'secondaryColor', label: 'Secundario', default: '#10B981' },
+        { key: 'secondaryDarkColor', label: 'Secundario Oscuro', default: '#064E3B' },
+        { key: 'secondaryLightColor', label: 'Secundario Claro', default: '#BBF7D0' }
+      ]
+    },
+    {
+      name: 'Colores Terciarios',
+      colors: [
+        { key: 'tertiaryColor', label: 'Terciario', default: '#F59E0B' },
+        { key: 'tertiaryDarkColor', label: 'Terciario Oscuro', default: '#92400E' },
+        { key: 'tertiaryLightColor', label: 'Terciario Claro', default: '#FEF3C7' }
+      ]
+    },
+    {
+      name: 'Colores de Fondo',
+      colors: [
+        { key: 'backgroundColor', label: 'Fondo Principal', default: '#FFFFFF' },
+        { key: 'backgroundSecondaryColor', label: 'Fondo Secundario', default: '#F8FAFC' },
+        { key: 'borderColor', label: 'Bordes', default: '#E2E8F0' }
+      ]
+    },
+    {
+      name: 'Colores de Texto',
+      colors: [
+        { key: 'textPrimaryColor', label: 'Texto Principal', default: '#111827' },
+        { key: 'textSecondaryColor', label: 'Texto Secundario', default: '#6B7280' },
+        { key: 'textMutedColor', label: 'Texto Atenuado', default: '#9CA3AF' }
+      ]
+    },
+    {
+      name: 'Colores de Estado',
+      colors: [
+        { key: 'dangerColor', label: 'Peligro', default: '#EF4444' },
+        { key: 'successColor', label: 'Éxito', default: '#22C55E' },
+        { key: 'warningColor', label: 'Advertencia', default: '#F59E0B' },
+        { key: 'infoColor', label: 'Información', default: '#3B82F6' }
+      ]
+    },
+    {
+      name: 'Colores de Input',
+      colors: [
+        { key: 'inputBackgroundColor', label: 'Fondo de Input', default: '#FFFFFF' },
+        { key: 'inputBorderColor', label: 'Borde de Input', default: '#E2E8F0' },
+        { key: 'inputFocusColor', label: 'Foco de Input', default: '#3B82F6' }
+      ]
+    }
+  ];
+
+  typographySettings = [
+    {
+      name: 'Fuente',
+      fields: [
+        { 
+          key: 'fontFamily', 
+          label: 'Familia de Fuente', 
+          type: 'select',
+          default: 'Inter, system-ui, -apple-system, sans-serif',
+          options: [
+            { value: 'Inter, system-ui, -apple-system, sans-serif', label: 'Inter (Sans-serif)' },
+            { value: 'Georgia, serif', label: 'Georgia (Serif)' },
+            { value: 'Monaco, monospace', label: 'Monaco (Monospace)' },
+            { value: 'Arial, sans-serif', label: 'Arial (Sans-serif)' },
+            { value: 'Helvetica, sans-serif', label: 'Helvetica (Sans-serif)' },
+            { value: 'Times, serif', label: 'Times (Serif)' }
+          ]
+        },
+        { key: 'fontSize', label: 'Tamaño Base', type: 'text', default: '16px' },
+        { key: 'fontSizeSmall', label: 'Tamaño Pequeño', type: 'text', default: '14px' },
+        { key: 'fontSizeLarge', label: 'Tamaño Grande', type: 'text', default: '18px' },
+        { 
+          key: 'fontWeight', 
+          label: 'Peso de Fuente', 
+          type: 'select',
+          default: '400',
+          options: [
+            { value: '100', label: '100 - Thin' },
+            { value: '300', label: '300 - Light' },
+            { value: '400', label: '400 - Regular' },
+            { value: '500', label: '500 - Medium' },
+            { value: '600', label: '600 - Semibold' },
+            { value: '700', label: '700 - Bold' },
+            { value: '900', label: '900 - Black' }
+          ]
+        },
+        { key: 'lineHeight', label: 'Altura de Línea', type: 'text', default: '1.5' },
+        { key: 'letterSpacing', label: 'Espaciado de Letras', type: 'text', default: '0px' }
+      ]
+    }
+  ];
+
+  visualEffects = [
+    {
+      name: 'Efectos Visuales',
+      fields: [
+        { key: 'textShadow', label: 'Sombra de Texto', type: 'text', default: 'none' },
+        { key: 'borderRadius', label: 'Radio de Borde', type: 'text', default: '8px' },
+        { key: 'borderRadiusSmall', label: 'Radio Pequeño', type: 'text', default: '4px' },
+        { key: 'borderRadiusLarge', label: 'Radio Grande', type: 'text', default: '12px' },
+        { key: 'boxShadow', label: 'Sombra de Caja', type: 'text', default: '0 1px 3px rgba(0, 0, 0, 0.1)' },
+        { key: 'backdropBlur', label: 'Desenfoque de Fondo', type: 'text', default: '0px' },
+        { 
+          key: 'backgroundOpacity', 
+          label: 'Opacidad de Fondo', 
+          type: 'range',
+          default: '1',
+          min: '0',
+          max: '1',
+          step: '0.1'
+        },
+        { key: 'glassEffect', label: 'Efecto de Vidrio', type: 'checkbox', default: false }
+      ]
+    },
+    {
+      name: 'Estilos de Input',
+      fields: [
+        { key: 'inputPadding', label: 'Padding de Input', type: 'text', default: '12px 16px' }
+      ]
+    }
+  ];
+
+  previewTheme: any = {};
+  
+  // Color suggestions
+  showSuggestions = false;
+  suggestions: ColorSuggestion[] = [];
+  baseColorForSuggestions = '#3B82F6';
+  selectedSuggestion: ColorSuggestion | null = null;
+
+  constructor(
+    private fb: FormBuilder,
+    private appearanceService: AppearanceService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { 
+    this.form = this.createForm();
+  }
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.isEdit = true;
+        this.themeId = params['id'];
+        this.loadTheme();
+      } else {
+        this.initializeDefaults();
+      }
+    });
+
+    // Initialize preview with defaults
+    this.updatePreview();
+    
+    // Watch form changes for live preview
+    this.form.valueChanges.subscribe(() => {
+      this.updatePreview();
+    });
+  }
+
+  createForm(): FormGroup {
+    const formConfig: any = {
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      description: [''],
+      isActive: [true],
+      isDefault: [false]
+    };
+
+    // Add all color fields
+    this.colorCategories.forEach(category => {
+      category.colors.forEach(color => {
+        formConfig[color.key] = [color.default, [Validators.required, this.hexColorValidator]];
+      });
+    });
+
+    // Add typography fields
+    this.typographySettings.forEach(category => {
+      category.fields.forEach(field => {
+        if (field.type === 'checkbox') {
+          formConfig[field.key] = [field.default];
+        } else {
+          formConfig[field.key] = [field.default, [Validators.required]];
+        }
+      });
+    });
+
+    // Add visual effects fields
+    this.visualEffects.forEach(category => {
+      category.fields.forEach(field => {
+        if (field.type === 'checkbox') {
+          formConfig[field.key] = [field.default];
+        } else {
+          formConfig[field.key] = [field.default, [Validators.required]];
+        }
+      });
+    });
+
+    return this.fb.group(formConfig);
+  }
+
+  hexColorValidator(control: any) {
+    const hexColor = /^#[0-9A-Fa-f]{6}$/;
+    return hexColor.test(control.value) ? null : { invalidHexColor: true };
+  }
+
+  initializeDefaults(): void {
+    // Form already has default values from createForm
+  }
+
+  loadTheme(): void {
+    if (!this.themeId) return;
+    
+    this.loading = true;
+    this.appearanceService.getById(this.themeId).subscribe({
+      next: (theme) => {
+        this.form.patchValue(theme);
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading theme:', error);
+        this.loading = false;
+        this.router.navigate(['/appearance']);
+      }
+    });
+  }
+
+  updatePreview(): void {
+    const formValue = this.form.value;
+    this.previewTheme = { ...formValue };
+    
+    // Apply preview to document
+    const root = document.documentElement;
+    Object.entries(formValue).forEach(([key, value]) => {
+      if (key.includes('Color') && value) {
+        const cssVar = key
+          .replace(/([A-Z])/g, '-$1')
+          .toLowerCase()
+          .replace('color', '');
+        root.style.setProperty(`--preview-${cssVar}`, value as string);
+      }
+    });
+  }
+
+  onSubmit(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    this.saving = true;
+    const formValue = this.form.value;
+
+    const saveObservable = this.isEdit
+      ? this.appearanceService.update(this.themeId!, formValue)
+      : this.appearanceService.create(formValue);
+
+    saveObservable.subscribe({
+      next: (theme) => {
+        this.saving = false;
+        if (formValue.isDefault) {
+          this.appearanceService.applyTheme(theme);
+        }
+        this.router.navigate(['/appearance']);
+      },
+      error: (error) => {
+        console.error('Error saving theme:', error);
+        this.saving = false;
+      }
+    });
+  }
+
+  cancel(): void {
+    this.router.navigate(['/appearance']);
+  }
+
+  resetToDefaults(): void {
+    if (confirm('¿Está seguro de que desea restablecer todos los valores por defecto?')) {
+      this.form.reset();
+      this.initializeDefaults();
+      this.updatePreview();
+    }
+  }
+
+  getFieldError(fieldName: string): string {
+    const field = this.form.get(fieldName);
+    if (field?.errors?.['required']) {
+      return 'Este campo es requerido';
+    }
+    if (field?.errors?.['minlength']) {
+      return 'Debe tener al menos 3 caracteres';
+    }
+    if (field?.errors?.['invalidHexColor']) {
+      return 'Debe ser un color hexadecimal válido (ej: #3B82F6)';
+    }
+    return '';
+  }
+
+  // Color suggestions methods
+  toggleSuggestions(): void {
+    this.showSuggestions = !this.showSuggestions;
+    if (this.showSuggestions && this.suggestions.length === 0) {
+      this.generateSuggestions();
+    }
+  }
+
+  onBaseColorChange(color: string): void {
+    this.baseColorForSuggestions = color;
+    if (this.showSuggestions) {
+      this.generateSuggestions();
+    }
+  }
+
+  generateSuggestions(): void {
+    this.suggestions = ColorHarmonyGenerator.generateAllSuggestions(this.baseColorForSuggestions);
+  }
+
+  selectSuggestion(suggestion: ColorSuggestion): void {
+    this.selectedSuggestion = suggestion;
+    
+    // Apply the suggested colors to the form
+    Object.entries(suggestion.colors).forEach(([key, value]) => {
+      if (this.form.get(key)) {
+        this.form.get(key)?.setValue(value);
+      }
+    });
+    
+    this.updatePreview();
+  }
+
+  getSuggestionCardClass(suggestion: ColorSuggestion): string {
+    const baseClass = 'suggestion-card';
+    const isSelected = this.selectedSuggestion?.name === suggestion.name;
+    const schemeClass = suggestion.name.toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/á/g, 'a')
+      .replace(/é/g, 'e')
+      .replace(/í/g, 'i')
+      .replace(/ó/g, 'o')
+      .replace(/ú/g, 'u');
+    
+    return `${baseClass} ${schemeClass} ${isSelected ? 'selected' : ''}`;
+  }
+  }
+
+  cancel(): void {
+    this.router.navigate(['/appearance']);
+  }
+
+  resetToDefaults(): void {
+    if (confirm('¿Está seguro de que desea restablecer todos los colores a los valores por defecto?')) {
+      this.colorCategories.forEach(category => {
+        category.colors.forEach(color => {
+          this.form.patchValue({ [color.key]: color.default });
+        });
+      });
+    }
+  }
+
+  getFieldError(field: string): string {
+    const control = this.form.get(field);
+    if (control?.errors && control.touched) {
+      if (control.errors['required']) return 'Este campo es requerido';
+      if (control.errors['minlength']) return 'Mínimo 3 caracteres';
+      if (control.errors['invalidHexColor']) return 'Debe ser un color hexadecimal válido (ej: #FF0000)';
+    }
+    return '';
+  }
+
+  // === COLOR SUGGESTIONS FUNCTIONALITY ===
+  
+  toggleSuggestions(): void {
+    this.showSuggestions = !this.showSuggestions;
+    if (this.showSuggestions && this.suggestions.length === 0) {
+      this.generateSuggestions();
+    }
+  }
+
+  generateSuggestions(): void {
+    if (!this.baseColorForSuggestions) return;
+    
+    this.suggestions = ColorHarmonyGenerator.generateAllSuggestions(this.baseColorForSuggestions);
+    this.selectedSuggestion = null;
+  }
+
+  onBaseColorChange(color: string): void {
+    this.baseColorForSuggestions = color;
+    if (this.showSuggestions) {
+      this.generateSuggestions();
+    }
+  }
+
+  selectSuggestion(suggestion: ColorSuggestion): void {
+    this.selectedSuggestion = suggestion;
+  }
+
+  applySuggestion(): void {
+    if (!this.selectedSuggestion) return;
+
+    // Aplicar los colores de la sugerencia al formulario
+    const colors = this.selectedSuggestion.colors;
+    
+    // Aplicar solo los colores principales, secundarios y terciarios
+    Object.keys(colors).forEach(colorKey => {
+      if (this.form.get(colorKey)) {
+        this.form.patchValue({ [colorKey]: colors[colorKey] });
+      }
+    });
+
+    // Agregar colores de estado y fondo automáticos
+    const statusColors = ColorHarmonyGenerator.generateStatusColors(colors['primaryColor']);
+    const backgroundColors = ColorHarmonyGenerator.generateBackgroundAndTextColors();
+    
+    this.form.patchValue({
+      ...statusColors,
+      ...backgroundColors
+    });
+
+    // Cerrar el panel de sugerencias
+    this.showSuggestions = false;
+    this.selectedSuggestion = null;
+  }
+
+  discardSuggestion(): void {
+    this.selectedSuggestion = null;
+  }
+
+  getSuggestionCardClass(suggestion: ColorSuggestion): string {
+    let classes = 'suggestion-card';
+    
+    if (this.selectedSuggestion?.name === suggestion.name) {
+      classes += ' selected';
+    }
+    
+    if (suggestion.name.includes('Glass Liquid')) {
+      classes += ' glass-liquid';
+    }
+    
+    return classes;
+  }
+}

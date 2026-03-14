@@ -1,0 +1,54 @@
+<div class="topbar">
+  <div class="left">
+    <button class="hamburger" (click)="toggleMenu()" aria-label="Menu">☰</button>
+  </div>
+
+  <div class="brand">Project Manager</div>
+
+  <div class="right">
+    <div class="profile" (click)="toggleProfile()">
+      <div class="avatar">
+        <img *ngIf="user?.photo" [src]="user.photo" alt="avatar" />
+        <span *ngIf="!user?.photo">{{ user?.nombre ? (user.nombre.charAt(0) || 'U') : 'U' }}</span>
+      </div>
+      <div class="profile-name">{{ user?.nombre || 'Usuario' }}</div>
+    </div>
+  </div>
+</div>
+
+<!-- Left sidebar (menu) -->
+<aside class="sidebar left" [class.open]="showMenu" [attr.aria-hidden]="!showMenu">
+  <div class="sidebar-header">
+    <button class="close" (click)="toggleMenu()">✕</button>
+  </div>
+  <nav class="sidebar-nav">
+    <button class="menu-item" (click)="goBack()">← Volver</button>
+    <button class="menu-item" (click)="goDashboard()">🏠 Dashboard</button>
+  </nav>
+</aside>
+
+<!-- Right sidebar (profile) -->
+<aside class="sidebar right" [class.open]="showProfile" [attr.aria-hidden]="!showProfile">
+  <div class="cover" [ngStyle]="{ 'background-image': user?.photo ? 'url(' + user.photo + ')' : '' }">
+    <div class="cover-overlay"></div>
+  </div>
+  <div class="profile-body">
+    <div class="avatar-large">
+      <img *ngIf="user?.photo" [src]="user.photo" alt="avatar" />
+      <span *ngIf="!user?.photo">{{ user?.nombre ? user.nombre.charAt(0) : 'U' }}</span>
+    </div>
+    <div class="info">
+      <div class="name">{{ user?.nombre || 'Usuario' }}</div>
+      <div class="subtitle">{{ user?.roleName || 'Administrador' }}</div>
+      <div class="email">{{ user?.email || '' }}</div>
+    </div>
+
+    <div class="sidebar-actions bold">
+      <button class="menu-item primary" (click)="goSettings()">⚙️ Configuración</button>
+      <button class="menu-item outline" (click)="logout()">🔓 Cerrar sesión</button>
+    </div>
+  </div>
+</aside>
+
+<!-- overlay -->
+<div class="overlay" *ngIf="showMenu || showProfile" (click)="showMenu=false; showProfile=false"></div>

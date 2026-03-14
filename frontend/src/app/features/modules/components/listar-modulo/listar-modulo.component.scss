@@ -1,0 +1,41 @@
+.modules-list {
+	padding: 12px;
+}
+.modules-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 12px;
+}
+.modules-header button {
+	background: #2b6cb0;
+	color: #fff;
+	border: none;
+	padding: 8px 12px;
+	border-radius: 6px;
+	cursor: pointer;
+}
+.table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.table th, .table td {
+	padding: 8px;
+	border-bottom: 1px solid #eee;
+	text-align: left;
+}
+.table th {
+	background: #fafafa;
+}
+.table button {
+	margin-right: 6px;
+	padding: 6px 8px;
+	border-radius: 6px;
+	border: 1px solid #ddd;
+	background: #fff;
+	cursor: pointer;
+}
+.error {
+	color: #c53030;
+	margin-top: 8px;
+}

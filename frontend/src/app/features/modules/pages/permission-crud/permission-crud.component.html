@@ -1,0 +1,47 @@
+<div class="permission-crud">
+  <div class="header">
+    <h1>Permisos — {{ moduleName }}</h1>
+    <div class="actions"><button class="btn-secondary" (click)="back()">← Volver a Módulos</button></div>
+  </div>
+
+  <div *ngIf="loading">Cargando...</div>
+
+  <div *ngIf="!loading">
+    <section class="create">
+      <h3>Agregar permiso</h3>
+      <div class="form-row">
+        <select [(ngModel)]="newRoleId">
+          <option value="">-- Selecciona rol --</option>
+          <option *ngFor="let r of roles" [value]="r.id">{{ r.nombre }}</option>
+        </select>
+        <label><input type="checkbox" [(ngModel)]="newCanRead"> Leer</label>
+        <label><input type="checkbox" [(ngModel)]="newCanCreate"> Crear</label>
+        <label><input type="checkbox" [(ngModel)]="newCanUpdate"> Editar</label>
+        <label><input type="checkbox" [(ngModel)]="newCanDelete"> Eliminar</label>
+        <button class="btn-primary" (click)="createPermission()">Agregar</button>
+      </div>
+    </section>
+
+    <section class="list">
+      <h3>Permisos existentes</h3>
+      <table class="table">
+        <thead>
+          <tr><th>Rol</th><th>Leer</th><th>Crear</th><th>Editar</th><th>Eliminar</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of permissions">
+            <td>{{ p.role?.nombre || p.roleId }}</td>
+            <td><input type="checkbox" [(ngModel)]="p.canRead"></td>
+            <td><input type="checkbox" [(ngModel)]="p.canCreate"></td>
+            <td><input type="checkbox" [(ngModel)]="p.canUpdate"></td>
+            <td><input type="checkbox" [(ngModel)]="p.canDelete"></td>
+            <td>
+              <button (click)="savePermission(p)">Guardar</button>
+              <button (click)="deletePermission(p)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,256 @@
+<div class="appearance-form">
+  <div class="form-header">
+    <h2>{{ isEdit ? 'Editar Tema' : 'Crear Nuevo Tema' }}</h2>
+    <div class="form-actions">
+      <button type="button" class="btn btn-outline" (click)="cancel()" [disabled]="saving">
+        Cancelar
+      </button>
+      <button type="button" class="btn btn-outline" (click)="resetToDefaults()" [disabled]="saving">
+        <span class="material-icons">refresh</span>
+        Restablecer
+      </button>
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="saving || form.invalid">
+        <span class="material-icons">{{ saving ? 'hourglass_empty' : 'save' }}</span>
+        {{ saving ? 'Guardando...' : (isEdit ? 'Actualizar' : 'Crear Tema') }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="tab-navigation" *ngIf="!loading">
+    <button 
+      *ngFor="let tab of tabs"
+      type="button"
+      class="tab-button"
+      [class.active]="isActiveTab(tab.id)"
+      (click)="setActiveTab(tab.id)">
+      <span class="material-icons">{{ tab.icon }}</span>
+      {{ tab.label }}
+    </button>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tab-content" *ngIf="!loading">
+    
+    <!-- Basic Info Tab -->
+    <div class="tab-panel" *ngIf="activeTab === 'basic'">
+      <form [formGroup]="form" class="form-grid">
+        <div class="form-section">
+          <h3>Información Básica</h3>
+          
+          <div class="form-group">
+            <label for="name">Nombre del Tema *</label>
+            <input type="text" id="name" formControlName="name" class="form-control" 
+                   [class.error]="form.get('name')?.invalid && form.get('name')?.touched" 
+                   placeholder="Ej: Tema Corporativo">
+            <div class="error-message" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+              {{ getFieldError('name') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Descripción</label>
+            <textarea id="description" formControlName="description" class="form-control" 
+                      rows="2" placeholder="Describe las características de este tema"></textarea>
+          </div>
+
+          <div class="form-checkboxes">
+            <label class="checkbox-group">
+              <input type="checkbox" formControlName="isActive">
+              <span class="checkmark"></span>
+              Tema activo
+            </label>
+            <label class="checkbox-group">
+              <input type="checkbox" formControlName="isDefault">
+              <span class="checkmark"></span>
+              Tema por defecto
+            </label>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Colors Tab -->
+    <div class="tab-panel" *ngIf="activeTab === 'colors'">
+      <form [formGroup]="form" class="form-grid">
+        
+        <!-- Color Suggestions Section -->
+        <div class="form-section suggestions-section">
+          <h3>
+            <span class="material-icons">auto_fix_high</span>
+            Sugerencias de Colores
+            <button type="button" class="btn btn-sm btn-secondary" (click)="toggleSuggestions()">
+              {{ showSuggestions ? 'Ocultar' : 'Mostrar' }}
+            </button>
+          </h3>
+          
+          <div *ngIf="showSuggestions">
+            <div class="base-color-section">
+              <p class="section-description">Selecciona un color base para generar paletas automáticas:</p>
+              <div class="base-color-picker">
+                <label>Color Base para Sugerencias</label>
+                <div class="color-input-wrapper">
+                  <input type="color" 
+                         [value]="baseColorForSuggestions" 
+                         (input)="onBaseColorChange($any($event.target).value)"
+                         class="color-picker">
+                  <input type="text" 
+                         [value]="baseColorForSuggestions" 
+                         (input)="onBaseColorChange($any($event.target).value)"
+                         class="color-text">
+                  <button type="button" class="btn btn-sm btn-primary" (click)="generateSuggestions()">
+                    Generar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="suggestions-grid" *ngIf="suggestions.length > 0">
+              <div *ngFor="let suggestion of suggestions" [class]="getSuggestionCardClass(suggestion)">
+                <div class="suggestion-header">
+                  <div class="scheme-title">
+                    <h4>{{ suggestion.name }}</h4>
+                    <p>{{ suggestion.description }}</p>
+                  </div>
+                  <button type="button" class="btn btn-sm btn-primary" (click)="selectSuggestion(suggestion)">
+                    Aplicar
+                  </button>
+                </div>
+                <div class="color-preview">
+                  <div *ngFor="let color of suggestion.colors | keyvalue" 
+                       class="color-swatch" 
+                       [style.background-color]="color.value"
+                       [title]="color.key + ': ' + color.value">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Color Categories -->
+        <div class="form-section" *ngFor="let category of colorCategories">
+          <h3>{{ category.name }}</h3>
+          <div class="color-group">
+            <div class="form-group" *ngFor="let color of category.colors">
+              <label [for]="color.key">{{ color.label }}</label>
+              <div class="color-input-wrapper">
+                <input type="color" 
+                       [id]="color.key" 
+                       [formControlName]="color.key" 
+                       class="color-picker">
+                <input type="text" 
+                       [formControlName]="color.key" 
+                       class="color-text form-control"
+                       [class.error]="form.get(color.key)?.invalid && form.get(color.key)?.touched">
+              </div>
+              <div class="error-message" *ngIf="form.get(color.key)?.invalid && form.get(color.key)?.touched">
+                {{ getFieldError(color.key) }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Typography Tab -->
+    <div class="tab-panel" *ngIf="activeTab === 'typography'">
+      <form [formGroup]="form" class="form-grid">
+        <div class="form-section" *ngFor="let category of typographySettings">
+          <h3>{{ category.name }}</h3>
+          <div class="typography-group">
+            <div class="form-group" *ngFor="let field of category.fields">
+              <label [for]="field.key">{{ field.label }}</label>
+              
+              <!-- Text Input -->
+              <input *ngIf="field.type === 'text'" 
+                     type="text" 
+                     [id]="field.key" 
+                     [formControlName]="field.key" 
+                     class="form-control"
+                     [placeholder]="field.default">
+              
+              <!-- Select Input -->
+              <select *ngIf="field.type === 'select'" 
+                      [id]="field.key" 
+                      [formControlName]="field.key" 
+                      class="form-control">
+                <option *ngFor="let option of field.options" [value]="option.value">
+                  {{ option.label }}
+                </option>
+              </select>
+              
+              <div class="error-message" *ngIf="form.get(field.key)?.invalid && form.get(field.key)?.touched">
+                {{ getFieldError(field.key) }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Effects Tab -->
+    <div class="tab-panel" *ngIf="activeTab === 'effects'">
+      <form [formGroup]="form" class="form-grid">
+        <div class="form-section" *ngFor="let category of visualEffects">
+          <h3>{{ category.name }}</h3>
+          <div class="effects-group">
+            <div class="form-group" *ngFor="let field of category.fields">
+              <label [for]="field.key">{{ field.label }}</label>
+              
+              <!-- Text Input -->
+              <input *ngIf="field.type === 'text'" 
+                     type="text" 
+                     [id]="field.key" 
+                     [formControlName]="field.key" 
+                     class="form-control"
+                     [placeholder]="field.default">
+              
+              <!-- Range Input -->
+              <div *ngIf="field.type === 'range'" class="range-group">
+                <input type="range" 
+                       [id]="field.key" 
+                       [formControlName]="field.key" 
+                       [min]="field.min"
+                       [max]="field.max"
+                       [step]="field.step"
+                       class="form-range">
+                <span class="range-value">{{ form.get(field.key)?.value }}</span>
+              </div>
+              
+              <!-- Checkbox -->
+              <label *ngIf="field.type === 'checkbox'" class="checkbox-group">
+                <input type="checkbox" [formControlName]="field.key">
+                <span class="checkmark"></span>
+                {{ field.label }}
+              </label>
+              
+              <div class="error-message" *ngIf="form.get(field.key)?.invalid && form.get(field.key)?.touched">
+                {{ getFieldError(field.key) }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Preview Tab -->
+    <div class="tab-panel" *ngIf="activeTab === 'preview'">
+      <div class="form-section">
+        <h3>Vista Previa de Componentes</h3>
+        <p class="section-description">
+          Aquí puedes ver cómo se ven todos los componentes con la configuración actual de apariencia.
+        </p>
+        
+        <app-components-preview></app-components-preview>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Cargando información del tema...</p>
+  </div>
+</div>

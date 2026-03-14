@@ -1,0 +1,17 @@
+<div class="login-container">
+	<div class="login-form">
+		<div class="login-header">
+			<div class="logo">PM</div>
+			<div class="title">Inicia sesión</div>
+			<div class="subtitle">Accede a tu panel de administración</div>
+		</div>
+
+		<app-dynamic-form 
+			[config]="loginFormConfig"
+			(formSubmit)="onFormSubmit($event)"
+			class="login-dynamic-form">
+		</app-dynamic-form>
+
+		<div class="error" *ngIf="error">{{ error }}</div>
+	</div>
+</div>

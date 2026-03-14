@@ -1,0 +1,7 @@
+.permissions-container { padding: 30px; max-width: 1100px; margin: 0 auto; }
+.permissions-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+.permissions-header h1 { font-size:24px; margin:0; }
+.permissions-table { width:100%; border-collapse:collapse; background:white; border-radius:8px; overflow:hidden; border:1px solid #e5e7eb; }
+.permissions-table th, .permissions-table td { padding:12px 16px; text-align:left; border-bottom:1px solid #e5e7eb; }
+.permissions-table thead { background:#f9fafb; }
+.loading { text-align:center; padding:20px; }

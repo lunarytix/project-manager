@@ -1,0 +1,27 @@
+<div class="form-card permission-catalog-edit">
+  <h2 *ngIf="!id">Nuevo catálogo</h2>
+  <h2 *ngIf="id">Editar catálogo</h2>
+
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <mat-form-field appearance="fill" class="full">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" />
+      <mat-error *ngIf="form.get('nombre')?.hasError('required')">Requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full">
+      <mat-label>Descripción</mat-label>
+      <input matInput formControlName="descripcion" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full">
+      <mat-label>Icono</mat-label>
+      <input matInput formControlName="icono" placeholder="Ej: dashboard, settings, etc." />
+    </mat-form-field>
+
+    <div class="actions">
+      <button mat-raised-button color="primary" type="submit">Guardar</button>
+      <button mat-button type="button" (click)="router.navigate(['permission-catalogs'])">Cancelar</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,177 @@
+.permission-catalog-container {
+  padding: 1rem;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.container-header {
+  margin-bottom: 2rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .back-btn {
+    color: #666;
+
+    &:hover {
+      color: #333;
+    }
+  }
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+
+  p {
+    color: #666;
+    font-size: 1rem;
+  }
+}
+
+.content-container {
+  min-height: 400px;
+}
+
+.table-view {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.grid-view {
+  .catalog-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px 8px 0 0;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+
+  .empty-icon {
+    font-size: 4rem;
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+
+  h3 {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  button {
+    margin-top: 1rem;
+  }
+}
+
+.no-permissions {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+
+  .no-permissions-icon {
+    font-size: 3rem;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1rem;
+    color: #f44336;
+  }
+
+  h3 {
+    color: #f44336;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  button {
+    margin-top: 1rem;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .permission-catalog-container {
+    padding: 0.5rem;
+  }
+
+  .header-actions {
+    h1 {
+      font-size: 1.25rem;
+    }
+  }
+
+  .empty-state,
+  .no-permissions {
+    padding: 2rem;
+
+    .empty-icon,
+    .no-permissions-icon {
+      font-size: 3rem;
+      width: 3rem;
+      height: 3rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+// Grid specific styling
+:host ::ng-deep {
+  .catalog-header {
+    .grid-item-title {
+      color: white !important;
+      font-weight: 600;
+    }
+
+    .grid-item-subtitle {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  // Table row hover effects
+  .mat-mdc-row:hover {
+    background-color: #f5f5f5;
+  }
+
+  // Action button styling in table
+  .action-button {
+    margin: 0 2px;
+    min-width: 36px;
+
+    &.warn {
+      color: #f44336;
+    }
+  }
+}

@@ -1,0 +1,139 @@
+<div class="roles-container">
+  <div class="container-header">
+    <h2>Gestión de Roles</h2>
+  </div>
+
+  <!-- Search Filter Bar -->
+  <app-search-filter-bar
+    [config]="searchFilterConfig"
+    [currentView]="currentView"
+    [searchTerm]="searchTerm"
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (searchChange)="onSearchChange($event)"
+    (viewChange)="onViewChange($event)"
+    (createClick)="onCreateClick()"
+    (pageChange)="onPageChange($event)">
+  </app-search-filter-bar>
+
+  <!-- Loading State -->
+  <div class="loading-section" *ngIf="loading">
+    <div class="spinner"></div>
+    <span>Cargando roles...</span>
+  </div>
+
+  <!-- Roles List with View Toggle -->
+  <div class="list-section" *ngIf="roles.length > 0 && !loading">
+    <!-- Grid View -->
+    <app-standard-grid
+      *ngIf="currentView === 'grid'"
+      [items]="gridItems"
+      [config]="gridConfig"
+      [actionDropdownConfig]="actionDropdownConfig"
+      [actionsProvider]="getRoleActionsForGrid"
+      (edit)="onGridEdit($event)"
+      (action)="onGridAction($event)">
+
+      <!-- Custom content for each role -->
+      <ng-template #bodyTemplate let-item>
+        <div class="role-info-section">
+          <div class="info-header">
+            <span class="material-icons">admin_panel_settings</span>
+            <span class="info-title">Información del Rol</span>
+          </div>
+
+          <div class="info-summary">
+            <div class="info-stat">
+              <span class="stat-label">{{ getRolePermissionSummary(item.id) }}</span>
+            </div>
+          </div>
+
+          <div class="permissions-preview">
+            <div class="permissions-header">Tipo de acceso:</div>
+            <div class="permission-badges">
+              <span
+                class="permission-badge"
+                [ngClass]="getRoleType(item)">
+                <span class="material-icons">{{ getRoleType(item) === 'admin' ? 'admin_panel_settings' : getRoleType(item) === 'manager' ? 'supervisor_account' : 'person' }}</span>
+                {{ getRoleType(item) === 'admin' ? 'Administrador' : getRoleType(item) === 'manager' ? 'Gerente' : 'Usuario' }}
+              </span>
+            </div>
+          </div>
+
+          <div class="no-info" *ngIf="!item.status">
+            <span class="material-icons">info</span>
+            <span>Rol inactivo - Sin acceso al sistema</span>
+          </div>
+        </div>
+      </ng-template>
+    </app-standard-grid>
+
+    <!-- Table View -->
+    <app-generic-table
+      *ngIf="currentView === 'table'"
+      [columns]="cols"
+      [data]="tableData"
+      [pageSize]="pageSize"
+      [enableSearch]="false"
+      [canEdit]="permissionChecker.hasPermission(modulePermissions, 'Editar')"
+      [canDelete]="permissionChecker.hasPermission(modulePermissions, 'Eliminar')"
+      [extraActions]="tableExtraActions"
+      (edit)="editRole($event)"
+      (delete)="deleteRole($event.id)"
+      (action)="onTableAction($event)">
+    </app-generic-table>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!loading && filteredRoles.length === 0 && searchTerm">
+    <div class="empty-icon">
+      <span class="material-icons">search_off</span>
+    </div>
+    <h3>No se encontraron roles</h3>
+    <p>No hay roles que coincidan con "{{ searchTerm }}".</p>
+    <button type="button" class="btn btn-secondary" (click)="onSearchChange('')">
+      <span class="material-icons">clear</span>
+      Limpiar búsqueda
+    </button>
+  </div>
+
+  <!-- No Roles State -->
+  <div class="empty-state" *ngIf="!loading && roles.length === 0">
+    <div class="empty-icon">
+      <span class="material-icons">group</span>
+    </div>
+    <h3>No hay roles creados</h3>
+    <p>Crea tu primer rol para comenzar a gestionar permisos.</p>
+    <button type="button" class="btn btn-primary" *ngIf="permissionChecker.hasPermission(modulePermissions, 'Crear')" (click)="openForm()">
+      <span class="material-icons">add</span>
+      Crear Primer Rol
+    </button>
+  </div>
+
+  <!-- Modal Form -->
+  <div *ngIf="showForm" class="modal-overlay" (click)="closeForm()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>{{ editingId ? 'Editar Rol' : 'Nuevo Rol' }}</h2>
+
+      <form [formGroup]="form" (ngSubmit)="saveRole()">
+        <mat-form-field appearance="outline" class="form-group">
+          <mat-label>Nombre *</mat-label>
+          <input matInput type="text" formControlName="nombre" placeholder="Ej: Admin">
+          <mat-error *ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.touched">El nombre es requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-group">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="descripcion" placeholder="Descripción del rol"></textarea>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="activo">Activo</mat-checkbox>
+
+        <div class="form-actions">
+          <button mat-raised-button class="btn-primary" type="submit" [disabled]="form.invalid">{{ editingId ? 'Actualizar' : 'Crear' }}</button>
+          <button mat-button class="btn-secondary" type="button" (click)="closeForm()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

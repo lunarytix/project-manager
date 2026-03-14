@@ -1,0 +1,145 @@
+<div class="role-permissions-container">
+  <!-- Header -->
+  <div class="container-header">
+    <div class="header-content">
+      <div class="header-info">
+        <button type="button" class="btn-back" (click)="cancelChanges()">
+          <span class="material-icons">arrow_back</span>
+        </button>
+        <div>
+          <h2>Configurar Permisos</h2>
+          <p class="role-info" *ngIf="role">
+            <span class="material-icons">person</span>
+            Rol: <strong>{{ role.nombre }}</strong>
+          </p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span class="permission-count">{{ getPermissionCount() }} permisos seleccionados</span>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="cancelChanges()"
+          [disabled]="saving">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="savePermissions()"
+          [disabled]="saving || loading">
+          <span class="material-icons" *ngIf="saving">hourglass_empty</span>
+          <span class="material-icons" *ngIf="!saving">save</span>
+          {{ saving ? 'Guardando...' : 'Guardar Permisos' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading-section" *ngIf="loading">
+    <div class="spinner"></div>
+    <span>Cargando configuración de permisos...</span>
+  </div>
+
+  <!-- Permission Matrix -->
+  <div class="permissions-matrix" *ngIf="!loading && modules.length > 0 && permissionCatalogs.length > 0">
+
+    <!-- Catalogs Header -->
+    <div class="catalogs-header">
+      <div class="module-header-cell">Módulos</div>
+      <div class="catalog-headers">
+        <div
+          *ngFor="let catalog of permissionCatalogs"
+          class="catalog-header-cell"
+          [title]="catalog.descripcion">
+          <span class="material-icons">{{ catalog.icono || 'security' }}</span>
+          <span class="catalog-name">{{ catalog.nombre }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Rows -->
+    <div class="modules-grid">
+      <div
+        *ngFor="let module of modules; trackBy: trackByModuleId"
+        class="module-row">
+
+        <!-- Module Info -->
+        <div class="module-info">
+          <div class="module-header">
+            <mat-checkbox
+              [checked]="isModuleFullySelected(module.id)"
+              [indeterminate]="isModulePartiallySelected(module.id)"
+              (change)="toggleAllForModule(module.id, $event.checked)"
+              color="primary">
+            </mat-checkbox>
+            <span class="material-icons module-icon">{{ module.icono || 'extension' }}</span>
+            <div class="module-details">
+              <span class="module-name">{{ module.nombre }}</span>
+              <span class="module-route">{{ module.ruta }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Permission Checkboxes -->
+        <div class="permission-checkboxes">
+          <div
+            *ngFor="let catalog of permissionCatalogs; trackBy: trackByCatalogId"
+            class="permission-cell">
+            <mat-checkbox
+              [checked]="permissionMatrix[module.id] && permissionMatrix[module.id][catalog.id] || false"
+              (change)="onPermissionChange(module.id, catalog.id, $event.checked)"
+              color="primary"
+              [title]="'Asignar ' + catalog.nombre + ' para ' + module.nombre">
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty States -->
+  <div class="empty-state" *ngIf="!loading && modules.length === 0">
+    <div class="empty-icon">
+      <span class="material-icons">extension</span>
+    </div>
+    <h3>No hay módulos disponibles</h3>
+    <p>Necesitas crear módulos antes de configurar permisos.</p>
+    <button type="button" class="btn btn-primary" routerLink="/modules">
+      <span class="material-icons">add</span>
+      Ir a Módulos
+    </button>
+  </div>
+
+  <div class="empty-state" *ngIf="!loading && permissionCatalogs.length === 0">
+    <div class="empty-icon">
+      <span class="material-icons">security</span>
+    </div>
+    <h3>No hay catálogo de permisos</h3>
+    <p>Necesitas configurar el catálogo de permisos primero.</p>
+    <button type="button" class="btn btn-primary" routerLink="/permission-catalogs">
+      <span class="material-icons">add</span>
+      Ir a Catálogo de Permisos
+    </button>
+  </div>
+
+  <!-- Legend -->
+  <div class="permission-legend" *ngIf="!loading && modules.length > 0 && permissionCatalogs.length > 0">
+    <h4>Leyenda:</h4>
+    <div class="legend-items">
+      <div class="legend-item">
+        <mat-checkbox [checked]="true" [disabled]="true" color="primary"></mat-checkbox>
+        <span>Permiso asignado</span>
+      </div>
+      <div class="legend-item">
+        <mat-checkbox [checked]="false" [disabled]="true"></mat-checkbox>
+        <span>Permiso no asignado</span>
+      </div>
+      <div class="legend-item">
+        <mat-checkbox [indeterminate]="true" [disabled]="true" color="primary"></mat-checkbox>
+        <span>Módulo con algunos permisos</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+.components-preview {
+  padding: 24px;
+  background: var(--background-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.preview-title {
+  font-family: var(--font-family);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight, 600);
+  color: var(--text-primary-color);
+  margin: 0 0 24px 0;
+  text-align: center;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 12px;
+}
+
+.preview-section {
+  margin-bottom: 32px;
+  padding: 20px;
+  background: var(--background-secondary-color);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+}
+
+.section-title {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight, 600);
+  color: var(--text-primary-color);
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.form-values {
+  background: var(--input-background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-small);
+  padding: 16px;
+  font-family: Monaco, 'Courier New', monospace;
+  font-size: 13px;
+  color: var(--text-primary-color);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .components-preview {
+    padding: 16px;
+  }
+  
+  .buttons-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 8px;
+  }
+  
+  .preview-section {
+    padding: 16px;
+  }
+}
+
+// Glass effect when enabled
+:host-context(.glass-theme) {
+  .components-preview {
+    background: rgba(255, 255, 255, var(--background-opacity, 0.1));
+    backdrop-filter: blur(var(--backdrop-blur, 10px));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .preview-section {
+    background: rgba(255, 255, 255, var(--background-opacity, 0.05));
+    backdrop-filter: blur(var(--backdrop-blur, 5px));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .form-values {
+    background: rgba(255, 255, 255, var(--background-opacity, 0.1));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}

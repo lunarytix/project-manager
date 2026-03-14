@@ -1,0 +1,12 @@
+<div class="eliminar-usuario">
+	<h3>Eliminar Usuario</h3>
+	<div *ngIf="loading">Cargando...</div>
+	<div *ngIf="!loading && usuario">
+		<p>¿Está seguro de eliminar a <strong>{{ usuario.nombre }}</strong> ({{ usuario.email }})?</p>
+		<div class="actions">
+			<button (click)="confirmDelete()">Eliminar</button>
+			<button (click)="cancel()">Cancelar</button>
+		</div>
+	</div>
+	<div *ngIf="error" class="error">{{ error }}</div>
+</div>

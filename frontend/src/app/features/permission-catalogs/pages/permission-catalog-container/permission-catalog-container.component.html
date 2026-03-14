@@ -1,0 +1,82 @@
+<!-- Permission Catalog Container -->
+<div class="permission-catalog-container" *ngIf="permissionChecker.hasPermission(modulePermissions, 'Vista')">
+  <div class="container-header">
+    <div class="header-actions">
+      <button mat-icon-button (click)="goBack()" class="back-btn">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1>Catálogos de Permisos</h1>
+    </div>
+  </div>
+
+  <!-- Search and filter bar -->
+  <app-search-filter-bar
+    [config]="searchFilterConfig"
+    [searchTerm]="searchTerm"
+    [currentPage]="currentPage"
+    [totalPages]="getTotalPages()"
+    [currentView]="currentView"
+    (searchChange)="onSearchChanged($event)"
+    (createClick)="createCatalog()"
+    (viewChange)="onViewModeChanged($event)"
+    (pageChange)="onPageChanged($event)">
+  </app-search-filter-bar>
+
+  <!-- Loading indicator -->
+  <div *ngIf="loading" class="loading-container">
+    <p>Cargando catálogos...</p>
+  </div>
+
+  <!-- Content based on view mode -->
+  <div *ngIf="!loading" class="content-container">
+
+    <!-- Table View -->
+    <div *ngIf="currentView === 'table'" class="table-view">
+      <app-generic-table
+        [data]="getPaginatedCatalogs()"
+        [columns]="tableColumns"
+        [canEdit]="permissionChecker.hasPermission(modulePermissions, 'Editar')"
+        [canDelete]="permissionChecker.hasPermission(modulePermissions, 'Eliminar')"
+        [extraActions]="[]"
+        (edit)="editCatalog($event)"
+        (delete)="deleteCatalog($event)">
+      </app-generic-table>
+    </div>
+
+    <!-- Grid View -->
+    <div *ngIf="currentView === 'grid'" class="grid-view">
+      <app-standard-grid
+        [items]="getCatalogGridItems()"
+        [config]="gridConfig">
+      </app-standard-grid>
+    </div>
+
+    <!-- Empty state -->
+    <div *ngIf="filteredCatalogs.length === 0" class="empty-state">
+      <mat-icon class="empty-icon">folder_open</mat-icon>
+      <h3>No se encontraron catálogos</h3>
+      <p *ngIf="searchTerm">No hay catálogos que coincidan con "{{ searchTerm }}"</p>
+      <p *ngIf="!searchTerm">No hay catálogos de permisos disponibles</p>
+
+      <button
+        *ngIf="permissionChecker.hasPermission(modulePermissions, 'Crear')"
+        mat-raised-button
+        color="primary"
+        (click)="createCatalog()">
+        <mat-icon>add</mat-icon>
+        Crear Primer Catálogo
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- No permissions message -->
+<div *ngIf="!permissionChecker.hasPermission(modulePermissions, 'Vista')" class="no-permissions">
+  <mat-icon class="no-permissions-icon">lock</mat-icon>
+  <h3>Acceso Denegado</h3>
+  <p>No tiene permisos para ver los catálogos de permisos.</p>
+  <button mat-stroked-button (click)="goBack()">
+    Volver al Dashboard
+  </button>
+</div>

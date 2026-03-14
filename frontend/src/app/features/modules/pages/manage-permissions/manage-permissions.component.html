@@ -1,0 +1,31 @@
+<div class="permissions-container">
+  <div class="permissions-header">
+    <h1>Permisos — {{ moduleName }}</h1>
+    <div class="header-actions">
+      <button class="btn-secondary" (click)="back()">← Volver a Módulos</button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading">Cargando permisos...</div>
+
+  <table *ngIf="!loading" class="permissions-table">
+    <thead>
+      <tr>
+        <th>Rol</th>
+        <th>Leer</th>
+        <th>Crear</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of roles">
+        <td>{{ r.nombre }}</td>
+        <td><input type="checkbox" [checked]="permissionsMap[r.id]?.canRead" (change)="onCheckboxChange($event, r.id, 'canRead')"></td>
+        <td><input type="checkbox" [checked]="permissionsMap[r.id]?.canCreate" (change)="onCheckboxChange($event, r.id, 'canCreate')"></td>
+        <td><input type="checkbox" [checked]="permissionsMap[r.id]?.canUpdate" (change)="onCheckboxChange($event, r.id, 'canUpdate')"></td>
+        <td><input type="checkbox" [checked]="permissionsMap[r.id]?.canDelete" (change)="onCheckboxChange($event, r.id, 'canDelete')"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,8 @@
+.editar-usuario { padding: 12px; }
+.editar-usuario .field { margin-bottom: 10px; }
+.actions { display: flex; justify-content: flex-end; }
+.actions button { background: #2b6cb0; color: #fff; border: none; padding: 8px 12px; border-radius: 6px }
+.error { color: #c53030; margin-top: 8px }
+
+/* Prefer Material form-field styles; only apply to legacy plain inputs if explicitly used */
+.editar-usuario .plain-input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px }
