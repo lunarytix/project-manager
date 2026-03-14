@@ -1,0 +1,27 @@
+{
+  "name": "project-manager",
+  "version": "1.0.0",
+  "description": "Administra, gestiona y crea proyectos futuros",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --test test/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lunarytix/project-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lunarytix/project-manager/issues"
+  },
+  "homepage": "https://github.com/lunarytix/project-manager#readme",
+  "dependencies": {
+    "better-sqlite3": "^12.8.0",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.3.1"
+  }
+}

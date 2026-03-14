@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🗂️ Project Manager</h1>
+    <p class="subtitle">Administra, gestiona y crea tus proyectos futuros</p>
+  </header>
+
+  <main>
+    <!-- Filters & Search -->
+    <section class="toolbar">
+      <input type="text" id="searchInput" placeholder="🔍 Buscar proyectos..." />
+      <select id="filterStatus">
+        <option value="">Todos los estados</option>
+        <option value="pending">Pendiente</option>
+        <option value="in-progress">En progreso</option>
+        <option value="completed">Completado</option>
+        <option value="on-hold">En pausa</option>
+        <option value="cancelled">Cancelado</option>
+      </select>
+      <select id="filterPriority">
+        <option value="">Todas las prioridades</option>
+        <option value="low">Baja</option>
+        <option value="medium">Media</option>
+        <option value="high">Alta</option>
+        <option value="critical">Crítica</option>
+      </select>
+      <button id="newProjectBtn" class="btn btn-primary">+ Nuevo Proyecto</button>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats" id="stats"></section>
+
+    <!-- Projects Grid -->
+    <section class="projects-grid" id="projectsGrid">
+      <p class="empty-state">Cargando proyectos...</p>
+    </section>
+  </main>
+
+  <!-- Modal: Create / Edit Project -->
+  <div class="modal-overlay" id="modalOverlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h2 id="modalTitle">Nuevo Proyecto</h2>
+      <form id="projectForm" novalidate>
+        <input type="hidden" id="projectId" />
+
+        <label for="projectName">Nombre <span class="required">*</span></label>
+        <input type="text" id="projectName" maxlength="100" required placeholder="Nombre del proyecto" />
+
+        <label for="projectDescription">Descripción</label>
+        <textarea id="projectDescription" rows="3" maxlength="500" placeholder="Descripción opcional"></textarea>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="projectStatus">Estado</label>
+            <select id="projectStatus">
+              <option value="pending">Pendiente</option>
+              <option value="in-progress">En progreso</option>
+              <option value="completed">Completado</option>
+              <option value="on-hold">En pausa</option>
+              <option value="cancelled">Cancelado</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="projectPriority">Prioridad</label>
+            <select id="projectPriority">
+              <option value="low">Baja</option>
+              <option value="medium" selected>Media</option>
+              <option value="high">Alta</option>
+              <option value="critical">Crítica</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="projectDueDate">Fecha límite</label>
+        <input type="date" id="projectDueDate" />
+
+        <p class="form-error" id="formError" hidden></p>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelBtn">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="saveBtn">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirm Delete Modal -->
+  <div class="modal-overlay" id="deleteOverlay" hidden>
+    <div class="modal modal-sm" role="dialog" aria-modal="true">
+      <h2>¿Eliminar proyecto?</h2>
+      <p id="deleteProjectName" class="delete-name"></p>
+      <p>Esta acción no se puede deshacer.</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="cancelDeleteBtn">Cancelar</button>
+        <button class="btn btn-danger" id="confirmDeleteBtn">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
