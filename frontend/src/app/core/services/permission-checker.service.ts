@@ -75,6 +75,7 @@ export class PermissionCheckerService {
    * @returns boolean
    */
   hasPermission(permissions: DynamicModulePermissions, catalogName: string): boolean {
+    if (!permissions) return false;
     return permissions[catalogName] === true;
   }
 

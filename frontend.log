@@ -522,3 +522,18 @@ chunk-HOCBOXEV.js   | -                                      |   4.24 kB |
 
 Application bundle generation complete. [0.201 seconds]
 
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                                  |  Raw size
+main.js             | main                                   |  37.35 kB | 
+
+Lazy chunk files    | Names                                  |  Raw size
+chunk-CIQPCLDK.js   | users-module                           | 106.71 kB | 
+chunk-ZXGCC3BA.js   | roles-module                           |  39.72 kB | 
+chunk-3GLYPVZJ.js   | permission-catalog-container-component |  34.95 kB | 
+chunk-JYKFENMO.js   | dashboard-module                       |  20.44 kB | 
+chunk-W3KCOVAN.js   | -                                      |   7.33 kB | 
+
+Application bundle generation complete. [0.266 seconds]
+
+Page reload sent to client(s).

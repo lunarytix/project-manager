@@ -32,7 +32,7 @@ export class RolesContainerComponent implements OnInit {
   editingId: string | null = null;
   currentUser: any = null;
   userPermissions: any[] = [];
-  modulePermissions!: DynamicModulePermissions;
+  modulePermissions: DynamicModulePermissions = {};
   rolePermissions: { [key: string]: any[] } = {};
   modalOpen = false;
   isEditing = false;
