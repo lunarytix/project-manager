@@ -34,6 +34,7 @@ export class UsuarioContainerComponent implements OnInit {
   currentUser: any = null;
   userPermissions: any[] = [];
   modulePermissions: DynamicModulePermissions = {};
+  showPermissionDebug = false;
 
   // Search and Pagination
   searchTerm = '';
@@ -100,7 +101,51 @@ export class UsuarioContainerComponent implements OnInit {
         color: 'secondary'
       });
     }
-    return actions;
+    // Deduplicate by key then by label to avoid showing duplicate entries
+    const seenKeys = new Set<string>();
+    const seenLabels = new Set<string>();
+    let deduped: ActionItem[] = [];
+
+    actions.forEach(a => {
+      const k = a.key || '';
+      const label = (a.label || '').toString();
+      if (k && seenKeys.has(k)) return;
+      if (label && seenLabels.has(label)) return;
+      if (k) seenKeys.add(k);
+      if (label) seenLabels.add(label);
+      deduped.push(a);
+    });
+
+    // Special-case collapse: if there are multiple entries for enable/disable
+    const normalize = (s: string) => s.toString().trim().toLowerCase();
+    const isToggleLabel = (s: string) => {
+      const n = normalize(s);
+      return n.includes('habilitar') || n.includes('deshabilitar');
+    };
+
+    const toggleGroups: {[k: string]: ActionItem[]} = {};
+    deduped.forEach(a => {
+      const key = normalize(a.label || a.key || '');
+      if (!toggleGroups[key]) toggleGroups[key] = [];
+      toggleGroups[key].push(a);
+    });
+
+    Object.keys(toggleGroups).forEach(k => {
+      if (!isToggleLabel(k)) return;
+      const group = toggleGroups[k];
+      if (group.length <= 1) return;
+
+      // prefer item with key 'toggle-status' or icon containing 'toggle'
+      let preferred = group.find(x => x.key === 'toggle-status')
+        || group.find(x => (x.icon || '').toString().includes('toggle'))
+        || group[0];
+
+      // remove all group items and put only preferred
+      deduped = deduped.filter(x => !group.includes(x));
+      deduped.push(preferred);
+    });
+
+    return deduped;
   }
 
   constructor(
@@ -114,23 +159,52 @@ export class UsuarioContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.getCurrentUser();
+
+    // If auth state changes later (async init), re-load permissions
+    this.authService.authState$.subscribe(state => {
+      if (state && (state as any).usuario) {
+        this.currentUser = (state as any).usuario;
+        this.loadUserPermissions();
+      }
+    });
+
     this.loadUsers();
     this.loadRoles();
-    this.loadUserPermissions();
+
+    // Try loading permissions immediately if currentUser already available
+    if (this.currentUser) {
+      this.loadUserPermissions();
+    }
+
     this.initUserFormConfig();
   }
 
   private loadUserPermissions(): void {
-    if (this.currentUser?.roleId) {
-      this.permissionService.getByRole(this.currentUser.roleId).subscribe({
-        next: permissions => {
-          this.userPermissions = permissions;
-          this.updatePermissions();
-          this.updateSearchConfig();
-        },
-        error: () => this.userPermissions = []
-      });
+    const roleId = this.currentUser?.roleId;
+    console.debug('[Users] loadUserPermissions start, currentUser:', this.currentUser);
+
+    if (!roleId) {
+      console.warn('[Users] No roleId found for currentUser, skipping permission fetch.');
+      this.userPermissions = [];
+      this.updatePermissions();
+      this.updateSearchConfig();
+      return;
     }
+
+    this.permissionService.getByRole(roleId).subscribe({
+      next: permissions => {
+        console.debug('[Users] permissions response for role', roleId, permissions);
+        this.userPermissions = permissions || [];
+        this.updatePermissions();
+        this.updateSearchConfig();
+      },
+      error: err => {
+        console.error('[Users] error loading permissions for role', roleId, err);
+        this.userPermissions = [];
+        this.updatePermissions();
+        this.updateSearchConfig();
+      }
+    });
   }
 
   private updatePermissions(): void {
@@ -329,53 +403,55 @@ export class UsuarioContainerComponent implements OnInit {
 
   getUserActions(user: User): ActionItem[] {
     const actions: ActionItem[] = [];
-    const availableActions = this.permissionChecker.getAvailableActions(this.modulePermissions);
+    const availableActions = this.permissionChecker.getAvailableActions(this.modulePermissions) || [];
 
-    availableActions.forEach(action => {
-      switch (action) {
-        case 'Editar':
-          if (this.permissionChecker.hasPermission(this.modulePermissions, 'Editar')) {
-            actions.push({
-              key: 'edit',
-              label: 'Editar Usuario',
-              icon: 'edit',
-              color: 'primary'
-            });
-          }
+    // availableActions returns objects: { key, label, icon, color }
+    let toggleAdded = false;
+    availableActions.forEach(a => {
+      const key = a?.key;
+
+      // Handle toggle action once only (enable/disable)
+      if ((key === 'enable' || key === 'disable' || key === 'toggle-status') && !toggleAdded) {
+        const wantsToDisable = user.activo === true;
+        const hasDisablePerm = this.permissionChecker.hasPermission(this.modulePermissions, 'Deshabilitar');
+        const hasEnablePerm = this.permissionChecker.hasPermission(this.modulePermissions, 'Habilitar');
+
+        if ((wantsToDisable && hasDisablePerm) || (!wantsToDisable && hasEnablePerm)) {
+          actions.push({
+            key: 'toggle-status',
+            label: wantsToDisable ? 'Deshabilitar' : 'Habilitar',
+            icon: wantsToDisable ? 'toggle_off' : 'toggle_on',
+            color: wantsToDisable ? 'warning' : 'success'
+          });
+          toggleAdded = true;
+        }
+
+        return;
+      }
+
+      switch (key) {
+        case 'edit':
+          actions.push({ key: 'edit', label: a.label || 'Editar', icon: a.icon || 'edit', color: a.color || 'primary' });
           break;
-        case 'ConfigurarPermisos':
-          if (this.permissionChecker.hasPermission(this.modulePermissions, 'ConfigurarPermisos')) {
-            actions.push({
-              key: 'permissions',
-              label: 'Configurar Permisos',
-              icon: 'security',
-              color: 'secondary'
-            });
-          }
+        case 'permissions':
+          actions.push({ key: 'permissions', label: a.label || 'Configurar Permisos', icon: a.icon || 'security', color: a.color || 'secondary' });
           break;
-        case 'Habilitar':
-        case 'Deshabilitar':
-          if (this.permissionChecker.hasPermission(this.modulePermissions, user.activo ? 'Deshabilitar' : 'Habilitar')) {
-            actions.push({
-              key: 'toggle-status',
-              label: user.activo ? 'Deshabilitar' : 'Habilitar',
-              icon: user.activo ? 'toggle_off' : 'toggle_on',
-              color: user.activo ? 'warning' : 'success'
-            });
-          }
+        case 'delete':
+          actions.push({ key: 'delete', label: a.label || 'Eliminar', icon: a.icon || 'delete', color: a.color || 'danger' });
           break;
-        case 'Eliminar':
-          if (this.permissionChecker.hasPermission(this.modulePermissions, 'Eliminar')) {
-            actions.push({
-              key: 'delete',
-              label: 'Eliminar Usuario',
-              icon: 'delete',
-              color: 'danger'
-            });
-          }
+        case 'details':
+          actions.push({ key: 'details', label: a.label || 'Ver detalles', icon: a.icon || 'info', color: a.color || 'secondary' });
           break;
+        default:
+          // Fallback: add the action as-is
+          if (key) {
+            actions.push({ key, label: a.label || key, icon: a.icon, color: a.color as any });
+          }
       }
     });
+
+    // Debug: log available action objects and the computed actions to help diagnose duplicates
+    console.debug('[Users] getUserActions - availableActions:', availableActions, 'computed actions:', actions, 'user:', { id: user?.id, activo: user?.activo });
 
     return actions;
   }

@@ -38,6 +38,21 @@
 
   <!-- Users List with View Toggle -->
   <div class="list-section" *ngIf="users.length > 0">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:8px;gap:8px;">
+      <button type="button" class="btn btn-ghost" (click)="showPermissionDebug = !showPermissionDebug">
+        <span class="material-icons">bug_report</span>
+        <span>{{ showPermissionDebug ? 'Ocultar debug' : 'Mostrar debug permisos' }}</span>
+      </button>
+    </div>
+
+    <div *ngIf="showPermissionDebug" class="form-card" style="padding:12px;margin-bottom:16px;white-space:pre-wrap;overflow:auto;max-height:220px;">
+      <strong>Current User:</strong>
+      <pre>{{ currentUser | json }}</pre>
+      <strong>User Permissions (raw):</strong>
+      <pre>{{ userPermissions | json }}</pre>
+      <strong>Module Permissions (computed):</strong>
+      <pre>{{ modulePermissions | json }}</pre>
+    </div>
     <!-- Grid View -->
     <div class="users-grid" *ngIf="currentView === 'grid'">
       <div *ngFor="let user of paginatedUsers" class="user-card">

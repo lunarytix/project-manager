@@ -134,6 +134,37 @@ export class AppearanceEntity {
   @Column({ default: '12px 16px' })
   inputPadding: string;
 
+  // Component-specific styles
+  @Column({ default: '#FFFFFF' })
+  gridHeaderBgColor: string;
+
+  @Column({ default: '#FFFFFF' })
+  gridBodyBgColor: string;
+
+  @Column({ default: '#3B82F6' })
+  gridIconColor: string;
+
+  @Column({ default: '#F8FAFC' })
+  tableHeaderBgColor: string;
+
+  @Column({ default: '#FFFFFF' })
+  tableRowBgColor: string;
+
+  @Column({ default: '#FFFFFF' })
+  menuBgColor: string;
+
+  @Column({ default: '#111827' })
+  menuTextColor: string;
+
+  @Column({ default: '#FFFFFF' })
+  loginBackgroundColor: string;
+
+  @Column({ default: '#FFFFFF' })
+  loginFormBgColor: string;
+
+  @Column({ default: '#111827' })
+  loginHeaderColor: string;
+
   @Column({ default: true })
   isActive: boolean;
 

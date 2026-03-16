@@ -1,4 +1,4 @@
-.users-container {
+.usuario-container {
 	padding: 40px;
 	max-width: 1400px;
 	margin: 0 auto;
@@ -93,6 +93,10 @@
 			align-items: flex-start;
 			gap: 12px;
 			margin-bottom: 16px;
+
+			/* Use module header vars so users cards follow theme */
+			background: var(--module-header-bg, var(--primary-gradient, linear-gradient(135deg, #3b82f6, #1d4ed8)));
+			color: var(--module-header-text, #ffffff);
 
 			.user-avatar {
 				width: 48px;

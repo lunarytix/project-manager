@@ -213,3 +213,312 @@ No output file changes.
 
 Application bundle generation complete. [0.325 seconds]
 
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                                  |  Raw size
+main.js             | main                                   |  37.35 kB | 
+
+Lazy chunk files    | Names                                  |  Raw size
+chunk-CODQXKFT.js   | modules-module                         | 146.51 kB | 
+chunk-LZTF33OC.js   | -                                      | 100.56 kB | 
+chunk-OBUDGR6Q.js   | users-module                           | 100.39 kB | 
+chunk-DWOFVWZA.js   | roles-module                           |  39.72 kB | 
+chunk-VPKQIIUV.js   | permission-catalog-container-component |  34.95 kB | 
+chunk-3JNBU2H7.js   | -                                      |  33.83 kB | 
+chunk-C5Q7RPR4.js   | permission-catalog-list-component      |  28.56 kB | 
+
+Application bundle generation complete. [0.268 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        |  Raw size
+main.js             | main         |  37.35 kB | 
+
+Lazy chunk files    | Names        |  Raw size
+chunk-QDFDL4W7.js   | users-module | 100.69 kB | 
+
+Application bundle generation complete. [0.162 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                                  |  Raw size
+polyfills.js        | polyfills                              |  89.77 kB | 
+main.js             | main                                   |  37.35 kB | 
+styles.css          | styles                                 |  20.91 kB | 
+chunk-UDYALH4O.js   | -                                      |  10.23 kB | 
+chunk-X6X3Y735.js   | -                                      |   3.31 kB | 
+chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
+chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
+
+                    | Initial total                          | 164.47 kB
+
+Lazy chunk files    | Names                                  |  Raw size
+chunk-DPUNOHQA.js   | appearance-module                      | 169.44 kB | 
+chunk-CODQXKFT.js   | modules-module                         | 146.51 kB | 
+chunk-ILEXJUET.js   | -                                      | 102.50 kB | 
+chunk-QDFDL4W7.js   | users-module                           | 100.69 kB | 
+chunk-LZTF33OC.js   | -                                      | 100.56 kB | 
+chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
+chunk-DWOFVWZA.js   | roles-module                           |  39.72 kB | 
+chunk-VPKQIIUV.js   | permission-catalog-container-component |  34.95 kB | 
+chunk-3JNBU2H7.js   | -                                      |  33.83 kB | 
+chunk-C5Q7RPR4.js   | permission-catalog-list-component      |  28.56 kB | 
+chunk-26G5MDQT.js   | dashboard-module                       |  20.44 kB | 
+chunk-DDTWDLHW.js   | auth-module                            |  12.34 kB | 
+chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
+chunk-TXMPJQLU.js   | -                                      |   5.54 kB | 
+chunk-HOCBOXEV.js   | -                                      |   4.24 kB | 
+...and 4 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [0.287 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        |  Raw size
+main.js             | main         |  37.35 kB | 
+
+Lazy chunk files    | Names        |  Raw size
+chunk-RLRPVR57.js   | users-module | 100.70 kB | 
+
+Application bundle generation complete. [0.310 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                                  |  Raw size
+main.js             | main                                   |  37.35 kB | 
+
+Lazy chunk files    | Names                                  |  Raw size
+chunk-LOBSCMHY.js   | users-module                           | 100.70 kB | 
+chunk-QNGMUCRR.js   | roles-module                           |  39.72 kB | 
+chunk-6K3TXMER.js   | permission-catalog-container-component |  34.95 kB | 
+chunk-H7ES45PA.js   | dashboard-module                       |  20.44 kB | 
+chunk-XGPXPZTW.js   | -                                      |   7.28 kB | 
+
+Application bundle generation complete. [0.103 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        |  Raw size
+main.js             | main         |  37.35 kB | 
+
+Lazy chunk files    | Names        |  Raw size
+chunk-BTURRLW3.js   | users-module | 101.47 kB | 
+
+Application bundle generation complete. [0.276 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        |  Raw size
+main.js             | main         |  37.35 kB | 
+
+Lazy chunk files    | Names        |  Raw size
+chunk-ZLZWXD2E.js   | users-module | 101.50 kB | 
+
+Application bundle generation complete. [0.243 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        |  Raw size
+main.js             | main         |  37.35 kB | 
+
+Lazy chunk files    | Names        |  Raw size
+chunk-FA2LVY4C.js   | users-module | 105.05 kB | 
+
+Application bundle generation complete. [0.179 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                                  |  Raw size
+polyfills.js        | polyfills                              |  89.77 kB | 
+main.js             | main                                   |  37.35 kB | 
+styles.css          | styles                                 |  20.91 kB | 
+chunk-UDYALH4O.js   | -                                      |  10.23 kB | 
+chunk-X6X3Y735.js   | -                                      |   3.31 kB | 
+chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
+chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
+
+                    | Initial total                          | 164.47 kB
+
+Lazy chunk files    | Names                                  |  Raw size
+chunk-DPUNOHQA.js   | appearance-module                      | 169.44 kB | 
+chunk-CODQXKFT.js   | modules-module                         | 146.51 kB | 
+chunk-FA2LVY4C.js   | users-module                           | 105.05 kB | 
+chunk-ILEXJUET.js   | -                                      | 102.50 kB | 
+chunk-LZTF33OC.js   | -                                      | 100.56 kB | 
+chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
+chunk-QNGMUCRR.js   | roles-module                           |  39.72 kB | 
+chunk-6K3TXMER.js   | permission-catalog-container-component |  34.95 kB | 
+chunk-3JNBU2H7.js   | -                                      |  33.83 kB | 
+chunk-C5Q7RPR4.js   | permission-catalog-list-component      |  28.56 kB | 
+chunk-H7ES45PA.js   | dashboard-module                       |  20.44 kB | 
+chunk-DDTWDLHW.js   | auth-module                            |  12.34 kB | 
+chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
+chunk-XGPXPZTW.js   | -                                      |   7.28 kB | 
+chunk-HOCBOXEV.js   | -                                      |   4.24 kB | 
+...and 4 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [0.270 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        |  Raw size
+main.js             | main         |  37.35 kB | 
+
+Lazy chunk files    | Names        |  Raw size
+chunk-I4FXGL2U.js   | users-module | 104.99 kB | 
+
+Application bundle generation complete. [0.208 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        |  Raw size
+main.js             | main         |  37.35 kB | 
+
+Lazy chunk files    | Names        |  Raw size
+chunk-6HPQ2MGK.js   | users-module | 105.27 kB | 
+
+Application bundle generation complete. [0.236 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                                  |  Raw size
+polyfills.js        | polyfills                              |  89.77 kB | 
+main.js             | main                                   |  37.35 kB | 
+styles.css          | styles                                 |  20.91 kB | 
+chunk-UDYALH4O.js   | -                                      |  10.23 kB | 
+chunk-X6X3Y735.js   | -                                      |   3.31 kB | 
+chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
+chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
+
+                    | Initial total                          | 164.47 kB
+
+Lazy chunk files    | Names                                  |  Raw size
+chunk-DPUNOHQA.js   | appearance-module                      | 169.44 kB | 
+chunk-CODQXKFT.js   | modules-module                         | 146.51 kB | 
+chunk-6HPQ2MGK.js   | users-module                           | 105.27 kB | 
+chunk-ILEXJUET.js   | -                                      | 102.50 kB | 
+chunk-LZTF33OC.js   | -                                      | 100.56 kB | 
+chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
+chunk-QNGMUCRR.js   | roles-module                           |  39.72 kB | 
+chunk-6K3TXMER.js   | permission-catalog-container-component |  34.95 kB | 
+chunk-3JNBU2H7.js   | -                                      |  33.83 kB | 
+chunk-C5Q7RPR4.js   | permission-catalog-list-component      |  28.56 kB | 
+chunk-H7ES45PA.js   | dashboard-module                       |  20.44 kB | 
+chunk-DDTWDLHW.js   | auth-module                            |  12.34 kB | 
+chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
+chunk-XGPXPZTW.js   | -                                      |   7.28 kB | 
+chunk-HOCBOXEV.js   | -                                      |   4.24 kB | 
+...and 4 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [0.173 seconds]
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        |  Raw size
+main.js             | main         |  37.35 kB | 
+
+Lazy chunk files    | Names        |  Raw size
+chunk-ENKJPQR7.js   | users-module | 105.72 kB | 
+
+Application bundle generation complete. [0.233 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        |  Raw size
+main.js             | main         |  37.35 kB | 
+
+Lazy chunk files    | Names        |  Raw size
+chunk-7Y7ZBI5W.js   | users-module | 106.55 kB | 
+
+Application bundle generation complete. [0.365 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                                  |  Raw size
+polyfills.js        | polyfills                              |  89.77 kB | 
+main.js             | main                                   |  37.35 kB | 
+styles.css          | styles                                 |  20.91 kB | 
+chunk-UDYALH4O.js   | -                                      |  10.23 kB | 
+chunk-X6X3Y735.js   | -                                      |   3.31 kB | 
+chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
+chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
+
+                    | Initial total                          | 164.47 kB
+
+Lazy chunk files    | Names                                  |  Raw size
+chunk-DPUNOHQA.js   | appearance-module                      | 169.44 kB | 
+chunk-CODQXKFT.js   | modules-module                         | 146.51 kB | 
+chunk-7Y7ZBI5W.js   | users-module                           | 106.55 kB | 
+chunk-ILEXJUET.js   | -                                      | 102.50 kB | 
+chunk-LZTF33OC.js   | -                                      | 100.56 kB | 
+chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
+chunk-QNGMUCRR.js   | roles-module                           |  39.72 kB | 
+chunk-6K3TXMER.js   | permission-catalog-container-component |  34.95 kB | 
+chunk-3JNBU2H7.js   | -                                      |  33.83 kB | 
+chunk-C5Q7RPR4.js   | permission-catalog-list-component      |  28.56 kB | 
+chunk-H7ES45PA.js   | dashboard-module                       |  20.44 kB | 
+chunk-DDTWDLHW.js   | auth-module                            |  12.34 kB | 
+chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
+chunk-XGPXPZTW.js   | -                                      |   7.28 kB | 
+chunk-HOCBOXEV.js   | -                                      |   4.24 kB | 
+...and 4 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [0.108 seconds]
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        |  Raw size
+main.js             | main         |  37.35 kB | 
+
+Lazy chunk files    | Names        |  Raw size
+chunk-5VJROTCE.js   | users-module | 106.71 kB | 
+
+Application bundle generation complete. [0.276 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                                  |  Raw size
+polyfills.js        | polyfills                              |  89.77 kB | 
+main.js             | main                                   |  37.35 kB | 
+styles.css          | styles                                 |  20.91 kB | 
+chunk-UDYALH4O.js   | -                                      |  10.23 kB | 
+chunk-X6X3Y735.js   | -                                      |   3.31 kB | 
+chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
+chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
+
+                    | Initial total                          | 164.47 kB
+
+Lazy chunk files    | Names                                  |  Raw size
+chunk-DPUNOHQA.js   | appearance-module                      | 169.44 kB | 
+chunk-CODQXKFT.js   | modules-module                         | 146.51 kB | 
+chunk-5VJROTCE.js   | users-module                           | 106.71 kB | 
+chunk-ILEXJUET.js   | -                                      | 102.50 kB | 
+chunk-LZTF33OC.js   | -                                      | 100.56 kB | 
+chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
+chunk-QNGMUCRR.js   | roles-module                           |  39.72 kB | 
+chunk-6K3TXMER.js   | permission-catalog-container-component |  34.95 kB | 
+chunk-3JNBU2H7.js   | -                                      |  33.83 kB | 
+chunk-C5Q7RPR4.js   | permission-catalog-list-component      |  28.56 kB | 
+chunk-H7ES45PA.js   | dashboard-module                       |  20.44 kB | 
+chunk-DDTWDLHW.js   | auth-module                            |  12.34 kB | 
+chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
+chunk-XGPXPZTW.js   | -                                      |   7.28 kB | 
+chunk-HOCBOXEV.js   | -                                      |   4.24 kB | 
+...and 4 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [0.201 seconds]
+

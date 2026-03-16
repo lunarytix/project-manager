@@ -16,17 +16,52 @@ export class PermissionCheckerService {
    * @returns Objeto con los permisos disponibles dinámicamente
    */
   checkModulePermissions(userPermissions: any[], moduleName: string): DynamicModulePermissions {
-    const modulePermissions = userPermissions?.filter(p =>
-      p.module?.nombre?.toLowerCase() === moduleName.toLowerCase() ||
-      p.module?.ruta?.includes(moduleName.toLowerCase())
-    ) || [];
-
     const permissions: DynamicModulePermissions = {};
+    if (!userPermissions || !Array.isArray(userPermissions)) return permissions;
 
-    // Agregar todos los catálogos de permisos encontrados
-    modulePermissions.forEach(p => {
-      if (p.permissionCatalog?.nombre) {
-        permissions[p.permissionCatalog.nombre] = p.isGranted;
+    const moduleNameLower = (moduleName || '').toString().toLowerCase();
+
+    userPermissions.forEach(p => {
+      // Normalize module identification fields coming from different backends
+      const moduleNombre = (p?.module?.nombre ?? p?.module ?? '').toString().toLowerCase();
+      const moduleRuta = (p?.module?.ruta ?? p?.module?.route ?? '').toString().toLowerCase();
+
+      const matchesModule = (
+        moduleNombre && moduleNombre.includes(moduleNameLower)
+      ) || (
+        moduleRuta && moduleRuta.includes(moduleNameLower)
+      ) || (
+        moduleNameLower && moduleNameLower.includes(moduleNombre)
+      );
+
+      if (!matchesModule) return;
+
+      // Different backends may return permission catalog objects or boolean flags
+      if (p.permissionCatalog && p.permissionCatalog.nombre) {
+        permissions[p.permissionCatalog.nombre] = !!p.isGranted;
+        return;
+      }
+
+      // Legacy boolean flags mapping
+      if (typeof p.canCreate === 'boolean') permissions['Crear'] = permissions['Crear'] || !!p.canCreate;
+      if (typeof p.canUpdate === 'boolean') permissions['Editar'] = permissions['Editar'] || !!p.canUpdate;
+      if (typeof p.canDelete === 'boolean') permissions['Eliminar'] = permissions['Eliminar'] || !!p.canDelete;
+      if (typeof p.canRead === 'boolean') permissions['Leer'] = permissions['Leer'] || !!p.canRead;
+      if (typeof p.canEnable === 'boolean') permissions['Habilitar'] = permissions['Habilitar'] || !!p.canEnable;
+      if (typeof p.canDisable === 'boolean') permissions['Deshabilitar'] = permissions['Deshabilitar'] || !!p.canDisable;
+
+      // Some backends may provide a permissions array or object
+      if (p.permissions && Array.isArray(p.permissions)) {
+        p.permissions.forEach((perm: any) => {
+          const name = (perm?.name ?? perm?.nombre ?? '').toString();
+          if (name) permissions[name] = permissions[name] || !!perm?.granted || !!perm?.isGranted || !!perm?.value;
+        });
+      }
+
+      // Generic single permission field
+      if (p.permission && (p.permission.nombre || p.permission.name)) {
+        const name = (p.permission.nombre ?? p.permission.name).toString();
+        permissions[name] = permissions[name] || !!p.isGranted || !!p.permission?.isGranted || !!p.permission?.granted;
       }
     });
 

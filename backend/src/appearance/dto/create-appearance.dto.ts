@@ -98,4 +98,45 @@ export class CreateAppearanceDto {
   @IsBoolean()
   @IsOptional()
   isDefault?: boolean;
+
+  // Component-specific styles
+  @IsString()
+  @IsOptional()
+  gridHeaderBgColor?: string;
+
+  @IsString()
+  @IsOptional()
+  gridBodyBgColor?: string;
+
+  @IsString()
+  @IsOptional()
+  gridIconColor?: string;
+
+  @IsString()
+  @IsOptional()
+  tableHeaderBgColor?: string;
+
+  @IsString()
+  @IsOptional()
+  tableRowBgColor?: string;
+
+  @IsString()
+  @IsOptional()
+  menuBgColor?: string;
+
+  @IsString()
+  @IsOptional()
+  menuTextColor?: string;
+
+  @IsString()
+  @IsOptional()
+  loginBackgroundColor?: string;
+
+  @IsString()
+  @IsOptional()
+  loginFormBgColor?: string;
+
+  @IsString()
+  @IsOptional()
+  loginHeaderColor?: string;
 }
