@@ -23,9 +23,9 @@ chunk-H2BBNBV4.js   | modules-module                         | 146.51 kB |
 chunk-ILEXJUET.js   | -                                      | 102.50 kB | 
 chunk-VVSIXH2F.js   | -                                      | 100.51 kB | 
 chunk-RYDWWCUM.js   | users-module                           | 100.39 kB | 
-chunk-IXW2KJI7.js   | role-permissions-component             |  43.67 kB | 
-chunk-4W2ICTKT.js   | roles-module                           |  39.73 kB | 
-chunk-NP2VO2IP.js   | permission-catalog-container-component |  33.54 kB | 
+chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
+chunk-IAEGTUI2.js   | roles-module                           |  39.73 kB | 
+chunk-6RGSNUR4.js   | permission-catalog-container-component |  34.95 kB | 
 chunk-D3NQN3PQ.js   | -                                      |  32.71 kB | 
 chunk-RV37SSLC.js   | permission-catalog-list-component      |  28.56 kB | 
 chunk-26G5MDQT.js   | dashboard-module                       |  20.44 kB | 
@@ -35,8 +35,96 @@ chunk-TXMPJQLU.js   | -                                      |   5.54 kB |
 chunk-HOCBOXEV.js   | -                                      |   4.24 kB | 
 ...and 4 more lazy chunks files. Use "--verbose" to show all the files.
 
-Application bundle generation complete. [2.077 seconds]
+Application bundle generation complete. [1.935 seconds]
 
 Watch mode enabled. Watching for file changes...
 NOTE: Raw file sizes do not reflect development server per-request transformations.
   ➜  Local:   http://localhost:4200/
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        | Raw size
+main.js             | main         | 36.99 kB | 
+
+Lazy chunk files    | Names        | Raw size
+chunk-TXUB2QEY.js   | roles-module | 39.61 kB | 
+
+Application bundle generation complete. [1.012 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        | Raw size
+main.js             | main         | 36.99 kB | 
+
+Lazy chunk files    | Names        | Raw size
+chunk-2ETYWYYO.js   | roles-module | 39.67 kB | 
+
+Application bundle generation complete. [0.128 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        | Raw size
+main.js             | main         | 36.99 kB | 
+
+Lazy chunk files    | Names        | Raw size
+chunk-UXIGODQI.js   | roles-module | 39.72 kB | 
+
+Application bundle generation complete. [0.146 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        | Raw size
+main.js             | main         | 36.99 kB | 
+
+Lazy chunk files    | Names        | Raw size
+chunk-BEUV3QOG.js   | roles-module | 39.72 kB | 
+
+Application bundle generation complete. [0.329 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        |  Raw size
+main.js             | main         |  36.99 kB | 
+
+Lazy chunk files    | Names        |  Raw size
+chunk-KTOQ3RLN.js   | users-module | 100.39 kB | 
+
+Application bundle generation complete. [0.284 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        |  Raw size
+main.js             | main         |  36.99 kB | 
+
+Lazy chunk files    | Names        |  Raw size
+chunk-RYDWWCUM.js   | users-module | 100.39 kB | 
+
+Application bundle generation complete. [0.196 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        |  Raw size
+main.js             | main         |  36.99 kB | 
+
+Lazy chunk files    | Names        |  Raw size
+chunk-IOSJGV6C.js   | users-module | 100.27 kB | 
+
+Application bundle generation complete. [0.171 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        |  Raw size
+main.js             | main         |  36.99 kB | 
+
+Lazy chunk files    | Names        |  Raw size
+chunk-RYDWWCUM.js   | users-module | 100.39 kB | 
+
+Application bundle generation complete. [0.162 seconds]
+
+Component update sent to client(s).

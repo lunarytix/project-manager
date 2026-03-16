@@ -37,9 +37,9 @@
         [columns]="tableColumns"
         [canEdit]="permissionChecker.hasPermission(modulePermissions, 'Editar')"
         [canDelete]="permissionChecker.hasPermission(modulePermissions, 'Eliminar')"
-        [extraActions]="[]"
-        (edit)="editCatalog($event)"
-        (delete)="deleteCatalog($event)">
+        [extraActions]="getTableExtraActions()"
+        (edit)="editCatalog($event.id)"
+        (delete)="deleteCatalog($event.id)">
       </app-generic-table>
     </div>
 
@@ -47,7 +47,12 @@
     <div *ngIf="currentView === 'grid'" class="grid-view">
       <app-standard-grid
         [items]="getCatalogGridItems()"
-        [config]="gridConfig">
+        [config]="gridConfig"
+        [showEditButton]="permissionChecker.hasPermission(modulePermissions, 'Editar')"
+        [actionsProvider]="catalogActionsProvider"
+        [actionDropdownConfig]="{ buttonIcon: 'more_vert', position: 'bottom-left', searchable: true }"
+        (edit)="editCatalog($event.id)"
+        (action)="onGridAction($event)">
       </app-standard-grid>
     </div>
 

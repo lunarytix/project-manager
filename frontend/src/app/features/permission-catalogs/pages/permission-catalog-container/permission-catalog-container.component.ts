@@ -73,6 +73,9 @@ export class PermissionCatalogContainerComponent implements OnInit {
     private permissionService: PermissionService
   ) {}
 
+  // Provider to supply actions per grid item (preserves "this" context)
+  catalogActionsProvider = (item: any) => this.getCatalogActions(item);
+
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
     this.loadUserPermissions();
@@ -135,54 +138,43 @@ export class PermissionCatalogContainerComponent implements OnInit {
   }
 
   getCatalogActions(catalog: any): ActionItem[] {
-    return this.permissionChecker.getAvailableActions(this.modulePermissions).map(action => {
-      const actionMap: { [key: string]: ActionItem } = {
-        'VerDetalles': {
-          key: 'view',
-          label: 'Ver Detalles',
-          icon: 'visibility'
-        },
-        'Leer': {
-          key: 'read',
-          label: 'Leer',
-          icon: 'description'
-        },
-        'Editar': {
-          key: 'edit',
-          label: 'Editar',
-          icon: 'edit'
-        },
-        'Eliminar': {
-          key: 'delete',
-          label: 'Eliminar',
-          icon: 'delete',
-          color: 'danger'
-        },
-        'ConfigurarPermisos': {
-          key: 'permissions',
-          label: 'Configurar Permisos',
-          icon: 'security'
-        },
-        'Habilitar': {
-          key: 'enable',
-          label: 'Habilitar',
-          icon: 'check_circle'
-        },
-        'Deshabilitar': {
-          key: 'disable',
-          label: 'Deshabilitar',
-          icon: 'cancel',
-          color: 'danger'
-        },
-        'descargar': {
-          key: 'download',
-          label: 'Descargar',
-          icon: 'download'
-        }
-      };
+    // permissionChecker.getAvailableActions already returns ActionItem-like objects
+    // so return them directly. Keep this method for future mapping if needed.
+    return this.permissionChecker.getAvailableActions(this.modulePermissions) as ActionItem[];
+  }
 
-      return actionMap[action];
-    }).filter(action => action !== undefined);
+  onGridAction(event: { action: ActionItem, item: any }) {
+    if (!event || !event.action || !event.item) return;
+    const { action, item } = event;
+    switch (action.key) {
+      case 'view':
+      case 'details':
+        this.viewCatalog(item.id);
+        break;
+      case 'read':
+        this.readCatalog(item.id);
+        break;
+      case 'edit':
+        this.editCatalog(item.id);
+        break;
+      case 'delete':
+        this.deleteCatalog(item.id);
+        break;
+      case 'permissions':
+        this.configurePermissions(item.id);
+        break;
+      case 'download':
+        this.downloadCatalog(item.id);
+        break;
+      case 'enable':
+        this.enableCatalog(item.id);
+        break;
+      case 'disable':
+        this.disableCatalog(item.id);
+        break;
+      default:
+        console.warn('Unhandled grid action', action);
+    }
   }
 
   getTableExtraActions(): ActionItem[] {
@@ -196,26 +188,29 @@ export class PermissionCatalogContainerComponent implements OnInit {
     }
   }
 
-  viewCatalog(id: string) {
+  viewCatalog(id?: string) {
+    if (!id) return;
     if (this.permissionChecker.hasPermission(this.modulePermissions, 'VerDetalles')) {
       this.router.navigate(['view', id], { relativeTo: this.route });
     }
   }
 
-  readCatalog(id: string) {
+  readCatalog(id?: string) {
+    if (!id) return;
     if (this.permissionChecker.hasPermission(this.modulePermissions, 'Leer')) {
-      // Implementar lógica de lectura
       console.log('Leyendo catálogo:', id);
     }
   }
 
-  editCatalog(id: string) {
+  editCatalog(id?: string) {
+    if (!id) return;
     if (this.permissionChecker.hasPermission(this.modulePermissions, 'Editar')) {
       this.router.navigate(['edit', id], { relativeTo: this.route });
     }
   }
 
-  deleteCatalog(id: string) {
+  deleteCatalog(id?: string) {
+    if (!id) return;
     if (!this.permissionChecker.hasPermission(this.modulePermissions, 'Eliminar')) {
       return;
     }
@@ -232,30 +227,30 @@ export class PermissionCatalogContainerComponent implements OnInit {
     }
   }
 
-  configurePermissions(id: string) {
+  configurePermissions(id?: string) {
+    if (!id) return;
     if (this.permissionChecker.hasPermission(this.modulePermissions, 'ConfigurarPermisos')) {
-      // Implementar configuración de permisos
       console.log('Configurando permisos para catálogo:', id);
     }
   }
 
-  enableCatalog(id: string) {
+  enableCatalog(id?: string) {
+    if (!id) return;
     if (this.permissionChecker.hasPermission(this.modulePermissions, 'Habilitar')) {
-      // Implementar habilitación
       console.log('Habilitando catálogo:', id);
     }
   }
 
-  disableCatalog(id: string) {
+  disableCatalog(id?: string) {
+    if (!id) return;
     if (this.permissionChecker.hasPermission(this.modulePermissions, 'Deshabilitar')) {
-      // Implementar deshabilitación
       console.log('Deshabilitando catálogo:', id);
     }
   }
 
-  downloadCatalog(id: string) {
+  downloadCatalog(id?: string) {
+    if (!id) return;
     if (this.permissionChecker.hasPermission(this.modulePermissions, 'descargar')) {
-      // Implementar descarga
       console.log('Descargando catálogo:', id);
     }
   }

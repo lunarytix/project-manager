@@ -44,55 +44,59 @@
 
   <!-- Permission Matrix -->
   <div class="permissions-matrix" *ngIf="!loading && modules.length > 0 && permissionCatalogs.length > 0">
-
-    <!-- Catalogs Header -->
-    <div class="catalogs-header">
-      <div class="module-header-cell">Módulos</div>
-      <div class="catalog-headers">
-        <div
-          *ngFor="let catalog of permissionCatalogs"
-          class="catalog-header-cell"
-          [title]="catalog.descripcion">
-          <span class="material-icons">{{ catalog.icono || 'security' }}</span>
-          <span class="catalog-name">{{ catalog.nombre }}</span>
+    <div class="permissions-table">
+      <!-- Left fixed column: modules -->
+      <div class="left-column">
+        <div class="module-header-cell">Módulos</div>
+        <div class="modules-list">
+          <div *ngFor="let module of modules; trackBy: trackByModuleId" class="module-row-left">
+            <div class="module-info">
+              <div class="module-header">
+                <mat-checkbox
+                  [checked]="isModuleFullySelected(module.id)"
+                  [indeterminate]="isModulePartiallySelected(module.id)"
+                  (change)="toggleAllForModule(module.id, $event.checked)"
+                  color="primary">
+                </mat-checkbox>
+                <span class="material-icons module-icon">{{ module.icono || 'extension' }}</span>
+                <div class="module-details">
+                  <span class="module-name">{{ module.nombre }}</span>
+                  <span class="module-route">{{ module.ruta }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Module Rows -->
-    <div class="modules-grid">
-      <div
-        *ngFor="let module of modules; trackBy: trackByModuleId"
-        class="module-row">
-
-        <!-- Module Info -->
-        <div class="module-info">
-          <div class="module-header">
-            <mat-checkbox
-              [checked]="isModuleFullySelected(module.id)"
-              [indeterminate]="isModulePartiallySelected(module.id)"
-              (change)="toggleAllForModule(module.id, $event.checked)"
-              color="primary">
-            </mat-checkbox>
-            <span class="material-icons module-icon">{{ module.icono || 'extension' }}</span>
-            <div class="module-details">
-              <span class="module-name">{{ module.nombre }}</span>
-              <span class="module-route">{{ module.ruta }}</span>
+      <!-- Right scrollable area: headers + permission cells -->
+      <div class="right-column" [style.--cols]="permissionCatalogs.length">
+        <div class="catalogs-header">
+          <div class="catalog-headers">
+            <div
+              *ngFor="let catalog of permissionCatalogs"
+              class="catalog-header-cell"
+              [title]="catalog.descripcion">
+              <span class="material-icons">{{ catalog.icono || 'security' }}</span>
+              <span class="catalog-name">{{ catalog.nombre }}</span>
             </div>
           </div>
         </div>
 
-        <!-- Permission Checkboxes -->
-        <div class="permission-checkboxes">
-          <div
-            *ngFor="let catalog of permissionCatalogs; trackBy: trackByCatalogId"
-            class="permission-cell">
-            <mat-checkbox
-              [checked]="permissionMatrix[module.id] && permissionMatrix[module.id][catalog.id] || false"
-              (change)="onPermissionChange(module.id, catalog.id, $event.checked)"
-              color="primary"
-              [title]="'Asignar ' + catalog.nombre + ' para ' + module.nombre">
-            </mat-checkbox>
+        <div class="modules-grid">
+          <div *ngFor="let module of modules; trackBy: trackByModuleId" class="module-row-right">
+            <div class="permission-checkboxes">
+              <div
+                *ngFor="let catalog of permissionCatalogs; trackBy: trackByCatalogId"
+                class="permission-cell">
+                <mat-checkbox
+                  [checked]="permissionMatrix[module.id] && permissionMatrix[module.id][catalog.id] || false"
+                  (change)="onPermissionChange(module.id, catalog.id, $event.checked)"
+                  color="primary"
+                  [title]="'Asignar ' + catalog.nombre + ' para ' + module.nombre">
+                </mat-checkbox>
+              </div>
+            </div>
           </div>
         </div>
       </div>

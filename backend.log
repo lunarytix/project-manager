@@ -2,70 +2,70 @@
 > project-manager-backend@0.1.0 start:dev
 > ts-node-dev --respawn --transpile-only src/main.ts
 
-[INFO] 10:36:50 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.9.3)
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +9ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +18ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPermissionCatalogsModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mModulesModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRolesModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPermissionsModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppearanceModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mModulesController {/api/modules}:[39m[38;5;3m +2ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/modules, POST} route[39m[38;5;3m +1ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/modules, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/modules/role/:roleId, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/modules/:id, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/modules/:id, PUT} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/modules/:id, DELETE} route[39m[38;5;3m +1ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/api/auth}:[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/auth/login, POST} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRolesController {/api/roles}:[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/roles, POST} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/roles, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/roles/:id, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/roles/:id, PATCH} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/roles/:id, DELETE} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPermissionsController {/api/permissions}:[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permissions, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permissions/role/:roleId, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permissions/module/:moduleId, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permissions/role/:roleId/update, PUT} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permissions, POST} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permissions/:id, PUT} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permissions/:id, DELETE} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPermissionCatalogsController {/api/permission-catalogs}:[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs/:id, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs, POST} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs/:id, PUT} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs/:id, DELETE} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs/:permissionId/mappings, POST} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs/:permissionId/mappings, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs/:permissionId/mappings/:catalogId, DELETE} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUsersController {/api/users}:[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users, POST} route[39m[38;5;3m +1ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/:id, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/:id, PATCH} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/:id, DELETE} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/role/:roleId, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppearanceController {/api/appearance}:[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/appearance, POST} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/appearance, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/appearance/default, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/appearance/:id, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/appearance/:id, PATCH} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/appearance/:id, DELETE} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/appearance/:id/set-default, POST} route[39m[38;5;3m +0ms[39m
+[INFO] 18:29:28 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.9.3)
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +9ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +19ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPermissionCatalogsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mModulesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRolesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPermissionsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppearanceModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mModulesController {/api/modules}:[39m[38;5;3m +2ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/modules, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/modules, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/modules/role/:roleId, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/modules/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/modules/:id, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/modules/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/api/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/auth/login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRolesController {/api/roles}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/roles, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/roles, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/roles/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/roles/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/roles/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPermissionsController {/api/permissions}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permissions, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permissions/role/:roleId, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permissions/module/:moduleId, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permissions/role/:roleId/update, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permissions, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permissions/:id, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permissions/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPermissionCatalogsController {/api/permission-catalogs}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs/:id, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs/:permissionId/mappings, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs/:permissionId/mappings, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/permission-catalogs/:permissionId/mappings/:catalogId, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUsersController {/api/users}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/role/:roleId, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppearanceController {/api/appearance}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/appearance, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/appearance, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/appearance/default, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/appearance/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/appearance/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/appearance/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/appearance/:id/set-default, POST} route[39m[38;5;3m +0ms[39m
 🚀 SEEDER: Starting database seeding...
 🧹 Clearing old permissions...
 ✓ Permission created: admin -> Dashboard -> Vista
@@ -160,14 +160,122 @@
 ✓ Permission created: colaborador -> CatalogoPermisos -> Leer
 ✓ Permission created: colaborador -> CatalogoPermisos -> VerDetalles
 ✅ SEEDER: Database seeding completed successfully!
-[32m[Nest] 90677  - [39m03/14/2026, 10:36:51 AM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +84ms[39m
+[32m[Nest] 61749  - [39m03/15/2026, 6:29:29 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +85ms[39m
 Backend running on http://localhost:3001
 🔐 Permission Guard - GET /api/roles
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/roles
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/fdc632f5-3d5d-412b-836b-8a8e6c4c009f
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/fdc632f5-3d5d-412b-836b-8a8e6c4c009f
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/fdc632f5-3d5d-412b-836b-8a8e6c4c009f
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/fdc632f5-3d5d-412b-836b-8a8e6c4c009f
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/fdc632f5-3d5d-412b-836b-8a8e6c4c009f
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/roles/fdc632f5-3d5d-412b-836b-8a8e6c4c009f
+🔐 Permission Guard - GET /api/permission-catalogs
+🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/fdc632f5-3d5d-412b-836b-8a8e6c4c009f
@@ -175,35 +283,54 @@ Backend running on http://localhost:3001
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/roles
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/roles/fdc632f5-3d5d-412b-836b-8a8e6c4c009f
+🔐 Permission Guard - GET /api/permission-catalogs
+🔐 Permission Guard - GET /api/permissions/role/fdc632f5-3d5d-412b-836b-8a8e6c4c009f
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/roles
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/fdc632f5-3d5d-412b-836b-8a8e6c4c009f
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/roles/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permission-catalogs
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
@@ -212,6 +339,67 @@ Backend running on http://localhost:3001
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/fdc632f5-3d5d-412b-836b-8a8e6c4c009f
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
@@ -284,8 +472,8 @@ Backend running on http://localhost:3001
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
@@ -318,6 +506,7 @@ Backend running on http://localhost:3001
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
@@ -330,21 +519,20 @@ Backend running on http://localhost:3001
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/module/b0dadc21-5ae1-4994-b100-205fb3ce1f88
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/module/00276948-9cb3-4c68-9f5a-9675455730cd
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/module/1c9986e3-8ed6-4097-9ac6-f3f968910f37
 🔐 Permission Guard - GET /api/permissions/module/a5a2ef10-77aa-417a-a515-1da4d893aa8d
-🔐 Permission Guard - GET /api/permissions/module/00276948-9cb3-4c68-9f5a-9675455730cd
 🔐 Permission Guard - GET /api/permissions/module/e7e3090f-e001-457c-b76f-622abf4d8ab1
 🔐 Permission Guard - GET /api/permissions/module/b7d1e5cb-c941-45ce-a348-7a445a6a9e78
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/module/ccce8316-dc25-4030-ac8f-4ef6b1debb4a
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
@@ -367,29 +555,7 @@ Backend running on http://localhost:3001
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
@@ -401,16 +567,6 @@ Backend running on http://localhost:3001
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permission-catalogs
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/modules
@@ -428,6 +584,80 @@ Backend running on http://localhost:3001
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/appearance/default
+🔐 Permission Guard - GET /api/appearance/default
+🔐 Permission Guard - GET /api/appearance
+🔐 Permission Guard - GET /api/appearance
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/appearance/c8fc557b-2364-4b50-bac2-63f863d4289c
+🔐 Permission Guard - GET /api/appearance/c8fc557b-2364-4b50-bac2-63f863d4289c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
@@ -453,6 +683,55 @@ Backend running on http://localhost:3001
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/users
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/users
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/users
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/users
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
@@ -462,6 +741,74 @@ Backend running on http://localhost:3001
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/fdc632f5-3d5d-412b-836b-8a8e6c4c009f
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/users
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/roles
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
@@ -477,8 +824,7 @@ Backend running on http://localhost:3001
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/roles
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
@@ -486,27 +832,28 @@ Backend running on http://localhost:3001
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/roles
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/fdc632f5-3d5d-412b-836b-8a8e6c4c009f
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/roles
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/roles
 🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/roles/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/permission-catalogs
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/permissions/role/fdc632f5-3d5d-412b-836b-8a8e6c4c009f
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
@@ -516,12 +863,18 @@ Backend running on http://localhost:3001
 🔐 Permission Guard - GET /api/roles
 🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/roles/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/permission-catalogs
-🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
+🔐 Permission Guard - GET /api/modules
 🔐 Permission Guard - GET /api/roles
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/roles/94ea390a-606c-4056-81b6-2c856256ac4c
-🔐 Permission Guard - GET /api/modules
-🔐 Permission Guard - GET /api/permission-catalogs
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/fdc632f5-3d5d-412b-836b-8a8e6c4c009f
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
+🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c
 🔐 Permission Guard - GET /api/permissions/role/94ea390a-606c-4056-81b6-2c856256ac4c

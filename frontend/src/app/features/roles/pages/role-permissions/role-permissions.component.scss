@@ -4,10 +4,6 @@
   margin: 0 auto;
 }
 
-.container-header {
-  margin-bottom: 2rem;
-}
-
 .header-content {
   display: flex;
   justify-content: space-between;
@@ -71,8 +67,63 @@
   background: var(--surface-color, #ffffff);
   border-radius: var(--border-radius, 12px);
   box-shadow: var(--shadow-sm, 0 2px 4px rgba(0,0,0,0.1));
-  overflow: hidden;
+  /* Allow both vertical and horizontal scrolling for the permission area */
+  overflow: auto;
   margin-bottom: 2rem;
+  padding: 0.5rem;
+}
+
+.permissions-table {
+  display: flex;
+  width: 100%;
+}
+
+.left-column {
+  min-width: 320px;
+  max-width: 360px;
+  background: var(--surface-variant, #f8f9fa);
+  border-right: 1px solid var(--border-color, #e0e0e0);
+}
+
+.right-column {
+  flex: 1 1 auto;
+  overflow: auto; /* horizontal and vertical scroll for headers + body */
+}
+
+.module-header-cell {
+  padding: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+  background: var(--surface-variant, #f8f9fa);
+}
+
+.modules-list {
+  /* allow vertical scroll inside left column if needed */
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.module-row-left {
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.catalog-headers {
+  /* use CSS Grid so header columns match permission columns */
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(var(--cols, 6), minmax(120px, 1fr));
+  gap: 0;
+}
+
+.modules-grid {
+  display: block;
+}
+
+.module-row-right {
+  display: block;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
 }
 
 .catalogs-header {
@@ -81,7 +132,7 @@
   border-bottom: 2px solid var(--border-color, #e0e0e0);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 12;
 }
 
 .module-header-cell {
@@ -92,16 +143,19 @@
   align-items: center;
   border-right: 1px solid var(--border-color, #e0e0e0);
   background: var(--surface-variant, #f8f9fa);
+  /* Keep module header fixed when horizontally scrolling */
+  position: sticky;
+  left: 0;
+  z-index: 20;
 }
 
 .catalog-headers {
-  display: flex;
-  flex: 1;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(var(--cols, 6), minmax(120px, 1fr));
 }
 
 .catalog-header-cell {
-  flex: 1;
-  min-width: 120px;
   padding: 1rem 0.75rem;
   display: flex;
   flex-direction: column;
@@ -110,6 +164,7 @@
   font-weight: 500;
   border-right: 1px solid var(--border-color, #e0e0e0);
   gap: 0.5rem;
+  box-sizing: border-box;
 }
 
 .catalog-header-cell .material-icons {
@@ -123,8 +178,8 @@
 }
 
 .modules-grid {
-  max-height: 60vh;
-  overflow-y: auto;
+  /* right-column will provide scrolling; keep rows natural height */
+  display: block;
 }
 
 .module-row {
@@ -137,13 +192,17 @@
   background: var(--surface-hover, rgba(25, 118, 210, 0.04));
 }
 
-.module-info {
+.left-column .module-info {
   min-width: 300px;
   display: flex;
   align-items: center;
   padding: 1rem;
   border-right: 1px solid var(--border-color, #e0e0e0);
   background: var(--surface-color, #ffffff);
+  /* Keep the module info fixed when horizontally scrolling */
+  position: sticky;
+  left: 0;
+  z-index: 10;
 }
 
 .module-header {
@@ -153,14 +212,18 @@
   width: 100%;
 }
 
-.module-icon {
-  color: var(--primary-color, #1976d2);
-  font-size: 1.5rem;
+.module-row {
+  display: flex;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+  transition: background-color 0.2s;
 }
 
-.module-details {
+.module-row:hover {
+  background: var(--surface-hover, rgba(25, 118, 210, 0.04));
+}
+
+.module-row-right {
   display: flex;
-  flex-direction: column;
 }
 
 .module-name {
@@ -176,18 +239,20 @@
 }
 
 .permission-checkboxes {
-  display: flex;
-  flex: 1;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(var(--cols, 6), minmax(120px, 1fr));
+  gap: 0;
+  align-items: center;
 }
 
 .permission-cell {
-  flex: 1;
-  min-width: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1rem 0.75rem;
   border-right: 1px solid var(--border-color, #e0e0e0);
+  box-sizing: border-box;
 }
 
 .empty-state {

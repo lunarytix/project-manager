@@ -131,8 +131,14 @@ export class RolesContainerComponent implements OnInit {
 
   // Grid callbacks
   getRoleActionsForGrid = (item: any) => this.getRoleActions(item);
-  onGridEdit(e: any) { this.editRole(e); }
-  onGridAction(e: any) { this.onRoleAction(e, e.row || e); }
+  onGridEdit(e: any) { this.editRole(e.data || e); }
+  onGridAction(e: any) {
+    // event from StandardGrid is { action: ActionItem, item: GridItem }
+    const action = e?.action || e;
+    const gridItem = e?.item || e?.row || e;
+    const role = gridItem?.data || gridItem;
+    this.onRoleAction(action, role);
+  }
 
   // Action config for dropdown
   get actionConfig(): any {
@@ -276,6 +282,9 @@ export class RolesContainerComponent implements OnInit {
       descripcion: role.descripcion,
       activo: role.activo
     });
+    // Open modal for editing
+    this.modalOpen = true;
+    this.isEditing = true;
   }
 
   cancelEdit(): void {
@@ -318,50 +327,34 @@ export class RolesContainerComponent implements OnInit {
 
   getRoleActions(role: any): ActionItem[] {
     const actions: ActionItem[] = [];
-    const availableActions = this.permissionChecker.getAvailableActions(this.modulePermissions);
+    const availableActions = this.permissionChecker.getAvailableActions(this.modulePermissions || {});
 
-    availableActions.forEach(action => {
-      switch (action) {
-        case 'Editar':
+    availableActions.forEach(a => {
+      const key = a.key || a.label;
+      switch (key) {
+        case 'edit':
           if (this.permissionChecker.hasPermission(this.modulePermissions, 'Editar')) {
-            actions.push({
-              key: 'edit',
-              label: 'Editar Rol',
-              icon: 'edit',
-              color: 'primary'
-            });
+            actions.push({ key: 'edit', label: 'Editar Rol', icon: 'edit', color: 'primary' });
           }
           break;
-        case 'ConfigurarPermisos':
-          if (role.permissions && role.permissions.length > 0 && this.permissionChecker.hasPermission(this.modulePermissions, 'ConfigurarPermisos')) {
-            actions.push({
-              key: 'permissions',
-              label: 'Configurar Permisos',
-              icon: 'security',
-              color: 'secondary'
-            });
+        case 'permissions':
+          const perms = this.rolePermissions[role?.id] || role?.permissions || [];
+          if (perms.length > 0 && this.permissionChecker.hasPermission(this.modulePermissions, 'ConfigurarPermisos')) {
+            actions.push({ key: 'permissions', label: 'Configurar Permisos', icon: 'security', color: 'secondary' });
           }
           break;
-            case 'VerDetalles':
-              if (this.permissionChecker.hasPermission(this.modulePermissions, 'VerDetalles')) {
-                actions.push({
-                  key: 'users',
-                  label: 'Ver Usuarios',
-                  icon: 'group',
-                  color: 'secondary'
-                });
-              }
-              break;
-        case 'Eliminar':
+        case 'details':
+          if (this.permissionChecker.hasPermission(this.modulePermissions, 'VerDetalles')) {
+            actions.push({ key: 'users', label: 'Ver Usuarios', icon: 'group', color: 'secondary' });
+          }
+          break;
+        case 'delete':
           if (this.permissionChecker.hasPermission(this.modulePermissions, 'Eliminar')) {
-            actions.push({
-              key: 'delete',
-              label: 'Eliminar Rol',
-              icon: 'delete',
-              color: 'danger',
-              disabled: false
-            });
+            actions.push({ key: 'delete', label: 'Eliminar Rol', icon: 'delete', color: 'danger' });
           }
+          break;
+        default:
+          // map other generic actions if needed
           break;
       }
     });
