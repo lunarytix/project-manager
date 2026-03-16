@@ -2,32 +2,32 @@ export interface Appearance {
   id: string;
   name: string;
   description?: string;
-  
+
   // Primary colors
   primaryColor: string;
   primaryDarkColor: string;
   primaryLightColor: string;
-  
+
   // Secondary colors
   secondaryColor: string;
   secondaryDarkColor: string;
   secondaryLightColor: string;
-  
+
   // Tertiary colors
   tertiaryColor: string;
   tertiaryDarkColor: string;
   tertiaryLightColor: string;
-  
+
   // Background colors
   backgroundColor: string;
   backgroundSecondaryColor: string;
   borderColor: string;
-  
+
   // Text colors
   textPrimaryColor: string;
   textSecondaryColor: string;
   textMutedColor: string;
-  
+
   // Status colors
   dangerColor: string;
   successColor: string;
@@ -58,7 +58,23 @@ export interface Appearance {
   inputBorderColor: string;
   inputFocusColor: string;
   inputPadding: string;
-  
+
+  // Component-specific styles
+  gridHeaderBgColor?: string;
+  gridBodyBgColor?: string;
+
+  gridIconColor?: string;
+
+  tableHeaderBgColor?: string;
+  tableRowBgColor?: string;
+
+  menuBgColor?: string;
+  menuTextColor?: string;
+
+  loginBackgroundColor?: string;
+  loginFormBgColor?: string;
+  loginHeaderColor?: string;
+
   isActive: boolean;
   isDefault: boolean;
   createdAt: Date;
@@ -68,32 +84,32 @@ export interface Appearance {
 export interface CreateAppearanceRequest {
   name: string;
   description?: string;
-  
+
   // Primary colors
   primaryColor?: string;
   primaryDarkColor?: string;
   primaryLightColor?: string;
-  
+
   // Secondary colors
   secondaryColor?: string;
   secondaryDarkColor?: string;
   secondaryLightColor?: string;
-  
+
   // Tertiary colors
   tertiaryColor?: string;
   tertiaryDarkColor?: string;
   tertiaryLightColor?: string;
-  
+
   // Background colors
   backgroundColor?: string;
   backgroundSecondaryColor?: string;
   borderColor?: string;
-  
+
   // Text colors
   textPrimaryColor?: string;
   textSecondaryColor?: string;
   textMutedColor?: string;
-  
+
   // Status colors
   dangerColor?: string;
   successColor?: string;
@@ -124,7 +140,7 @@ export interface CreateAppearanceRequest {
   inputBorderColor?: string;
   inputFocusColor?: string;
   inputPadding?: string;
-  
+
   isActive?: boolean;
   isDefault?: boolean;
 }

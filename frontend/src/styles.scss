@@ -6,27 +6,27 @@
   --color-primary: #3B82F6;
   --color-primary-dark: #1E3A8A;
   --color-primary-light: #BFDBFE;
-  
-  /* Secondary colors */  
+
+  /* Secondary colors */
   --color-secondary: #10B981;
   --color-secondary-dark: #064E3B;
   --color-secondary-light: #BBF7D0;
-  
+
   /* Tertiary colors */
   --color-tertiary: #F59E0B;
   --color-tertiary-dark: #92400E;
   --color-tertiary-light: #FEF3C7;
-  
+
   /* Background colors */
   --color-background: #FFFFFF;
   --color-background-secondary: #F8FAFC;
   --color-border: #E2E8F0;
-  
+
   /* Text colors */
   --color-text-primary: #111827;
   --color-text-secondary: #6B7280;
   --color-text-muted: #9CA3AF;
-  
+
   /* Status colors */
   --color-danger: #EF4444;
   --color-success: #22C55E;
@@ -50,6 +50,10 @@
   --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   --backdrop-blur: 0px;
   --background-opacity: 1;
+
+  /* Card surfaces (opaque by default to avoid underlying dark bleed-through) */
+  --card-bg: #FFFFFF;
+  --card-body-bg: #FFFFFF;
 
   /* Input styles */
   --input-background-color: #FFFFFF;
@@ -94,7 +98,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: var(--box-shadow, 0 8px 32px rgba(31, 38, 135, 0.37));
   }
-  
+
   .sidebar, .topbar {
     background: rgba(255, 255, 255, var(--background-opacity, 0.85)) !important;
     backdrop-filter: blur(var(--backdrop-blur, 12px));

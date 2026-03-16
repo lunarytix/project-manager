@@ -1,0 +1,54 @@
+<div class="standard-grid" [ngStyle]="getGridStyles()">
+  <div *ngFor="let item of items; trackBy: trackByItem" class="grid-card" [ngStyle]="getCardStyle(item)">
+    <div class="card-header" [ngClass]="config?.cardHeaderClass || 'default-header'">
+      <div class="header-left">
+        <div class="item-icon" *ngIf="config?.showIcon">
+          <span class="material-icons">
+            {{ item.icon || config?.iconName || 'extension' }}
+          </span>
+        </div>
+        <div class="item-main-info">
+          <h4 class="item-name">{{ item.name }}</h4>
+          <p class="item-description">{{ item.description || 'Sin descripción' }}</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="item-status" *ngIf="item.status !== undefined" [class.active]="item.status">
+          <span class="status-dot"></span>
+          <span class="status-text">{{ item.statusText || (item.status ? 'Activo' : 'Inactivo') }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <!-- Default content slot -->
+      <ng-container *ngTemplateOutlet="bodyTemplate || null; context: { $implicit: item }"></ng-container>
+
+      <!-- Fallback default body if no template provided -->
+      <div *ngIf="!bodyTemplate" class="default-body">
+        <div class="detail-item">
+          <span class="detail-label">ID:</span>
+          <span class="detail-value">{{ item.id }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-actions">
+      <button
+        *ngIf="showEditButton"
+        type="button"
+        class="btn btn-sm btn-outline"
+        (click)="onEdit(item)"
+        title="Editar">
+        <span class="material-icons">edit</span>
+      </button>
+
+      <app-action-dropdown
+        *ngIf="actionDropdownConfig"
+        [config]="actionDropdownConfig"
+        [actions]="getItemActions(item)"
+        (actionClick)="onAction($event, item)">
+      </app-action-dropdown>
+    </div>
+  </div>
+</div>

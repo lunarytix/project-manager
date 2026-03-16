@@ -85,9 +85,9 @@ export class AppearanceFormComponent implements OnInit {
     {
       name: 'Fuente',
       fields: [
-        { 
-          key: 'fontFamily', 
-          label: 'Familia de Fuente', 
+        {
+          key: 'fontFamily',
+          label: 'Familia de Fuente',
           type: 'select',
           default: 'Inter, system-ui, -apple-system, sans-serif',
           min: undefined,
@@ -105,9 +105,9 @@ export class AppearanceFormComponent implements OnInit {
         { key: 'fontSize', label: 'Tamaño Base', type: 'text', default: '16px', min: undefined, max: undefined, step: undefined },
         { key: 'fontSizeSmall', label: 'Tamaño Pequeño', type: 'text', default: '14px', min: undefined, max: undefined, step: undefined },
         { key: 'fontSizeLarge', label: 'Tamaño Grande', type: 'text', default: '18px', min: undefined, max: undefined, step: undefined },
-        { 
-          key: 'fontWeight', 
-          label: 'Peso de Fuente', 
+        {
+          key: 'fontWeight',
+          label: 'Peso de Fuente',
           type: 'select',
           default: '400',
           min: undefined,
@@ -139,9 +139,9 @@ export class AppearanceFormComponent implements OnInit {
         { key: 'borderRadiusLarge', label: 'Radio Grande', type: 'text', default: '12px', min: undefined, max: undefined, step: undefined },
         { key: 'boxShadow', label: 'Sombra de Caja', type: 'text', default: '0 1px 3px rgba(0, 0, 0, 0.1)', min: undefined, max: undefined, step: undefined },
         { key: 'backdropBlur', label: 'Desenfoque de Fondo', type: 'text', default: '0px', min: undefined, max: undefined, step: undefined },
-        { 
-          key: 'backgroundOpacity', 
-          label: 'Opacidad de Fondo', 
+        {
+          key: 'backgroundOpacity',
+          label: 'Opacidad de Fondo',
           type: 'range',
           default: '1',
           min: '0',
@@ -160,7 +160,7 @@ export class AppearanceFormComponent implements OnInit {
   ];
 
   previewTheme: any = {};
-  
+
   // Color suggestions
   showSuggestions = false;
   suggestions: ColorSuggestion[] = [];
@@ -168,13 +168,48 @@ export class AppearanceFormComponent implements OnInit {
   selectedSuggestion: ColorSuggestion | null = null;
 
   // Tab navigation
-  activeTab: 'basic' | 'colors' | 'typography' | 'effects' | 'preview' = 'basic';
+  activeTab: 'basic' | 'colors' | 'typography' | 'effects' | 'preview' | 'components' = 'basic';
   tabs = [
     { id: 'basic', label: 'Información Básica', icon: 'info' },
     { id: 'colors', label: 'Colores', icon: 'palette' },
     { id: 'typography', label: 'Tipografía', icon: 'text_fields' },
     { id: 'effects', label: 'Efectos', icon: 'tune' },
-    { id: 'preview', label: 'Vista Previa', icon: 'preview' }
+    { id: 'preview', label: 'Vista Previa', icon: 'preview' },
+    { id: 'components', label: 'Componentes', icon: 'widgets' }
+  ];
+
+  // Component-specific style fields
+  componentStyles = [
+    {
+      name: 'Grid',
+      fields: [
+        { key: 'gridHeaderBgColor', label: 'Header (Grid) - Fondo', default: '#3B82F6' },
+        { key: 'gridBodyBgColor', label: 'Body (Grid) - Fondo', default: '#F8FAFC' },
+        { key: 'gridIconColor', label: 'Icono (Grid) - Color', default: '#111827' }
+      ]
+    },
+    {
+      name: 'Tabla',
+      fields: [
+        { key: 'tableHeaderBgColor', label: 'Header (Tabla) - Fondo', default: '#E5E7EB' },
+        { key: 'tableRowBgColor', label: 'Fila (Tabla) - Fondo', default: '#FFFFFF' }
+      ]
+    },
+    {
+      name: 'Menús',
+      fields: [
+        { key: 'menuBgColor', label: 'Fondo (Menú)', default: '#FFFFFF' },
+        { key: 'menuTextColor', label: 'Texto (Menú)', default: '#111827' }
+      ]
+    },
+    {
+      name: 'Login',
+      fields: [
+        { key: 'loginBackgroundColor', label: 'Fondo (Login)', default: '#F8FAFC' },
+        { key: 'loginFormBgColor', label: 'Formulario (Login) - Fondo', default: '#FFFFFF' },
+        { key: 'loginHeaderColor', label: 'Header (Login) - Color', default: '#3B82F6' }
+      ]
+    }
   ];
 
   constructor(
@@ -182,8 +217,42 @@ export class AppearanceFormComponent implements OnInit {
     private appearanceService: AppearanceService,
     private router: Router,
     private route: ActivatedRoute
-  ) { 
+  ) {
     this.form = this.createForm();
+  }
+
+  /**
+   * Normalize color strings to 6-digit hex (uppercase) when possible.
+   * Accepts '#rrggbb' or 'rgb(a)(r,g,b[,a])' and returns '#RRGGBB'.
+   * If conversion is not possible, returns null.
+   */
+  toHexColor(value: string): string | null {
+    if (!value) return null;
+    const hexMatch = value.match(/^#([0-9A-Fa-f]{6})$/);
+    if (hexMatch) return `#${hexMatch[1].toUpperCase()}`;
+
+    const rgbMatch = value.match(/rgba?\s*\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})(?:\s*,\s*(0|0?\.\d+|1(?:\.0+)?))?\s*\)/);
+    if (rgbMatch) {
+      const r = Math.max(0, Math.min(255, parseInt(rgbMatch[1], 10)));
+      const g = Math.max(0, Math.min(255, parseInt(rgbMatch[2], 10)));
+      const b = Math.max(0, Math.min(255, parseInt(rgbMatch[3], 10)));
+      const a = rgbMatch[4] !== undefined ? parseFloat(rgbMatch[4]) : 1;
+
+      // Composite onto white background if alpha < 1
+      let rr = r, gg = g, bb = b;
+      if (a < 1) {
+        rr = Math.round((1 - a) * 255 + a * r);
+        gg = Math.round((1 - a) * 255 + a * g);
+        bb = Math.round((1 - a) * 255 + a * b);
+      }
+
+      const rHex = rr.toString(16).padStart(2, '0');
+      const gHex = gg.toString(16).padStart(2, '0');
+      const bHex = bb.toString(16).padStart(2, '0');
+      return `#${rHex}${gHex}${bHex}`.toUpperCase();
+    }
+
+    return null;
   }
 
   ngOnInit(): void {
@@ -199,7 +268,7 @@ export class AppearanceFormComponent implements OnInit {
 
     // Initialize preview with defaults
     this.updatePreview();
-    
+
     // Watch form changes for live preview
     this.form.valueChanges.subscribe(() => {
       this.updatePreview();
@@ -243,6 +312,14 @@ export class AppearanceFormComponent implements OnInit {
       });
     });
 
+    // Add component style fields
+    this.componentStyles.forEach(section => {
+      section.fields.forEach(field => {
+        // color fields - validate hex
+        formConfig[field.key] = [field.default, [Validators.required, this.hexColorValidator]];
+      });
+    });
+
     return this.fb.group(formConfig);
   }
 
@@ -257,11 +334,21 @@ export class AppearanceFormComponent implements OnInit {
 
   loadTheme(): void {
     if (!this.themeId) return;
-    
+
     this.loading = true;
     this.appearanceService.getById(this.themeId).subscribe({
       next: (theme) => {
-        this.form.patchValue(theme);
+        // Normalize colors to hex where necessary before patching the form
+        const normalized: any = {};
+        Object.entries(theme).forEach(([k, v]) => {
+          if (k.includes('Color') && typeof v === 'string') {
+            const hex = this.toHexColor(v as string);
+            normalized[k] = hex ?? v;
+          } else {
+            normalized[k] = v;
+          }
+        });
+        this.form.patchValue(normalized);
         this.loading = false;
       },
       error: (error) => {
@@ -275,16 +362,16 @@ export class AppearanceFormComponent implements OnInit {
   updatePreview(): void {
     const formValue = this.form.value;
     this.previewTheme = { ...formValue };
-    
+
     // Apply preview to document
     const root = document.documentElement;
     Object.entries(formValue).forEach(([key, value]) => {
-      if (key.includes('Color') && value) {
-        const cssVar = key
+      // expose any color-like fields as preview CSS variables (keep naming consistent)
+      if (typeof value === 'string' && value.startsWith('#')) {
+        const cssKey = key
           .replace(/([A-Z])/g, '-$1')
-          .toLowerCase()
-          .replace('color', '');
-        root.style.setProperty(`--preview-${cssVar}`, value as string);
+          .toLowerCase();
+        root.style.setProperty(`--preview-${cssKey}`, value as string);
       }
     });
   }
@@ -298,9 +385,19 @@ export class AppearanceFormComponent implements OnInit {
     this.saving = true;
     const formValue = this.form.value;
 
+    // Normalize color fields to hex before sending to backend
+    const normalizedPayload: any = {};
+    Object.entries(formValue).forEach(([k, v]) => {
+      if (k.includes('Color') && typeof v === 'string') {
+        normalizedPayload[k] = this.toHexColor(v) ?? v;
+      } else {
+        normalizedPayload[k] = v;
+      }
+    });
+
     const saveObservable = this.isEdit
-      ? this.appearanceService.update(this.themeId!, formValue)
-      : this.appearanceService.create(formValue);
+      ? this.appearanceService.update(this.themeId!, normalizedPayload)
+      : this.appearanceService.create(normalizedPayload);
 
     saveObservable.subscribe({
       next: (theme) => {
@@ -364,14 +461,15 @@ export class AppearanceFormComponent implements OnInit {
 
   selectSuggestion(suggestion: ColorSuggestion): void {
     this.selectedSuggestion = suggestion;
-    
+
     // Apply the suggested colors to the form
     Object.entries(suggestion.colors).forEach(([key, value]) => {
       if (this.form.get(key)) {
-        this.form.get(key)?.setValue(value);
+        const final = (typeof value === 'string' && key.includes('Color')) ? (this.toHexColor(value) ?? value) : value;
+        this.form.get(key)?.setValue(final as any);
       }
     });
-    
+
     this.updatePreview();
   }
 
@@ -383,14 +481,16 @@ export class AppearanceFormComponent implements OnInit {
     // Aplicar solo los colores que existan en el formulario
     Object.keys(colors).forEach(colorKey => {
       if (this.form.get(colorKey)) {
-        this.form.patchValue({ [colorKey]: colors[colorKey] });
+        const val = colors[colorKey];
+        const final = (typeof val === 'string' && colorKey.includes('Color')) ? (this.toHexColor(val) ?? val) : val;
+        this.form.patchValue({ [colorKey]: final });
       }
     });
 
     // Agregar colores de estado y fondo automáticos
     const statusColors = ColorHarmonyGenerator.generateStatusColors(colors['primaryColor']);
     const backgroundColors = ColorHarmonyGenerator.generateBackgroundAndTextColors();
-    
+
     this.form.patchValue({
       ...statusColors,
       ...backgroundColors
@@ -407,21 +507,21 @@ export class AppearanceFormComponent implements OnInit {
 
   getSuggestionCardClass(suggestion: ColorSuggestion): string {
     let classes = 'suggestion-card';
-    
+
     if (this.selectedSuggestion?.name === suggestion.name) {
       classes += ' selected';
     }
-    
+
     if (suggestion.name.includes('Glass Liquid')) {
       classes += ' glass-liquid';
     }
-    
+
     return classes;
   }
 
   // Tab navigation methods
   setActiveTab(tabId: string): void {
-    this.activeTab = tabId as 'basic' | 'colors' | 'typography' | 'effects' | 'preview';
+    this.activeTab = tabId as 'basic' | 'colors' | 'typography' | 'effects' | 'preview' | 'components';
   }
 
   isActiveTab(tabId: string): boolean {

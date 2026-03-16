@@ -18,7 +18,7 @@
 
   <!-- Tab Navigation -->
   <div class="tab-navigation" *ngIf="!loading">
-    <button 
+    <button
       *ngFor="let tab of tabs"
       type="button"
       class="tab-button"
@@ -31,17 +31,17 @@
 
   <!-- Tab Content -->
   <div class="tab-content" *ngIf="!loading">
-    
+
     <!-- Basic Info Tab -->
     <div class="tab-panel" *ngIf="activeTab === 'basic'">
       <form [formGroup]="form" class="form-grid">
         <div class="form-section">
           <h3>Información Básica</h3>
-          
+
           <div class="form-group">
             <label for="name">Nombre del Tema *</label>
-            <input type="text" id="name" formControlName="name" class="form-control" 
-                   [class.error]="form.get('name')?.invalid && form.get('name')?.touched" 
+            <input type="text" id="name" formControlName="name" class="form-control"
+                   [class.error]="form.get('name')?.invalid && form.get('name')?.touched"
                    placeholder="Ej: Tema Corporativo">
             <div class="error-message" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
               {{ getFieldError('name') }}
@@ -50,7 +50,7 @@
 
           <div class="form-group">
             <label for="description">Descripción</label>
-            <textarea id="description" formControlName="description" class="form-control" 
+            <textarea id="description" formControlName="description" class="form-control"
                       rows="2" placeholder="Describe las características de este tema"></textarea>
           </div>
 
@@ -73,7 +73,7 @@
     <!-- Colors Tab -->
     <div class="tab-panel" *ngIf="activeTab === 'colors'">
       <form [formGroup]="form" class="form-grid">
-        
+
         <!-- Color Suggestions Section -->
         <div class="form-section suggestions-section">
           <h3>
@@ -83,19 +83,19 @@
               {{ showSuggestions ? 'Ocultar' : 'Mostrar' }}
             </button>
           </h3>
-          
+
           <div *ngIf="showSuggestions">
             <div class="base-color-section">
               <p class="section-description">Selecciona un color base para generar paletas automáticas:</p>
               <div class="base-color-picker">
                 <label>Color Base para Sugerencias</label>
                 <div class="color-input-wrapper">
-                  <input type="color" 
-                         [value]="baseColorForSuggestions" 
+                  <input type="color"
+                         [value]="baseColorForSuggestions"
                          (input)="onBaseColorChange($any($event.target).value)"
                          class="color-picker">
-                  <input type="text" 
-                         [value]="baseColorForSuggestions" 
+                  <input type="text"
+                         [value]="baseColorForSuggestions"
                          (input)="onBaseColorChange($any($event.target).value)"
                          class="color-text">
                   <button type="button" class="btn btn-sm btn-primary" (click)="generateSuggestions()">
@@ -117,8 +117,8 @@
                   </button>
                 </div>
                 <div class="color-preview">
-                  <div *ngFor="let color of suggestion.colors | keyvalue" 
-                       class="color-swatch" 
+                  <div *ngFor="let color of suggestion.colors | keyvalue"
+                       class="color-swatch"
                        [style.background-color]="color.value"
                        [title]="color.key + ': ' + color.value">
                   </div>
@@ -135,12 +135,12 @@
             <div class="form-group" *ngFor="let color of category.colors">
               <label [for]="color.key">{{ color.label }}</label>
               <div class="color-input-wrapper">
-                <input type="color" 
-                       [id]="color.key" 
-                       [formControlName]="color.key" 
+                <input type="color"
+                       [id]="color.key"
+                       [formControlName]="color.key"
                        class="color-picker">
-                <input type="text" 
-                       [formControlName]="color.key" 
+                <input type="text"
+                       [formControlName]="color.key"
                        class="color-text form-control"
                        [class.error]="form.get(color.key)?.invalid && form.get(color.key)?.touched">
               </div>
@@ -161,25 +161,25 @@
           <div class="typography-group">
             <div class="form-group" *ngFor="let field of category.fields">
               <label [for]="field.key">{{ field.label }}</label>
-              
+
               <!-- Text Input -->
-              <input *ngIf="field.type === 'text'" 
-                     type="text" 
-                     [id]="field.key" 
-                     [formControlName]="field.key" 
+              <input *ngIf="field.type === 'text'"
+                     type="text"
+                     [id]="field.key"
+                     [formControlName]="field.key"
                      class="form-control"
                      [placeholder]="field.default">
-              
+
               <!-- Select Input -->
-              <select *ngIf="field.type === 'select'" 
-                      [id]="field.key" 
-                      [formControlName]="field.key" 
+              <select *ngIf="field.type === 'select'"
+                      [id]="field.key"
+                      [formControlName]="field.key"
                       class="form-control">
                 <option *ngFor="let option of field.options" [value]="option.value">
                   {{ option.label }}
                 </option>
               </select>
-              
+
               <div class="error-message" *ngIf="form.get(field.key)?.invalid && form.get(field.key)?.touched">
                 {{ getFieldError(field.key) }}
               </div>
@@ -197,34 +197,34 @@
           <div class="effects-group">
             <div class="form-group" *ngFor="let field of category.fields">
               <label [for]="field.key">{{ field.label }}</label>
-              
+
               <!-- Text Input -->
-              <input *ngIf="field.type === 'text'" 
-                     type="text" 
-                     [id]="field.key" 
-                     [formControlName]="field.key" 
+              <input *ngIf="field.type === 'text'"
+                     type="text"
+                     [id]="field.key"
+                     [formControlName]="field.key"
                      class="form-control"
                      [placeholder]="field.default">
-              
+
               <!-- Range Input -->
               <div *ngIf="field.type === 'range'" class="range-group">
-                <input type="range" 
-                       [id]="field.key" 
-                       [formControlName]="field.key" 
+                <input type="range"
+                       [id]="field.key"
+                       [formControlName]="field.key"
                        [min]="field.min"
                        [max]="field.max"
                        [step]="field.step"
                        class="form-range">
                 <span class="range-value">{{ form.get(field.key)?.value }}</span>
               </div>
-              
+
               <!-- Checkbox -->
               <label *ngIf="field.type === 'checkbox'" class="checkbox-group">
                 <input type="checkbox" [formControlName]="field.key">
                 <span class="checkmark"></span>
                 {{ field.label }}
               </label>
-              
+
               <div class="error-message" *ngIf="form.get(field.key)?.invalid && form.get(field.key)?.touched">
                 {{ getFieldError(field.key) }}
               </div>
@@ -241,7 +241,7 @@
         <p class="section-description">
           Aquí puedes ver cómo se ven todos los componentes con la configuración actual de apariencia.
         </p>
-        
+
         <app-components-preview></app-components-preview>
       </div>
     </div>

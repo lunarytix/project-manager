@@ -39,50 +39,29 @@
     }
 
     &.module-header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
+      background: var(--module-header-bg, var(--color-primary, var(--primary, #3B82F6)));
+      color: var(--module-header-text, #ffffff);
 
-      .item-name {
-        color: white;
-      }
-
-      .item-description {
-        color: rgba(255, 255, 255, 0.9);
-      }
-
-      .status-text {
-        color: rgba(255, 255, 255, 0.9);
-      }
+      .item-name { color: var(--module-header-text, #ffffff); }
+      .item-description { color: var(--module-header-desc, rgba(255,255,255,0.9)); }
+      .status-text { color: var(--module-header-desc, rgba(255,255,255,0.9)); }
     }
 
     &.role-header {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: white;
+      background: var(--role-header-bg, var(--color-secondary, #10B981));
+      color: var(--role-header-text, #ffffff);
 
-      .item-name {
-        color: white;
-      }
-
-      .item-description {
-        color: rgba(255, 255, 255, 0.9);
-      }
-
-      .status-text {
-        color: rgba(255, 255, 255, 0.9);
-      }
+      .item-name { color: var(--role-header-text, #ffffff); }
+      .item-description { color: var(--role-header-desc, rgba(255,255,255,0.9)); }
+      .status-text { color: var(--role-header-desc, rgba(255,255,255,0.9)); }
     }
 
     &.catalog-header {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-      color: white;
+      background: var(--catalog-header-bg, var(--color-tertiary, #F59E0B));
+      color: var(--catalog-header-text, #ffffff);
 
-      .item-name {
-        color: white;
-      }
-
-      .item-description {
-        color: rgba(255, 255, 255, 0.9);
-      }
+      .item-name { color: var(--catalog-header-text, #ffffff); }
+      .item-description { color: var(--catalog-header-desc, rgba(255,255,255,0.9)); }
     }
 
     .header-left {
@@ -95,6 +74,7 @@
         .material-icons {
           font-size: 1.5rem;
           opacity: 0.8;
+          color: var(--icon-color, currentColor);
         }
       }
 
@@ -122,7 +102,7 @@
     }
 
     .header-right {
-      .item-status {
+        .item-status {
         display: flex;
         align-items: center;
         gap: 0.5rem;
@@ -130,14 +110,14 @@
         border-radius: 20px;
         font-size: 0.8rem;
         font-weight: 500;
-        background: rgba(220, 53, 69, 0.1);
-        color: #dc3545;
-        border: 1px solid rgba(220, 53, 69, 0.2);
+        background: var(--status-danger-bg, rgba(220, 53, 69, 0.08));
+        color: var(--status-danger, var(--color-danger, #EF4444));
+        border: 1px solid var(--status-danger-border, rgba(220, 53, 69, 0.12));
 
         &.active {
-          background: rgba(25, 135, 84, 0.1);
-          color: #198754;
-          border: 1px solid rgba(25, 135, 84, 0.2);
+          background: var(--status-success-bg, rgba(25, 135, 84, 0.08));
+          color: var(--status-success, var(--color-success, #22C55E));
+          border: 1px solid var(--status-success-border, rgba(25, 135, 84, 0.12));
         }
 
         .status-dot {
@@ -156,6 +136,7 @@
 
   .card-body {
     padding: 1rem 1.25rem;
+    background: var(--card-body-bg, transparent);
 
     .default-body {
       .detail-item {
@@ -170,19 +151,19 @@
 
         .detail-label {
           font-size: 0.85rem;
-          color: var(--text-secondary, #5a6c7d);
+          color: var(--text-secondary, #b0c7dc);
           font-weight: 500;
         }
 
         .detail-value {
           font-size: 0.85rem;
-          color: var(--text-primary, #2c3e50);
+          color: var(--text-primary, #bfcfdf);
           font-weight: 500;
           text-align: right;
 
           &.route-path {
             font-family: 'Courier New', monospace;
-            background: var(--background-light, #f8f9fa);
+            // background: var(--background-light, #f8f9fa);
             padding: 0.25rem 0.5rem;
             border-radius: 4px;
             font-size: 0.8rem;

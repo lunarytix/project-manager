@@ -19,68 +19,14 @@ export interface GridItem {
   statusText?: string;
   icon?: string;
   [key: string]: any; // Allow additional properties
+  iconColor?: string; // Optional per-item icon color
 }
 
 @Component({
   selector: 'app-standard-grid',
   standalone: true,
   imports: [CommonModule, ActionDropdownComponent],
-  template: `
-    <div class="standard-grid" [ngStyle]="getGridStyles()">
-      <div *ngFor="let item of items; trackBy: trackByItem" class="grid-card">
-        <div class="card-header" [ngClass]="config?.cardHeaderClass || 'default-header'">
-          <div class="header-left">
-            <div class="item-icon" *ngIf="config?.showIcon">
-              <span class="material-icons" [ngStyle]="{'color': config?.iconColor}">
-                {{ item.icon || config?.iconName || 'extension' }}
-              </span>
-            </div>
-            <div class="item-main-info">
-              <h4 class="item-name">{{ item.name }}</h4>
-              <p class="item-description">{{ item.description || 'Sin descripción' }}</p>
-            </div>
-          </div>
-          <div class="header-right">
-            <div class="item-status" *ngIf="item.status !== undefined" [class.active]="item.status">
-              <span class="status-dot"></span>
-              <span class="status-text">{{ item.statusText || (item.status ? 'Activo' : 'Inactivo') }}</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="card-body">
-          <!-- Default content slot -->
-          <ng-container *ngTemplateOutlet="bodyTemplate || null; context: { $implicit: item }"></ng-container>
-          
-          <!-- Fallback default body if no template provided -->
-          <div *ngIf="!bodyTemplate" class="default-body">
-            <div class="detail-item">
-              <span class="detail-label">ID:</span>
-              <span class="detail-value">{{ item.id }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-actions">
-          <button 
-            *ngIf="showEditButton" 
-            type="button" 
-            class="btn btn-sm btn-outline" 
-            (click)="onEdit(item)" 
-            title="Editar">
-            <span class="material-icons">edit</span>
-          </button>
-          
-          <app-action-dropdown
-            *ngIf="actionDropdownConfig"
-            [config]="actionDropdownConfig"
-            [actions]="getItemActions(item)"
-            (actionClick)="onAction($event, item)">
-          </app-action-dropdown>
-        </div>
-      </div>
-    </div>
-  `,
+  templateUrl: './standard-grid.component.html',
   styleUrls: ['./standard-grid.component.scss']
 })
 export class StandardGridComponent {
@@ -89,9 +35,9 @@ export class StandardGridComponent {
   @Input() actionDropdownConfig?: any;
   @Input() showEditButton = true;
   @Input() actionsProvider?: (item: GridItem) => ActionItem[];
-  
+
   @ContentChild('bodyTemplate') bodyTemplate?: TemplateRef<any>;
-  
+
   @Output() edit = new EventEmitter<GridItem>();
   @Output() action = new EventEmitter<{ action: ActionItem, item: GridItem }>();
 
@@ -116,5 +62,28 @@ export class StandardGridComponent {
 
   onAction(action: ActionItem, item: GridItem): void {
     this.action.emit({ action, item });
+  }
+
+  /**
+   * Devuelve estilos CSS (variables) para cada tarjeta.
+   * Prioriza valores de `config` y `item` pero usa la variable CSS cuando sea apropiado.
+   */
+  getCardStyle(item: GridItem): { [key: string]: string } {
+    const styles: { [key: string]: string } = {};
+
+    const iconColor = this.config?.iconColor || item?.iconColor;
+    if (iconColor) {
+      // if it's a CSS variable reference, keep as-is, otherwise set direct color value
+      styles['--icon-color'] = iconColor;
+    }
+
+    // Allow card header custom class to optionally define header-related vars via CSS.
+    // If item provides a headerBgColor we expose it as a CSS var for theming.
+    const headerBg = (item as any).headerBgColor || (this.config as any)?.headerBgColor;
+    if (headerBg) {
+      styles['--module-header-bg'] = headerBg;
+    }
+
+    return styles;
   }
 }
