@@ -20,6 +20,9 @@ export class UserEntity {
   @Column({ default: true })
   activo: boolean;
 
+  @Column({ type: 'varchar', nullable: true })
+  photo: string | null;
+
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 }

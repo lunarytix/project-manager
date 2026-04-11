@@ -14,12 +14,21 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
+const platform_express_1 = require("@nestjs/platform-express");
+const swagger_1 = require("@nestjs/swagger");
+const multer_1 = require("multer");
+const path_1 = require("path");
 const users_service_1 = require("./users.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
 const update_user_dto_1 = require("./dto/update-user.dto");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
+    }
+    static imageFileName(_req, file, callback) {
+        const suffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+        const extension = (0, path_1.extname)(file.originalname || '').toLowerCase();
+        callback(null, `profile-${suffix}${extension}`);
     }
     create(createUserDto) {
         return this.usersService.create(createUserDto);
@@ -33,6 +42,21 @@ let UsersController = class UsersController {
     update(id, updateUserDto) {
         return this.usersService.update(id, updateUserDto);
     }
+    updatePut(id, updateUserDto) {
+        return this.usersService.update(id, updateUserDto);
+    }
+    async uploadPhoto(id, file) {
+        if (!file) {
+            throw new common_1.BadRequestException('Debes seleccionar una imagen');
+        }
+        const photoPath = `/uploads/profile/${file.filename}`;
+        const updated = await this.usersService.update(id, { photo: photoPath });
+        return {
+            message: 'Imagen de perfil actualizada',
+            photo: photoPath,
+            user: updated
+        };
+    }
     remove(id) {
         return this.usersService.remove(id);
     }
@@ -42,6 +66,7 @@ let UsersController = class UsersController {
 };
 exports.UsersController = UsersController;
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Crear usuario' }),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -49,12 +74,15 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "create", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Listar usuarios' }),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "findAll", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Obtener usuario por ID' }),
+    (0, swagger_1.ApiParam)({ name: 'id', example: '3b6db4f4-9c2f-454f-a06e-08d6e16f24db' }),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -62,6 +90,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "findOne", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Actualizar usuario (PATCH)' }),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -70,6 +99,51 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "update", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Actualizar usuario (PUT)' }),
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_user_dto_1.UpdateUserDto]),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "updatePut", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Subir foto de perfil de usuario' }),
+    (0, swagger_1.ApiParam)({ name: 'id', example: '3b6db4f4-9c2f-454f-a06e-08d6e16f24db' }),
+    (0, swagger_1.ApiConsumes)('multipart/form-data'),
+    (0, swagger_1.ApiBody)({
+        schema: {
+            type: 'object',
+            properties: {
+                photo: {
+                    type: 'string',
+                    format: 'binary',
+                    description: 'Archivo de imagen (jpg, jpeg, png, webp, gif)',
+                },
+            },
+            required: ['photo'],
+        },
+    }),
+    (0, common_1.Post)(':id/photo'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('photo', {
+        storage: (0, multer_1.diskStorage)({
+            destination: 'uploads/profile',
+            filename: UsersController.imageFileName
+        }),
+        fileFilter: (_req, file, callback) => {
+            const allowed = /\.(jpg|jpeg|png|webp|gif)$/i.test(file.originalname || '');
+            callback(allowed ? null : new common_1.BadRequestException('Formato de imagen no permitido'), allowed);
+        },
+        limits: { fileSize: 5 * 1024 * 1024 }
+    })),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.UploadedFile)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "uploadPhoto", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Eliminar usuario' }),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -77,6 +151,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "remove", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Listar usuarios por rol' }),
+    (0, swagger_1.ApiParam)({ name: 'roleId', example: '9ab9b471-5f58-4056-99fd-8fdb0fb6563b' }),
     (0, common_1.Get)('role/:roleId'),
     __param(0, (0, common_1.Param)('roleId')),
     __metadata("design:type", Function),
@@ -84,6 +160,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "findByRole", null);
 exports.UsersController = UsersController = __decorate([
+    (0, swagger_1.ApiTags)('Users'),
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])
 ], UsersController);

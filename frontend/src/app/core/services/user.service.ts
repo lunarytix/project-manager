@@ -28,6 +28,16 @@ export class UserService {
     return this.http.put<User>(`${this.apiUrl}/${id}`, user);
   }
 
+  updateProfile(id: string, user: UpdateUserRequest): Observable<User> {
+    return this.http.patch<User>(`${this.apiUrl}/${id}`, user);
+  }
+
+  uploadProfilePhoto(id: string, file: File): Observable<{ message: string; photo: string; user: User }> {
+    const formData = new FormData();
+    formData.append('photo', file);
+    return this.http.post<{ message: string; photo: string; user: User }>(`${this.apiUrl}/${id}/photo`, formData);
+  }
+
   delete(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }

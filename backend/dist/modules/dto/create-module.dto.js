@@ -11,33 +11,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateModuleDto = void 0;
 const class_validator_1 = require("class-validator");
+const swagger_1 = require("@nestjs/swagger");
 class CreateModuleDto {
 }
 exports.CreateModuleDto = CreateModuleDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Usuarios' }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateModuleDto.prototype, "nombre", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ example: 'Gestion de usuarios del sistema' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateModuleDto.prototype, "descripcion", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ example: 'group' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateModuleDto.prototype, "icono", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: '/users/list' }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateModuleDto.prototype, "ruta", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        example: ['admin', 'supervisor'],
+        type: [String],
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),
     __metadata("design:type", Array)
 ], CreateModuleDto.prototype, "rolesPermitidos", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ example: true }),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
 ], CreateModuleDto.prototype, "activo", void 0);

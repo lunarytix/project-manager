@@ -74,6 +74,11 @@ export interface Appearance {
   loginBackgroundColor?: string;
   loginFormBgColor?: string;
   loginHeaderColor?: string;
+  loginBackgroundImage?: string;
+  loginBackgroundSize?: string;
+  loginBackgroundPosition?: string;
+  loginBackgroundRepeat?: string;
+  loginBackgroundOverlayOpacity?: number;
 
   isActive: boolean;
   isDefault: boolean;

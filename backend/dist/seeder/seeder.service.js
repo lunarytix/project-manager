@@ -17,19 +17,18 @@ const role_entity_1 = require("../roles/role.entity");
 const module_entity_1 = require("../modules/module.entity");
 const permission_entity_1 = require("../permissions/permission.entity");
 const permission_catalog_entity_1 = require("../permission-catalogs/permission-catalog.entity");
-const permission_catalog_mapping_entity_1 = require("../permission-catalogs/permission-catalog-mapping.entity");
 const appearance_entity_1 = require("../appearance/appearance.entity");
 let SeederService = class SeederService {
     constructor(dataSource) {
         this.dataSource = dataSource;
     }
     async onModuleInit() {
+        console.log('🚀 SEEDER: Starting database seeding...');
         const roleRepository = this.dataSource.getRepository(role_entity_1.RoleEntity);
         const userRepository = this.dataSource.getRepository(user_entity_1.UserEntity);
         const moduleRepository = this.dataSource.getRepository(module_entity_1.ModuleEntity);
         const permissionRepository = this.dataSource.getRepository(permission_entity_1.PermissionEntity);
         const catalogRepository = this.dataSource.getRepository(permission_catalog_entity_1.PermissionCatalogEntity);
-        const mappingRepository = this.dataSource.getRepository(permission_catalog_mapping_entity_1.PermissionCatalogMappingEntity);
         const appearanceRepository = this.dataSource.getRepository(appearance_entity_1.AppearanceEntity);
         // Create default roles
         const adminRole = await roleRepository.findOne({ where: { nombre: 'admin' } });
@@ -106,6 +105,18 @@ let SeederService = class SeederService {
                 activo: true
             });
             console.log('✓ Module created: Catálogos');
+        }
+        // Add CatalogoPermisos module for dynamic permission system
+        const catalogoPermisosModule = await moduleRepository.findOne({ where: { nombre: 'CatalogoPermisos' } });
+        if (!catalogoPermisosModule) {
+            await moduleRepository.save({
+                nombre: 'CatalogoPermisos',
+                descripcion: 'Gestión de catálogos de permisos',
+                ruta: '/permission-catalogs',
+                icono: 'security',
+                activo: true
+            });
+            console.log('✓ Module created: CatalogoPermisos');
         }
         // Add Appearance module
         const appearanceModule = await moduleRepository.findOne({ where: { nombre: 'Apariencia' } });
@@ -244,58 +255,92 @@ let SeederService = class SeederService {
                 console.log('✓ Seed user roleId corrected to role id');
             }
         }
-        // Create default permissions: give admin full access to all modules
+        // Create default permission catalogs first
+        const defaultCatalogs = [
+            { nombre: 'Vista', descripcion: 'Permiso para ver el módulo en dashboard', icono: 'visibility' },
+            { nombre: 'Leer', descripcion: 'Permiso de lectura', icono: 'visibility' },
+            { nombre: 'Crear', descripcion: 'Permiso de creación', icono: 'add' },
+            { nombre: 'Editar', descripcion: 'Permiso de edición', icono: 'edit' },
+            { nombre: 'Eliminar', descripcion: 'Permiso de eliminación', icono: 'delete' },
+            { nombre: 'descargar', descripcion: 'Permiso de descarga', icono: 'download' },
+            { nombre: 'ConfigurarPermisos', descripcion: 'Permiso para configurar permisos', icono: 'security' },
+            { nombre: 'Habilitar', descripcion: 'Permiso para habilitar/activar', icono: 'check_circle' },
+            { nombre: 'Deshabilitar', descripcion: 'Permiso para deshabilitar/desactivar', icono: 'cancel' },
+            { nombre: 'VerDetalles', descripcion: 'Permiso para ver detalles', icono: 'info' }
+        ];
+        const savedCatalogs = [];
+        for (const c of defaultCatalogs) {
+            let cat = await catalogRepository.findOne({ where: { nombre: c.nombre } });
+            if (!cat) {
+                cat = await catalogRepository.save(c);
+                console.log(`✓ Catalog created: ${c.nombre}`);
+            }
+            else if (!cat.icono && c.icono) {
+                cat.icono = c.icono;
+                await catalogRepository.save(cat);
+                console.log(`✓ Catalog updated (icono added): ${c.nombre}`);
+            }
+            if (cat) {
+                savedCatalogs.push(cat);
+            }
+        }
+        // Create permissions: give admin access to all modules with all catalogs
+        // First, clear old permissions to avoid conflicts with new system
+        console.log('🧹 Clearing old permissions...');
+        await permissionRepository.clear();
         const admin = await roleRepository.findOne({ where: { nombre: 'admin' } });
         if (admin) {
             const modules = await moduleRepository.find();
             for (const mod of modules) {
-                const exists = await permissionRepository.findOne({ where: { role: { id: admin.id }, module: { id: mod.id } } });
-                if (!exists) {
-                    await permissionRepository.save({
-                        role: admin,
-                        module: mod,
-                        canRead: true,
-                        canCreate: true,
-                        canUpdate: true,
-                        canDelete: true
+                for (const catalog of savedCatalogs) {
+                    const exists = await permissionRepository.findOne({
+                        where: {
+                            role: { id: admin.id },
+                            module: { id: mod.id },
+                            permissionCatalog: { id: catalog.id }
+                        }
                     });
-                    console.log(`✓ Permission created: admin -> ${mod.nombre} (all)`);
-                }
-            }
-            // Create default catalogs and map them to admin permissions
-            const defaultCatalogs = [
-                { nombre: 'Leer', descripcion: 'Permiso de lectura', icono: 'visibility' },
-                { nombre: 'Crear', descripcion: 'Permiso de creación', icono: 'add' },
-                { nombre: 'Editar', descripcion: 'Permiso de edición', icono: 'edit' },
-                { nombre: 'Eliminar', descripcion: 'Permiso de eliminación', icono: 'delete' }
-            ];
-            const savedCatalogs = [];
-            for (const c of defaultCatalogs) {
-                let cat = await catalogRepository.findOne({ where: { nombre: c.nombre } });
-                if (!cat) {
-                    cat = await catalogRepository.save(c);
-                    console.log(`✓ Catalog created: ${c.nombre}`);
-                }
-                else if (!cat.icono && c.icono) {
-                    // existing catalog without icono: update it
-                    cat.icono = c.icono;
-                    await catalogRepository.save(cat);
-                    console.log(`✓ Catalog updated (icono added): ${c.nombre}`);
-                }
-                savedCatalogs.push(cat);
-            }
-            // Map each admin permission to all default catalogs
-            const adminPermissions = await permissionRepository.find({ where: { role: { id: admin.id } } });
-            for (const p of adminPermissions) {
-                for (const cat of savedCatalogs) {
-                    const existsMap = await mappingRepository.findOne({ where: { permission: { id: p.id }, catalog: { id: cat.id } } });
-                    if (!existsMap) {
-                        await mappingRepository.save({ permission: p, catalog: cat });
-                        console.log(`✓ Mapping created: permission ${p.id} -> catalog ${cat.nombre}`);
+                    if (!exists) {
+                        await permissionRepository.save({
+                            role: admin,
+                            module: mod,
+                            permissionCatalog: catalog,
+                            isGranted: true
+                        });
+                        console.log(`✓ Permission created: admin -> ${mod.nombre} -> ${catalog.nombre}`);
                     }
                 }
             }
         }
+        // Create some permissions for colaborador role too (limited access)
+        const colaborador = await roleRepository.findOne({ where: { nombre: 'colaborador' } });
+        if (colaborador) {
+            const modules = await moduleRepository.find();
+            const limitedCatalogs = savedCatalogs.filter(c => ['Vista', 'Leer', 'VerDetalles'].includes(c.nombre));
+            if (limitedCatalogs.length > 0) {
+                for (const mod of modules) {
+                    for (const catalog of limitedCatalogs) {
+                        const exists = await permissionRepository.findOne({
+                            where: {
+                                role: { id: colaborador.id },
+                                module: { id: mod.id },
+                                permissionCatalog: { id: catalog.id }
+                            }
+                        });
+                        if (!exists) {
+                            await permissionRepository.save({
+                                role: colaborador,
+                                module: mod,
+                                permissionCatalog: catalog,
+                                isGranted: true
+                            });
+                            console.log(`✓ Permission created: colaborador -> ${mod.nombre} -> ${catalog.nombre}`);
+                        }
+                    }
+                }
+            }
+        }
+        console.log('✅ SEEDER: Database seeding completed successfully!');
     }
 };
 exports.SeederService = SeederService;

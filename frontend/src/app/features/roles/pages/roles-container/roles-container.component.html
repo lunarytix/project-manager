@@ -113,27 +113,21 @@
   <!-- Modal Form -->
   <div *ngIf="showForm" class="modal-overlay" (click)="closeForm()">
     <div class="modal-content" (click)="$event.stopPropagation()">
-      <h2>{{ editingId ? 'Editar Rol' : 'Nuevo Rol' }}</h2>
+      <div class="form-header">
+        <h2>{{ editingId ? 'Editar Rol' : 'Nuevo Rol' }}</h2>
+        <button type="button" class="btn-close" (click)="closeForm()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
 
-      <form [formGroup]="form" (ngSubmit)="saveRole()">
-        <mat-form-field appearance="outline" class="form-group">
-          <mat-label>Nombre *</mat-label>
-          <input matInput type="text" formControlName="nombre" placeholder="Ej: Admin">
-          <mat-error *ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.touched">El nombre es requerido</mat-error>
-        </mat-form-field>
+      <app-dynamic-form
+        [config]="roleFormConfig"
+        [initialValues]="roleFormInitialValues"
+        (formSubmit)="onRoleFormSubmit($event)"
+        (formReset)="closeForm()">
+      </app-dynamic-form>
 
-        <mat-form-field appearance="outline" class="form-group">
-          <mat-label>Descripción</mat-label>
-          <textarea matInput formControlName="descripcion" placeholder="Descripción del rol"></textarea>
-        </mat-form-field>
-
-        <mat-checkbox formControlName="activo">Activo</mat-checkbox>
-
-        <div class="form-actions">
-          <button mat-raised-button class="btn-primary" type="submit" [disabled]="form.invalid">{{ editingId ? 'Actualizar' : 'Crear' }}</button>
-          <button mat-button class="btn-secondary" type="button" (click)="closeForm()">Cancelar</button>
-        </div>
-      </form>
+      <div class="error" *ngIf="error">{{ error }}</div>
     </div>
   </div>
 </div>

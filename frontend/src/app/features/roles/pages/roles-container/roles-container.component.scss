@@ -1,2 +1,60 @@
 // Use only appearance system variables - no role-specific styles needed
 // StandardGridComponent handles all grid styling
+
+.modal-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(2, 6, 23, 0.45);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	padding: 1rem;
+}
+
+.modal-content {
+	width: min(720px, 100%);
+	background: var(--card-bg, rgba(255, 255, 255, 0.95));
+	border: 1px solid var(--border-color, rgba(203, 213, 225, 0.45));
+	border-radius: var(--border-radius, 12px);
+	box-shadow: 0 20px 45px rgba(15, 23, 42, 0.25);
+	padding: 1.25rem;
+}
+
+.form-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.form-header h2 {
+	margin: 0;
+	color: var(--text-primary-color, #0f172a);
+	font-size: 1.75rem;
+	font-weight: 700;
+}
+
+.btn-close {
+	border: none;
+	background: transparent;
+	color: var(--text-secondary-color, #64748b);
+	cursor: pointer;
+	border-radius: 8px;
+	padding: 0.35rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-close:hover {
+	background: var(--hover-bg, rgba(15, 23, 42, 0.06));
+	color: var(--text-primary-color, #0f172a);
+}
+
+.error {
+	margin-top: 0.75rem;
+	color: var(--danger-color, #dc2626);
+	font-size: 0.9rem;
+	font-weight: 600;
+}

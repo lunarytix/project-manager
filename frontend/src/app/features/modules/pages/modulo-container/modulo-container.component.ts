@@ -6,6 +6,7 @@ import { RoleService } from '../../../../core/services/role.service';
 import { DynamicPermissionsService } from '../../../../core/services/dynamic-permissions.service';
 import { PermissionService } from '../../../../core/services/permission.service';
 import { AuthService } from '../../../../core/services/auth.service';
+import { PermissionCheckerService, DynamicModulePermissions } from '../../../../core/services/permission-checker.service';
 import { Module } from '../../../../core/models/module.model';
 import { Role } from '../../../../core/models/role.model';
 import { DynamicFormComponent, DynamicFormConfig } from '../../../../shared/components/dynamic-form/dynamic-form.component';
@@ -31,12 +32,13 @@ export class ModuloContainerComponent implements OnInit {
   editingId: string | null = null;
   moduleFormConfig!: DynamicFormConfig;
   showForm = false;
-  
+
   // Module permissions tracking
   modulePermissions: { [moduleId: string]: any[] } = {};
+  checkerPermissions: DynamicModulePermissions = {};
   userPermissions: any = null;
   currentUser: any = null;
-  
+
   // Search and Pagination
   searchTerm = '';
   currentPage = 1;
@@ -44,7 +46,7 @@ export class ModuloContainerComponent implements OnInit {
 
   // View Toggle Properties
   currentView: ViewMode = 'grid';
-  
+
   // Configurations
   searchFilterConfig: SearchFilterConfig = {
     placeholder: 'Buscar módulos...',
@@ -90,6 +92,7 @@ export class ModuloContainerComponent implements OnInit {
     private permissionService: PermissionService,
     private dynamicPermissionsService: DynamicPermissionsService,
     private authService: AuthService,
+    public permissionChecker: PermissionCheckerService,
     private router: Router
   ) {}
 
@@ -106,6 +109,7 @@ export class ModuloContainerComponent implements OnInit {
     this.moduleService.getAll().subscribe({
       next: modules => {
         this.modules = modules;
+        this.currentPage = 1;
         this.loading = false;
         this.updateSearchConfig();
         // Load permissions for each module after modules are loaded
@@ -121,15 +125,15 @@ export class ModuloContainerComponent implements OnInit {
   }
 
   private loadRoles(): void {
-    this.roleService.getAll().subscribe({ 
+    this.roleService.getAll().subscribe({
       next: roles => {
         this.roles = roles;
         // Load module permissions after both modules and roles are loaded
         if (this.modules.length > 0) {
           this.loadModulePermissions();
         }
-      }, 
-      error: () => this.roles = [] 
+      },
+      error: () => this.roles = []
     });
   }
 
@@ -138,8 +142,16 @@ export class ModuloContainerComponent implements OnInit {
       this.permissionService.getByRole(this.currentUser.roleId).subscribe({
         next: permissions => {
           this.userPermissions = permissions;
+          this.checkerPermissions = this.permissionChecker.checkModulePermissions(
+            permissions,
+            'Modulos'
+          );
+          this.updateSearchConfig();
         },
-        error: () => this.userPermissions = null
+        error: () => {
+          this.userPermissions = null;
+          this.checkerPermissions = {};
+        }
       });
     }
   }
@@ -221,7 +233,7 @@ export class ModuloContainerComponent implements OnInit {
       rolesPermitidos: [] // Handle roles separately if needed
     };
 
-    const operation = this.editingId 
+    const operation = this.editingId
       ? this.moduleService.update(this.editingId, moduleData)
       : this.moduleService.create(moduleData);
 
@@ -249,7 +261,7 @@ export class ModuloContainerComponent implements OnInit {
   editModule(module: Module): void {
     this.editingId = module.id || null;
     this.showForm = true;
-    
+
     // Update form with module data
     if (this.moduleFormConfig) {
       this.moduleFormConfig.fields.forEach(field => {
@@ -257,7 +269,7 @@ export class ModuloContainerComponent implements OnInit {
           field.value = (module as any)[field.key];
         }
       });
-      
+
       // Update buttons
       if (this.moduleFormConfig.submitButton) {
         this.moduleFormConfig.submitButton.label = 'Guardar';
@@ -301,11 +313,25 @@ export class ModuloContainerComponent implements OnInit {
     this.deleteModule(module.id);
   }
 
-  // Prepare data for table
+  onTableAction(event: { key: string; row: any }): void {
+    const module = this.modules.find(m => m.id === event.row.id);
+    if (!module) return;
+
+    switch (event.key) {
+      case 'toggle-status':
+        this.toggleModuleStatus(module);
+        break;
+      case 'permissions':
+        this.navigateToPermissions(module.id);
+        break;
+    }
+  }
+
+  // Prepare data for table (uses filteredModules so search-filter-bar works for table too)
   get tableData(): any[] {
-    return this.modules.map(module => ({
+    return this.paginatedModules.map(module => ({
       ...module,
-      activo: module.activo ? 'Activo' : 'Inactivo' // Convert boolean to display text
+      activo: module.activo ? 'Activo' : 'Inactivo'
     }));
   }
 
@@ -313,6 +339,7 @@ export class ModuloContainerComponent implements OnInit {
   onSearchChange(searchTerm: string): void {
     this.searchTerm = searchTerm;
     this.currentPage = 1; // Reset to first page when searching
+    this.updateSearchConfig();
   }
 
   onPageChange(page: number): void {
@@ -330,9 +357,9 @@ export class ModuloContainerComponent implements OnInit {
   // Filtered and Paginated Modules
   get filteredModules(): Module[] {
     if (!this.searchTerm) return this.modules;
-    
+
     const term = this.searchTerm.toLowerCase();
-    return this.modules.filter(module => 
+    return this.modules.filter(module =>
       module.nombre.toLowerCase().includes(term) ||
       (module.descripcion || '').toLowerCase().includes(term) ||
       module.ruta.toLowerCase().includes(term)
@@ -347,7 +374,7 @@ export class ModuloContainerComponent implements OnInit {
   }
 
   get totalPages(): number {
-    return Math.ceil(this.filteredModules.length / this.pageSize);
+    return Math.max(1, Math.ceil(this.filteredModules.length / this.pageSize));
   }
 
   // Update search config when data changes
@@ -425,9 +452,9 @@ export class ModuloContainerComponent implements OnInit {
   // Actions provider for StandardGridComponent (arrow function to preserve 'this' context)
   getModuleActionsForGrid = (item: GridItem): ActionItem[] => {
     const module = item['originalData'] as Module;
-    const hasEditPermission = this.hasPermissionForAction('update');
-    const hasDeletePermission = this.hasPermissionForAction('delete');
-    
+    const hasEditPermission = this.permissionChecker.hasPermission(this.checkerPermissions, 'Editar');
+    const hasDeletePermission = this.permissionChecker.hasPermission(this.checkerPermissions, 'Eliminar');
+
     const actions: ActionItem[] = [
       {
         key: 'view',
@@ -474,28 +501,19 @@ export class ModuloContainerComponent implements OnInit {
         disabled: !hasDeletePermission
       }
     ];
-    
+
     return actions.filter(action => !action.hidden);
   }
 
   // Check if current user has permission for specific action
   private hasPermissionForAction(action: 'create' | 'update' | 'delete' | 'read'): boolean {
-    if (!this.userPermissions || !Array.isArray(this.userPermissions)) return false;
-    
-    // Find permission for modules route/module
-    const modulePermission = this.userPermissions.find(p => 
-      p.module?.ruta === '/modules' || p.module?.nombre?.toLowerCase().includes('modulo')
-    );
-    
-    if (!modulePermission) return false;
-    
-    switch (action) {
-      case 'create': return modulePermission.canCreate;
-      case 'update': return modulePermission.canUpdate;
-      case 'delete': return modulePermission.canDelete;
-      case 'read': return modulePermission.canRead;
-      default: return false;
-    }
+    const map: Record<string, string> = {
+      create: 'Crear',
+      update: 'Editar',
+      delete: 'Eliminar',
+      read: 'Leer'
+    };
+    return this.permissionChecker.hasPermission(this.checkerPermissions, map[action] || action);
   }
 
   // Event handlers for StandardGridComponent
@@ -506,7 +524,7 @@ export class ModuloContainerComponent implements OnInit {
 
   onGridAction(event: { action: ActionItem, item: GridItem }): void {
     const module = event.item['originalData'] as Module;
-    
+
     switch (event.action.key) {
       case 'view':
         this.viewModuleDetails(module);
@@ -521,7 +539,7 @@ export class ModuloContainerComponent implements OnInit {
         break;
       case 'navigate':
         if (module.ruta) {
-          window.open(module.ruta, '_blank');  
+          window.open(module.ruta, '_blank');
         }
         break;
       case 'toggle-status':
@@ -544,8 +562,8 @@ export class ModuloContainerComponent implements OnInit {
 
   private navigateToPermissions(moduleId: string | undefined): void {
     if (moduleId) {
-      this.router.navigate(['/permissions'], { 
-        queryParams: { moduleId } 
+      this.router.navigate(['/permissions'], {
+        queryParams: { moduleId }
       });
     }
   }

@@ -15,16 +15,24 @@ export class PermissionCheckerService {
    * @param moduleName - Nombre del módulo a verificar
    * @returns Objeto con los permisos disponibles dinámicamente
    */
+  /**
+   * Remove diacritical marks (accents) from a string for comparison.
+   * e.g. 'Módulos' → 'Modulos', 'Catálogos' → 'Catalogos'
+   */
+  private stripAccents(str: string): string {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
   checkModulePermissions(userPermissions: any[], moduleName: string): DynamicModulePermissions {
     const permissions: DynamicModulePermissions = {};
     if (!userPermissions || !Array.isArray(userPermissions)) return permissions;
 
-    const moduleNameLower = (moduleName || '').toString().toLowerCase();
+    const moduleNameLower = this.stripAccents((moduleName || '').toString()).toLowerCase();
 
     userPermissions.forEach(p => {
       // Normalize module identification fields coming from different backends
-      const moduleNombre = (p?.module?.nombre ?? p?.module ?? '').toString().toLowerCase();
-      const moduleRuta = (p?.module?.ruta ?? p?.module?.route ?? '').toString().toLowerCase();
+      const moduleNombre = this.stripAccents((p?.module?.nombre ?? p?.module ?? '').toString()).toLowerCase();
+      const moduleRuta = this.stripAccents((p?.module?.ruta ?? p?.module?.route ?? '').toString()).toLowerCase();
 
       const matchesModule = (
         moduleNombre && moduleNombre.includes(moduleNameLower)

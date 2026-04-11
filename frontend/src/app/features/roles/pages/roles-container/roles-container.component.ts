@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RoleService } from '../../../../core/services/role.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { PermissionService } from '../../../../core/services/permission.service';
@@ -14,14 +9,15 @@ import { PermissionCheckerService, DynamicModulePermissions } from '../../../../
 import { Router } from '@angular/router';
 import { GenericTableComponent, TableColumn } from '../../../../shared/components/generic-table/generic-table.component';
 import { SearchFilterBarComponent, SearchFilterConfig } from '../../../../shared/components/search-filter-bar/search-filter-bar.component';
-import { ActionDropdownComponent, ActionItem, ActionDropdownConfig } from '../../../../shared/components/action-dropdown/action-dropdown.component';
+import { ActionItem, ActionDropdownConfig } from '../../../../shared/components/action-dropdown/action-dropdown.component';
 import { ViewMode } from '../../../../shared/components/view-toggle/view-toggle.component';
 import { StandardGridComponent, GridConfig, GridItem } from '../../../../shared/components/standard-grid/standard-grid.component';
+import { DynamicFormComponent, DynamicFormConfig } from '../../../../shared/components/dynamic-form/dynamic-form.component';
 
 @Component({
   selector: 'app-roles-container',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule, GenericTableComponent, SearchFilterBarComponent, StandardGridComponent],
+  imports: [CommonModule, RouterModule, GenericTableComponent, SearchFilterBarComponent, StandardGridComponent, DynamicFormComponent],
   templateUrl: './roles-container.component.html',
   styleUrls: ['./roles-container.component.scss']
 })
@@ -37,7 +33,10 @@ export class RolesContainerComponent implements OnInit {
   modalOpen = false;
   isEditing = false;
   success: string | null = null;
-  form: FormGroup;
+  submitting = false;
+  roleFormConfig!: DynamicFormConfig;
+  roleFormInitialValues: { [key: string]: any } = {};
+  currentRolePermisos: string[] = [];
 
   // Search and filter
   searchTerm = '';
@@ -74,11 +73,17 @@ export class RolesContainerComponent implements OnInit {
   }
 
   get totalPages(): number {
-    return Math.ceil(this.filteredRoles.length / this.pageSize);
+    return Math.max(1, Math.ceil(this.filteredRoles.length / this.pageSize));
+  }
+
+  get paginatedRoles(): any[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.filteredRoles.slice(startIndex, endIndex);
   }
 
   get gridItems(): GridItem[] {
-    return this.filteredRoles.map(r => ({
+    return this.paginatedRoles.map(r => ({
       id: r.id,
       name: r.nombre,
       description: r.descripcion,
@@ -116,7 +121,7 @@ export class RolesContainerComponent implements OnInit {
   }
 
   get tableData(): any[] {
-    return this.filteredRoles;
+    return this.paginatedRoles;
   }
 
   get tableExtraActions(): ActionItem[] {
@@ -124,7 +129,15 @@ export class RolesContainerComponent implements OnInit {
   }
 
   // Template event adapters
-  onSearchChange(e: any) { this.onSearch(e); }
+  onSearchChange(term: string | any) {
+    if (typeof term === 'string') {
+      this.searchTerm = term;
+      this.currentPage = 1;
+      this.applyFilters();
+    } else {
+      this.onSearch(term);
+    }
+  }
   onViewChange(e: any) { this.onViewModeChange(e); }
   onCreateClick() { this.onCreate(); }
   onPageChange(e: number) { this.currentPage = e; }
@@ -162,24 +175,60 @@ export class RolesContainerComponent implements OnInit {
 
   constructor(
     private roleService: RoleService,
-    private fb: FormBuilder,
     private permissionService: PermissionService,
     private authService: AuthService,
     private dynamicPermissionsService: DynamicPermissionsService,
     public permissionChecker: PermissionCheckerService,
     private router: Router
-  ) {
-    this.form = this.fb.group({
-      nombre: ['', Validators.required],
-      descripcion: [''],
-      activo: [true]
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.getCurrentUser();
     this.loadRoles();
     this.loadUserPermissions();
+    this.initRoleFormConfig();
+  }
+
+  private initRoleFormConfig(): void {
+    this.roleFormConfig = {
+      submitButton: {
+        label: this.editingId ? 'Actualizar' : 'Crear',
+        loading: this.submitting
+      },
+      resetButton: {
+        label: 'Cancelar',
+        variant: 'secondary'
+      },
+      fields: [
+        {
+          key: 'nombre',
+          label: 'Nombre',
+          type: 'text',
+          required: true,
+          placeholder: 'Ej: Administrador'
+        },
+        {
+          key: 'descripcion',
+          label: 'Descripción',
+          type: 'textarea',
+          placeholder: 'Descripción del rol'
+        },
+        {
+          key: 'activo',
+          label: 'Activo',
+          type: 'checkbox',
+          value: true
+        }
+      ]
+    };
+  }
+
+  private updateRoleFormConfig(): void {
+    if (!this.roleFormConfig?.submitButton) return;
+    this.roleFormConfig.submitButton.label = this.editingId
+      ? (this.submitting ? 'Actualizando...' : 'Actualizar')
+      : (this.submitting ? 'Creando...' : 'Crear');
+    this.roleFormConfig.submitButton.loading = this.submitting;
   }
 
   private loadUserPermissions(): void {
@@ -216,6 +265,8 @@ export class RolesContainerComponent implements OnInit {
       next: roles => {
         this.roles = roles;
         this.filteredRoles = [...this.roles];
+        this.currentPage = 1;
+        this.searchConfig.totalItems = this.filteredRoles.length;
         this.loadRolePermissions();
         this.loading = false;
       },
@@ -241,29 +292,35 @@ export class RolesContainerComponent implements OnInit {
     });
   }
 
-  saveRole(): void {
-    if (this.form.valid) {
-      this.loading = true;
-      if (this.editingId) {
-        // Update existing role
-        this.roleService.update(this.editingId, this.form.value).subscribe({
-          next: () => {
-            this.loadRoles();
-            this.cancelEdit();
-          },
-          error: (err) => console.error(err)
-        });
-      } else {
-        // Create new role
-        this.roleService.create(this.form.value).subscribe({
-          next: () => {
-            this.loadRoles();
-            this.form.reset();
-          },
-          error: (err) => console.error(err)
-        });
+  onRoleFormSubmit(formData: any): void {
+    this.submitting = true;
+    this.error = null;
+    this.updateRoleFormConfig();
+
+    const payload = {
+      nombre: formData.nombre,
+      descripcion: formData.descripcion,
+      activo: !!formData.activo,
+      permisos: this.currentRolePermisos
+    };
+
+    const request = this.editingId
+      ? this.roleService.update(this.editingId, payload)
+      : this.roleService.create(payload);
+
+    request.subscribe({
+      next: () => {
+        this.submitting = false;
+        this.updateRoleFormConfig();
+        this.loadRoles();
+        this.closeForm();
+      },
+      error: (err) => {
+        this.submitting = false;
+        this.updateRoleFormConfig();
+        this.error = err?.error?.message || 'Error guardando rol';
       }
-    }
+    });
   }
 
   deleteRole(id: string): void {
@@ -277,19 +334,27 @@ export class RolesContainerComponent implements OnInit {
 
   editRole(role: any): void {
     this.editingId = role.id;
-    this.form.patchValue({
+    this.isEditing = true;
+    this.roleFormInitialValues = {
       nombre: role.nombre,
       descripcion: role.descripcion,
       activo: role.activo
-    });
-    // Open modal for editing
+    };
+    this.currentRolePermisos = Array.isArray(role.permisos) ? [...role.permisos] : [];
+    this.updateRoleFormConfig();
     this.modalOpen = true;
-    this.isEditing = true;
   }
 
   cancelEdit(): void {
     this.editingId = null;
-    this.form.reset();
+    this.isEditing = false;
+    this.roleFormInitialValues = {
+      nombre: '',
+      descripcion: '',
+      activo: true
+    };
+    this.currentRolePermisos = [];
+    this.updateRoleFormConfig();
   }
 
   onSearch(event: { searchTerm: string; statusFilter?: string }): void {
@@ -300,14 +365,18 @@ export class RolesContainerComponent implements OnInit {
   onCreate(): void {
     this.modalOpen = true;
     this.isEditing = false;
-    this.form.reset({
+    this.editingId = null;
+    this.roleFormInitialValues = {
       nombre: '',
       descripcion: '',
       activo: true
-    });
+    };
+    this.currentRolePermisos = [];
+    this.updateRoleFormConfig();
   }
 
   private applyFilters(): void {
+    this.currentPage = 1;
     this.filteredRoles = this.roles.filter(role => {
       const searchMatch = !this.searchTerm ||
         role.nombre.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
@@ -315,6 +384,7 @@ export class RolesContainerComponent implements OnInit {
 
       return searchMatch;
     });
+    this.searchConfig.totalItems = this.filteredRoles.length;
   }
 
   onViewModeChange(mode: ViewMode): void {

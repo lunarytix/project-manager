@@ -5,8 +5,11 @@ export interface User {
   password?: string;
   roleId: string;
   activo: boolean;
+  photo?: string;
   fechaCreacion?: Date;
   fechaActualizacion?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface CreateUserRequest {
@@ -21,4 +24,5 @@ export interface UpdateUserRequest {
   email?: string;
   roleId?: string;
   activo?: boolean;
+  photo?: string;
 }

@@ -11,28 +11,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateUserDto = void 0;
 const class_validator_1 = require("class-validator");
+const swagger_1 = require("@nestjs/swagger");
 class CreateUserDto {
 }
 exports.CreateUserDto = CreateUserDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Administrador Principal' }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "nombre", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 'admin@test.com' }),
     (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "email", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 'admin123' }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "password", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ example: '3b6db4f4-9c2f-454f-a06e-08d6e16f24db' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "roleId", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ example: true }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateUserDto.prototype, "activo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ example: '/uploads/profile/profile-1742975500012.png' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateUserDto.prototype, "photo", void 0);

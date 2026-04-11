@@ -192,6 +192,24 @@ export class AppearanceService {
     root.style.setProperty('--input-focus-color', theme.inputFocusColor);
     root.style.setProperty('--input-padding', theme.inputPadding);
 
+    // Component-specific styles
+    if (theme.gridHeaderBgColor) root.style.setProperty('--grid-header-bg', theme.gridHeaderBgColor);
+    if (theme.gridBodyBgColor) root.style.setProperty('--grid-body-bg', theme.gridBodyBgColor);
+    if (theme.gridIconColor) root.style.setProperty('--grid-icon-color', theme.gridIconColor);
+    if (theme.tableHeaderBgColor) root.style.setProperty('--table-header-bg', theme.tableHeaderBgColor);
+    if (theme.tableRowBgColor) root.style.setProperty('--table-row-bg', theme.tableRowBgColor);
+    if (theme.menuBgColor) root.style.setProperty('--menu-bg', theme.menuBgColor);
+    if (theme.menuTextColor) root.style.setProperty('--menu-text-color', theme.menuTextColor);
+    if (theme.loginBackgroundColor) root.style.setProperty('--login-bg', theme.loginBackgroundColor);
+    if (theme.loginFormBgColor) root.style.setProperty('--login-form-bg', theme.loginFormBgColor);
+    if (theme.loginHeaderColor) root.style.setProperty('--login-header-color', theme.loginHeaderColor);
+    if (theme.loginBackgroundImage) root.style.setProperty('--login-bg-image', `url(${theme.loginBackgroundImage})`);
+    else root.style.setProperty('--login-bg-image', 'none');
+    if (theme.loginBackgroundSize) root.style.setProperty('--login-bg-size', theme.loginBackgroundSize);
+    if (theme.loginBackgroundPosition) root.style.setProperty('--login-bg-position', theme.loginBackgroundPosition);
+    if (theme.loginBackgroundRepeat) root.style.setProperty('--login-bg-repeat', theme.loginBackgroundRepeat);
+    if (theme.loginBackgroundOverlayOpacity !== undefined) root.style.setProperty('--login-bg-overlay-opacity', String(theme.loginBackgroundOverlayOpacity));
+
     // Glass effect class toggle
     if (theme.glassEffect) {
       document.body.classList.add('glass-theme');

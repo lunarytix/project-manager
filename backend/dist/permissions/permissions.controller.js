@@ -14,9 +14,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PermissionsController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const permissions_service_1 = require("./permissions.service");
 const create_permission_dto_1 = require("./dto/create-permission.dto");
 const update_permission_dto_1 = require("./dto/update-permission.dto");
+const update_role_permissions_dto_1 = require("./dto/update-role-permissions.dto");
 let PermissionsController = class PermissionsController {
     constructor(service) {
         this.service = service;
@@ -33,12 +35,15 @@ let PermissionsController = class PermissionsController {
 };
 exports.PermissionsController = PermissionsController;
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Listar permisos' }),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], PermissionsController.prototype, "findAll", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Listar permisos por rol' }),
+    (0, swagger_1.ApiParam)({ name: 'roleId', example: '9ab9b471-5f58-4056-99fd-8fdb0fb6563b' }),
     (0, common_1.Get)('role/:roleId'),
     __param(0, (0, common_1.Param)('roleId')),
     __metadata("design:type", Function),
@@ -46,6 +51,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], PermissionsController.prototype, "findByRole", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Listar permisos por modulo' }),
+    (0, swagger_1.ApiParam)({ name: 'moduleId', example: '9c4f2d10-4f0a-4ac8-9258-a5eb5e7f9e65' }),
     (0, common_1.Get)('module/:moduleId'),
     __param(0, (0, common_1.Param)('moduleId')),
     __metadata("design:type", Function),
@@ -53,14 +60,17 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], PermissionsController.prototype, "findByModule", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Actualizar permisos de un rol' }),
+    (0, swagger_1.ApiBody)({ type: update_role_permissions_dto_1.UpdateRolePermissionsDto }),
     (0, common_1.Put)('role/:roleId/update'),
     __param(0, (0, common_1.Param)('roleId')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String, update_role_permissions_dto_1.UpdateRolePermissionsDto]),
     __metadata("design:returntype", void 0)
 ], PermissionsController.prototype, "updateRolePermissions", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Crear permiso' }),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -68,6 +78,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], PermissionsController.prototype, "create", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Actualizar permiso' }),
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -76,6 +87,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], PermissionsController.prototype, "update", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Eliminar permiso' }),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -83,6 +95,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], PermissionsController.prototype, "remove", null);
 exports.PermissionsController = PermissionsController = __decorate([
+    (0, swagger_1.ApiTags)('Permissions'),
     (0, common_1.Controller)('permissions'),
     __metadata("design:paramtypes", [permissions_service_1.PermissionsService])
 ], PermissionsController);

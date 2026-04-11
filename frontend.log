@@ -8,532 +8,785 @@ Component HMR has been enabled, see https://angular.dev/hmr for more info.
 ❯ Building...
 ✔ Building...
 Initial chunk files | Names                                  |  Raw size
+chunk-MWVULWPS.js   | -                                      | 119.37 kB | 
 polyfills.js        | polyfills                              |  89.77 kB | 
-main.js             | main                                   |  37.35 kB | 
-styles.css          | styles                                 |  20.86 kB | 
-chunk-UDYALH4O.js   | -                                      |  10.23 kB | 
-chunk-X6X3Y735.js   | -                                      |   3.31 kB | 
+main.js             | main                                   |  72.04 kB | 
+styles.css          | styles                                 |  20.78 kB | 
+chunk-YHGDF7QX.js   | -                                      |  11.97 kB | 
+chunk-PCSJAAUA.js   | -                                      |   4.19 kB | 
+chunk-N6EJLPLT.js   | -                                      |   1.80 kB | 
 chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
 chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
 
-                    | Initial total                          | 164.42 kB
+                    | Initial total                          | 322.83 kB
 
 Lazy chunk files    | Names                                  |  Raw size
-chunk-DPUNOHQA.js   | appearance-module                      | 169.44 kB | 
-chunk-TPE24UAQ.js   | modules-module                         | 146.51 kB | 
-chunk-ILEXJUET.js   | -                                      | 102.50 kB | 
-chunk-VVSIXH2F.js   | -                                      | 100.51 kB | 
-chunk-RYDWWCUM.js   | users-module                           | 100.39 kB | 
+chunk-HTWLS5VU.js   | appearance-module                      | 184.79 kB | 
+chunk-WUHJXCEQ.js   | modules-module                         | 147.84 kB | 
+chunk-3W6P7HAG.js   | -                                      | 146.52 kB | 
+chunk-2IGHCLSO.js   | users-module                           | 103.99 kB | 
 chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
-chunk-4FZA5SC6.js   | roles-module                           |  39.72 kB | 
-chunk-Q75ZQVA5.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-3CIMBQ6R.js   | -                                      |  33.83 kB | 
-chunk-FEA3YL4R.js   | permission-catalog-list-component      |  28.56 kB | 
-chunk-26G5MDQT.js   | dashboard-module                       |  20.44 kB | 
-chunk-DDTWDLHW.js   | auth-module                            |  12.34 kB | 
+chunk-FCGF7S3D.js   | roles-module                           |  39.83 kB | 
+chunk-BJN72ZVZ.js   | permission-catalog-container-component |  34.91 kB | 
+chunk-6W75OEF5.js   | permission-catalog-list-component      |  28.52 kB | 
+chunk-S2BPHQ5N.js   | dashboard-module                       |  21.39 kB | 
+chunk-KTJCX3NR.js   | auth-module                            |  13.81 kB | 
 chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
-chunk-TXMPJQLU.js   | -                                      |   5.54 kB | 
-chunk-HOCBOXEV.js   | -                                      |   4.24 kB | 
-...and 4 more lazy chunks files. Use "--verbose" to show all the files.
+chunk-5EGJHYUU.js   | -                                      |   7.62 kB | 
+chunk-MDTUSEEG.js   | -                                      |   4.24 kB | 
+chunk-GTCFWQLT.js   | -                                      |   2.15 kB | 
+chunk-AYAQZGZ6.js   | -                                      |   2.00 kB | 
+...and 2 more lazy chunks files. Use "--verbose" to show all the files.
 
-Application bundle generation complete. [2.167 seconds]
+Application bundle generation complete. [2.045 seconds]
 
 Watch mode enabled. Watching for file changes...
 NOTE: Raw file sizes do not reflect development server per-request transformations.
   ➜  Local:   http://localhost:4200/
 ❯ Changes detected. Rebuilding...
 ✔ Changes detected. Rebuilding...
+Application bundle generation failed. [1.105 seconds]
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'createdAt' does not exist on type 'User'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/users/pages/usuario-container/usuario-container.component.ts:125:45:
+[37m      125 │       created_at: user.fechaCreacion || user.[32mcreatedAt[37m || ''
+          ╵                                              [32m~~~~~~~~~[0m
+
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Application bundle generation failed. [0.168 seconds]
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'createdAt' does not exist on type 'User'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/users/pages/usuario-container/usuario-container.component.ts:125:45:
+[37m      125 │       created_at: user.fechaCreacion || user.[32mcreatedAt[37m || ''
+          ╵                                              [32m~~~~~~~~~[0m
+
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
 Initial chunk files | Names                                  |  Raw size
+chunk-MWVULWPS.js   | -                                      | 119.37 kB | 
 polyfills.js        | polyfills                              |  89.77 kB | 
-main.js             | main                                   |  37.35 kB | 
-styles.css          | styles                                 |  20.86 kB | 
-chunk-UDYALH4O.js   | -                                      |  10.23 kB | 
-chunk-X6X3Y735.js   | -                                      |   3.31 kB | 
+main.js             | main                                   |  72.04 kB | 
+styles.css          | styles                                 |  20.78 kB | 
+chunk-YHGDF7QX.js   | -                                      |  11.97 kB | 
+chunk-PCSJAAUA.js   | -                                      |   4.19 kB | 
+chunk-N6EJLPLT.js   | -                                      |   1.80 kB | 
 chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
 chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
 
-                    | Initial total                          | 164.42 kB
+                    | Initial total                          | 322.83 kB
 
 Lazy chunk files    | Names                                  |  Raw size
-chunk-DPUNOHQA.js   | appearance-module                      | 169.44 kB | 
-chunk-TPE24UAQ.js   | modules-module                         | 146.51 kB | 
-chunk-ILEXJUET.js   | -                                      | 102.50 kB | 
-chunk-VVSIXH2F.js   | -                                      | 100.51 kB | 
-chunk-RYDWWCUM.js   | users-module                           | 100.39 kB | 
+chunk-HTWLS5VU.js   | appearance-module                      | 184.79 kB | 
+chunk-WUHJXCEQ.js   | modules-module                         | 147.84 kB | 
+chunk-3W6P7HAG.js   | -                                      | 146.52 kB | 
+chunk-SRGSWVE3.js   | users-module                           | 104.78 kB | 
 chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
-chunk-4FZA5SC6.js   | roles-module                           |  39.72 kB | 
-chunk-Q75ZQVA5.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-3CIMBQ6R.js   | -                                      |  33.83 kB | 
-chunk-FEA3YL4R.js   | permission-catalog-list-component      |  28.56 kB | 
-chunk-26G5MDQT.js   | dashboard-module                       |  20.44 kB | 
-chunk-DDTWDLHW.js   | auth-module                            |  12.34 kB | 
+chunk-FCGF7S3D.js   | roles-module                           |  39.83 kB | 
+chunk-BJN72ZVZ.js   | permission-catalog-container-component |  34.91 kB | 
+chunk-6W75OEF5.js   | permission-catalog-list-component      |  28.52 kB | 
+chunk-S2BPHQ5N.js   | dashboard-module                       |  21.39 kB | 
+chunk-KTJCX3NR.js   | auth-module                            |  13.81 kB | 
 chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
-chunk-TXMPJQLU.js   | -                                      |   5.54 kB | 
-chunk-HOCBOXEV.js   | -                                      |   4.24 kB | 
-...and 4 more lazy chunks files. Use "--verbose" to show all the files.
+chunk-5EGJHYUU.js   | -                                      |   7.62 kB | 
+chunk-MDTUSEEG.js   | -                                      |   4.24 kB | 
+chunk-GTCFWQLT.js   | -                                      |   2.15 kB | 
+chunk-AYAQZGZ6.js   | -                                      |   2.00 kB | 
+...and 2 more lazy chunks files. Use "--verbose" to show all the files.
 
-Application bundle generation complete. [0.938 seconds]
+Application bundle generation complete. [0.160 seconds]
 
+Page reload sent to client(s).
 ❯ Changes detected. Rebuilding...
 ✔ Changes detected. Rebuilding...
 Initial chunk files | Names                                  |  Raw size
-main.js             | main                                   |  37.35 kB | 
-
-Lazy chunk files    | Names                                  |  Raw size
-chunk-JUFMITWB.js   | modules-module                         | 146.51 kB | 
-chunk-KTMJL5NQ.js   | roles-module                           |  39.72 kB | 
-chunk-VYE4ANEH.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-3DR67WVZ.js   | -                                      |  33.73 kB | 
-chunk-7ZAO7PZV.js   | permission-catalog-list-component      |  28.56 kB | 
-
-Application bundle generation complete. [0.542 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names                                  |  Raw size
-main.js             | main                                   |  37.35 kB | 
-
-Lazy chunk files    | Names                                  |  Raw size
-chunk-7N3ROK5J.js   | modules-module                         | 146.51 kB | 
-chunk-WC2UVFEC.js   | roles-module                           |  39.72 kB | 
-chunk-6T33QKAM.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-4W3URVWX.js   | -                                      |  33.71 kB | 
-chunk-JZ5ACSDU.js   | permission-catalog-list-component      |  28.56 kB | 
-
-Application bundle generation complete. [0.175 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names                                  |  Raw size
+chunk-MWVULWPS.js   | -                                      | 119.37 kB | 
 polyfills.js        | polyfills                              |  89.77 kB | 
-main.js             | main                                   |  37.35 kB | 
-styles.css          | styles                                 |  20.86 kB | 
-chunk-UDYALH4O.js   | -                                      |  10.23 kB | 
-chunk-X6X3Y735.js   | -                                      |   3.31 kB | 
+main.js             | main                                   |  72.04 kB | 
+styles.css          | styles                                 |  20.78 kB | 
+chunk-YHGDF7QX.js   | -                                      |  11.97 kB | 
+chunk-PCSJAAUA.js   | -                                      |   4.19 kB | 
+chunk-N6EJLPLT.js   | -                                      |   1.80 kB | 
 chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
 chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
 
-                    | Initial total                          | 164.42 kB
+                    | Initial total                          | 322.83 kB
 
 Lazy chunk files    | Names                                  |  Raw size
-chunk-DPUNOHQA.js   | appearance-module                      | 169.44 kB | 
-chunk-7N3ROK5J.js   | modules-module                         | 146.51 kB | 
-chunk-ILEXJUET.js   | -                                      | 102.50 kB | 
-chunk-VVSIXH2F.js   | -                                      | 100.51 kB | 
-chunk-RYDWWCUM.js   | users-module                           | 100.39 kB | 
+chunk-HTWLS5VU.js   | appearance-module                      | 184.79 kB | 
+chunk-WUHJXCEQ.js   | modules-module                         | 147.84 kB | 
+chunk-3W6P7HAG.js   | -                                      | 146.52 kB | 
+chunk-SRGSWVE3.js   | users-module                           | 104.78 kB | 
 chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
-chunk-WC2UVFEC.js   | roles-module                           |  39.72 kB | 
-chunk-6T33QKAM.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-4W3URVWX.js   | -                                      |  33.71 kB | 
-chunk-JZ5ACSDU.js   | permission-catalog-list-component      |  28.56 kB | 
-chunk-26G5MDQT.js   | dashboard-module                       |  20.44 kB | 
-chunk-DDTWDLHW.js   | auth-module                            |  12.34 kB | 
+chunk-FCGF7S3D.js   | roles-module                           |  39.83 kB | 
+chunk-BJN72ZVZ.js   | permission-catalog-container-component |  34.91 kB | 
+chunk-6W75OEF5.js   | permission-catalog-list-component      |  28.52 kB | 
+chunk-S2BPHQ5N.js   | dashboard-module                       |  21.39 kB | 
+chunk-KTJCX3NR.js   | auth-module                            |  13.81 kB | 
 chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
-chunk-TXMPJQLU.js   | -                                      |   5.54 kB | 
-chunk-HOCBOXEV.js   | -                                      |   4.24 kB | 
-...and 4 more lazy chunks files. Use "--verbose" to show all the files.
+chunk-5EGJHYUU.js   | -                                      |   7.62 kB | 
+chunk-MDTUSEEG.js   | -                                      |   4.24 kB | 
+chunk-GTCFWQLT.js   | -                                      |   2.15 kB | 
+chunk-AYAQZGZ6.js   | -                                      |   2.00 kB | 
+...and 2 more lazy chunks files. Use "--verbose" to show all the files.
 
-Application bundle generation complete. [0.177 seconds]
+Application bundle generation complete. [0.458 seconds]
 
 Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Application bundle generation failed. [0.211 seconds]
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mTS-998113: DynamicFormComponent is not used within the template of RolesContainerComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:20:112:
+[37m      20 │ ...hFilterBarComponent, StandardGridComponent, [32mDynamicFormComponent[37m],
+         ╵                                                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG8002: Can't bind to 'formGroup' since it isn't a known property of 'form'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.html:118:12:
+[37m      118 │       <form [32m[formGroup]="form"[37m (ngSubmit)="saveRole()">
+          ╵             [32m~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component RolesContainerComponent.
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./roles-container.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'form' does not exist on type 'RolesContainerComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.html:118:25:
+[37m      118 │       <form [formGroup]="[32mform[37m" (ngSubmit)="saveRole()">
+          ╵                          [32m~~~~[0m
+
+  Error occurs in the template of component RolesContainerComponent.
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./roles-container.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'saveRole' does not exist on type 'RolesContainerComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.html:118:43:
+[37m      118 │       <form [formGroup]="form" (ngSubmit)="[32msaveRole[37m()">
+          ╵                                            [32m~~~~~~~~[0m
+
+  Error occurs in the template of component RolesContainerComponent.
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./roles-container.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'mat-form-field' is not a known element:
+1. If 'mat-form-field' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'mat-form-field' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.html:119:8:
+[37m      119 │         [32m<mat-form-field appearance="outline" class="form-group">[37m
+          ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component RolesContainerComponent.
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./roles-container.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'mat-label' is not a known element:
+1. If 'mat-label' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'mat-label' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.html:120:10:
+[37m      120 │           [32m<mat-label>[37mNombre *</mat-label>
+          ╵           [32m~~~~~~~~~~~[0m
+
+  Error occurs in the template of component RolesContainerComponent.
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./roles-container.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'mat-error' is not a known element:
+1. If 'mat-error' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'mat-error' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.html:122:10:
+[37m      122 │           [32m<mat-error *ngIf="form.get('nombre')?.hasError('require[37m...
+          ╵           [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component RolesContainerComponent.
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./roles-container.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'form' does not exist on type 'RolesContainerComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.html:122:28:
+[37m      122 │           <mat-error *ngIf="[32mform[37m.get('nombre')?.hasError('require...
+          ╵                             [32m~~~~[0m
+
+  Error occurs in the template of component RolesContainerComponent.
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./roles-container.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'form' does not exist on type 'RolesContainerComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.html:122:72:
+[37m      122 │ ...e')?.hasError('required') && [32mform[37m.get('nombre')?.touched">El n...
+          ╵                                 [32m~~~~[0m
+
+  Error occurs in the template of component RolesContainerComponent.
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./roles-container.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'mat-form-field' is not a known element:
+1. If 'mat-form-field' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'mat-form-field' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.html:125:8:
+[37m      125 │         [32m<mat-form-field appearance="outline" class="form-group">[37m
+          ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component RolesContainerComponent.
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./roles-container.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'mat-label' is not a known element:
+1. If 'mat-label' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'mat-label' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.html:126:10:
+[37m      126 │           [32m<mat-label>[37mDescripción</mat-label>
+          ╵           [32m~~~~~~~~~~~[0m
+
+  Error occurs in the template of component RolesContainerComponent.
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./roles-container.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'mat-checkbox' is not a known element:
+1. If 'mat-checkbox' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'mat-checkbox' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.html:130:8:
+[37m      130 │         [32m<mat-checkbox formControlName="activo">[37mActivo</mat-checkbox>
+          ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component RolesContainerComponent.
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./roles-container.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'form' does not exist on type 'RolesContainerComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.html:133:82:
+[37m      133 │ ...y" type="submit" [disabled]="[32mform[37m.invalid">{{ editingId ? 'Act...
+          ╵                                 [32m~~~~[0m
+
+  Error occurs in the template of component RolesContainerComponent.
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./roles-container.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2345: Argument of type '{ nombre: any; descripcion: any; activo: boolean; }' is not assignable to parameter of type 'Role'.
+  Property 'permisos' is missing in type '{ nombre: any; descripcion: any; activo: boolean; }' but required in type 'Role'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:298:48:
+[37m      298 │       ? this.roleService.update(this.editingId, [32mpayload[37m)
+          ╵                                                 [32m~~~~~~~[0m
+
+  'permisos' is declared here.
+
+    src/app/core/models/role.model.ts:5:2:
+[37m      5 │   [32mpermisos[37m: string[];
+        ╵   [32m~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2345: Argument of type '{ nombre: any; descripcion: any; activo: boolean; }' is not assignable to parameter of type 'Role'.
+  Property 'permisos' is missing in type '{ nombre: any; descripcion: any; activo: boolean; }' but required in type 'Role'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:299:32:
+[37m      299 │       : this.roleService.create([32mpayload[37m);
+          ╵                                 [32m~~~~~~~[0m
+
+  'permisos' is declared here.
+
+    src/app/core/models/role.model.ts:5:2:
+[37m      5 │   [32mpermisos[37m: string[];
+        ╵   [32m~~~~~~~~[0m
+
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Application bundle generation failed. [0.171 seconds]
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2345: Argument of type '{ nombre: any; descripcion: any; activo: boolean; }' is not assignable to parameter of type 'Role'.
+  Property 'permisos' is missing in type '{ nombre: any; descripcion: any; activo: boolean; }' but required in type 'Role'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:298:48:
+[37m      298 │       ? this.roleService.update(this.editingId, [32mpayload[37m)
+          ╵                                                 [32m~~~~~~~[0m
+
+  'permisos' is declared here.
+
+    src/app/core/models/role.model.ts:5:2:
+[37m      5 │   [32mpermisos[37m: string[];
+        ╵   [32m~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2345: Argument of type '{ nombre: any; descripcion: any; activo: boolean; }' is not assignable to parameter of type 'Role'.
+  Property 'permisos' is missing in type '{ nombre: any; descripcion: any; activo: boolean; }' but required in type 'Role'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:299:32:
+[37m      299 │       : this.roleService.create([32mpayload[37m);
+          ╵                                 [32m~~~~~~~[0m
+
+  'permisos' is declared here.
+
+    src/app/core/models/role.model.ts:5:2:
+[37m      5 │   [32mpermisos[37m: string[];
+        ╵   [32m~~~~~~~~[0m
+
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Application bundle generation failed. [0.181 seconds]
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2345: Argument of type '{ nombre: any; descripcion: any; activo: boolean; }' is not assignable to parameter of type 'Role'.
+  Property 'permisos' is missing in type '{ nombre: any; descripcion: any; activo: boolean; }' but required in type 'Role'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:298:48:
+[37m      298 │       ? this.roleService.update(this.editingId, [32mpayload[37m)
+          ╵                                                 [32m~~~~~~~[0m
+
+  'permisos' is declared here.
+
+    src/app/core/models/role.model.ts:5:2:
+[37m      5 │   [32mpermisos[37m: string[];
+        ╵   [32m~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2345: Argument of type '{ nombre: any; descripcion: any; activo: boolean; }' is not assignable to parameter of type 'Role'.
+  Property 'permisos' is missing in type '{ nombre: any; descripcion: any; activo: boolean; }' but required in type 'Role'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/roles/pages/roles-container/roles-container.component.ts:299:32:
+[37m      299 │       : this.roleService.create([32mpayload[37m);
+          ╵                                 [32m~~~~~~~[0m
+
+  'permisos' is declared here.
+
+    src/app/core/models/role.model.ts:5:2:
+[37m      5 │   [32mpermisos[37m: string[];
+        ╵   [32m~~~~~~~~[0m
+
+
 ❯ Changes detected. Rebuilding...
 ✔ Changes detected. Rebuilding...
 Initial chunk files | Names                                  |  Raw size
-main.js             | main                                   |  37.35 kB | 
-
-Lazy chunk files    | Names                                  |  Raw size
-chunk-JUFMITWB.js   | modules-module                         | 146.51 kB | 
-chunk-KTMJL5NQ.js   | roles-module                           |  39.72 kB | 
-chunk-VYE4ANEH.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-3DR67WVZ.js   | -                                      |  33.73 kB | 
-chunk-7ZAO7PZV.js   | permission-catalog-list-component      |  28.56 kB | 
-
-Application bundle generation complete. [0.118 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names                                  |  Raw size
-main.js             | main                                   |  37.35 kB | 
-
-Lazy chunk files    | Names                                  |  Raw size
-chunk-HWQVHHP7.js   | modules-module                         | 146.51 kB | 
-chunk-BLJ7URBO.js   | roles-module                           |  39.72 kB | 
-chunk-WEAY4OMU.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-W35NORT6.js   | -                                      |  33.70 kB | 
-chunk-A3HM5B5L.js   | permission-catalog-list-component      |  28.56 kB | 
-
-Application bundle generation complete. [0.535 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names                                  |  Raw size
-main.js             | main                                   |  37.35 kB | 
-
-Lazy chunk files    | Names                                  |  Raw size
-chunk-JUFMITWB.js   | modules-module                         | 146.51 kB | 
-chunk-KTMJL5NQ.js   | roles-module                           |  39.72 kB | 
-chunk-VYE4ANEH.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-3DR67WVZ.js   | -                                      |  33.73 kB | 
-chunk-7ZAO7PZV.js   | permission-catalog-list-component      |  28.56 kB | 
-
-Application bundle generation complete. [0.163 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names  | Raw size
-styles.css          | styles | 20.91 kB | 
-
-Application bundle generation complete. [0.038 seconds]
-
-Stylesheet update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names                                  |  Raw size
-main.js             | main                                   |  37.35 kB | 
-
-Lazy chunk files    | Names                                  |  Raw size
-chunk-PSEBBQE3.js   | modules-module                         | 146.51 kB | 
-chunk-LSWH6BKP.js   | roles-module                           |  39.72 kB | 
-chunk-ULG7Z6N7.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-4HQKCID7.js   | -                                      |  33.83 kB | 
-chunk-56BAH4ZP.js   | permission-catalog-list-component      |  28.56 kB | 
-
-Application bundle generation complete. [0.289 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-
-No output file changes.
-
-Application bundle generation complete. [0.325 seconds]
-
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names                                  |  Raw size
-main.js             | main                                   |  37.35 kB | 
-
-Lazy chunk files    | Names                                  |  Raw size
-chunk-CODQXKFT.js   | modules-module                         | 146.51 kB | 
-chunk-LZTF33OC.js   | -                                      | 100.56 kB | 
-chunk-OBUDGR6Q.js   | users-module                           | 100.39 kB | 
-chunk-DWOFVWZA.js   | roles-module                           |  39.72 kB | 
-chunk-VPKQIIUV.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-3JNBU2H7.js   | -                                      |  33.83 kB | 
-chunk-C5Q7RPR4.js   | permission-catalog-list-component      |  28.56 kB | 
-
-Application bundle generation complete. [0.268 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names        |  Raw size
-main.js             | main         |  37.35 kB | 
-
-Lazy chunk files    | Names        |  Raw size
-chunk-QDFDL4W7.js   | users-module | 100.69 kB | 
-
-Application bundle generation complete. [0.162 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names                                  |  Raw size
+chunk-MWVULWPS.js   | -                                      | 119.37 kB | 
 polyfills.js        | polyfills                              |  89.77 kB | 
-main.js             | main                                   |  37.35 kB | 
-styles.css          | styles                                 |  20.91 kB | 
-chunk-UDYALH4O.js   | -                                      |  10.23 kB | 
-chunk-X6X3Y735.js   | -                                      |   3.31 kB | 
+main.js             | main                                   |  72.04 kB | 
+styles.css          | styles                                 |  20.78 kB | 
+chunk-YHGDF7QX.js   | -                                      |  11.97 kB | 
+chunk-PCSJAAUA.js   | -                                      |   4.19 kB | 
+chunk-N6EJLPLT.js   | -                                      |   1.80 kB | 
 chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
 chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
 
-                    | Initial total                          | 164.47 kB
+                    | Initial total                          | 322.83 kB
 
 Lazy chunk files    | Names                                  |  Raw size
-chunk-DPUNOHQA.js   | appearance-module                      | 169.44 kB | 
-chunk-CODQXKFT.js   | modules-module                         | 146.51 kB | 
-chunk-ILEXJUET.js   | -                                      | 102.50 kB | 
-chunk-QDFDL4W7.js   | users-module                           | 100.69 kB | 
-chunk-LZTF33OC.js   | -                                      | 100.56 kB | 
+chunk-HTWLS5VU.js   | appearance-module                      | 184.79 kB | 
+chunk-WUHJXCEQ.js   | modules-module                         | 147.84 kB | 
+chunk-3W6P7HAG.js   | -                                      | 146.52 kB | 
+chunk-SRGSWVE3.js   | users-module                           | 104.78 kB | 
 chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
-chunk-DWOFVWZA.js   | roles-module                           |  39.72 kB | 
-chunk-VPKQIIUV.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-3JNBU2H7.js   | -                                      |  33.83 kB | 
-chunk-C5Q7RPR4.js   | permission-catalog-list-component      |  28.56 kB | 
-chunk-26G5MDQT.js   | dashboard-module                       |  20.44 kB | 
-chunk-DDTWDLHW.js   | auth-module                            |  12.34 kB | 
+chunk-MVUS5ZBG.js   | roles-module                           |  40.88 kB | 
+chunk-BJN72ZVZ.js   | permission-catalog-container-component |  34.91 kB | 
+chunk-6W75OEF5.js   | permission-catalog-list-component      |  28.52 kB | 
+chunk-S2BPHQ5N.js   | dashboard-module                       |  21.39 kB | 
+chunk-KTJCX3NR.js   | auth-module                            |  13.81 kB | 
 chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
-chunk-TXMPJQLU.js   | -                                      |   5.54 kB | 
-chunk-HOCBOXEV.js   | -                                      |   4.24 kB | 
-...and 4 more lazy chunks files. Use "--verbose" to show all the files.
+chunk-5EGJHYUU.js   | -                                      |   7.62 kB | 
+chunk-MDTUSEEG.js   | -                                      |   4.24 kB | 
+chunk-GTCFWQLT.js   | -                                      |   2.15 kB | 
+chunk-AYAQZGZ6.js   | -                                      |   2.00 kB | 
+...and 2 more lazy chunks files. Use "--verbose" to show all the files.
 
-Application bundle generation complete. [0.287 seconds]
+Application bundle generation complete. [0.143 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                                  |  Raw size
+chunk-MWVULWPS.js   | -                                      | 119.37 kB | 
+polyfills.js        | polyfills                              |  89.77 kB | 
+main.js             | main                                   |  72.04 kB | 
+styles.css          | styles                                 |  20.78 kB | 
+chunk-YHGDF7QX.js   | -                                      |  11.97 kB | 
+chunk-PCSJAAUA.js   | -                                      |   4.19 kB | 
+chunk-N6EJLPLT.js   | -                                      |   1.80 kB | 
+chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
+chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
+
+                    | Initial total                          | 322.83 kB
+
+Lazy chunk files    | Names                                  |  Raw size
+chunk-HTWLS5VU.js   | appearance-module                      | 184.79 kB | 
+chunk-WUHJXCEQ.js   | modules-module                         | 147.84 kB | 
+chunk-3W6P7HAG.js   | -                                      | 146.52 kB | 
+chunk-SRGSWVE3.js   | users-module                           | 104.78 kB | 
+chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
+chunk-MVUS5ZBG.js   | roles-module                           |  40.88 kB | 
+chunk-BJN72ZVZ.js   | permission-catalog-container-component |  34.91 kB | 
+chunk-6W75OEF5.js   | permission-catalog-list-component      |  28.52 kB | 
+chunk-S2BPHQ5N.js   | dashboard-module                       |  21.39 kB | 
+chunk-KTJCX3NR.js   | auth-module                            |  13.81 kB | 
+chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
+chunk-5EGJHYUU.js   | -                                      |   7.62 kB | 
+chunk-MDTUSEEG.js   | -                                      |   4.24 kB | 
+chunk-GTCFWQLT.js   | -                                      |   2.15 kB | 
+chunk-AYAQZGZ6.js   | -                                      |   2.00 kB | 
+...and 2 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [0.156 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names            | Raw size
+main.js             | main             | 72.04 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-ELCPHWU7.js   | dashboard-module | 20.86 kB | 
+
+Application bundle generation complete. [0.123 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names            | Raw size
+main.js             | main             | 72.04 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-IPAVYEWG.js   | dashboard-module | 20.77 kB | 
+
+Application bundle generation complete. [0.128 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names            | Raw size
+main.js             | main             | 72.04 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-JLLIXIZL.js   | dashboard-module | 20.75 kB | 
+
+Application bundle generation complete. [0.134 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Application bundle generation failed. [0.184 seconds]
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mTS-998113: DynamicFormComponent is not used within the template of PermissionCatalogContainerComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/permission-catalogs/pages/permission-catalog-container/permission-catalog-container.component.ts:33:4:
+[37m      33 │     [32mDynamicFormComponent[37m
+         ╵     [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'route' does not exist on type 'PermissionCatalogContainerComponent'. Did you mean 'router'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/permission-catalogs/pages/permission-catalog-container/permission-catalog-container.component.ts:250:60:
+[37m      250 │ ...  this.router.navigate(['view', id], { relativeTo: this.[32mroute[37m });
+          ╵                                                            [32m~~~~~[0m
+
+  'router' is declared here.
+
+    src/app/features/permission-catalogs/pages/permission-catalog-container/permission-catalog-container.component.ts:76:4:
+[37m      76 │     [32mprivate router: Router[37m,
+         ╵     [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Application bundle generation failed. [0.154 seconds]
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'route' does not exist on type 'PermissionCatalogContainerComponent'. Did you mean 'router'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/permission-catalogs/pages/permission-catalog-container/permission-catalog-container.component.ts:250:60:
+[37m      250 │ ...  this.router.navigate(['view', id], { relativeTo: this.[32mroute[37m });
+          ╵                                                            [32m~~~~~[0m
+
+  'router' is declared here.
+
+    src/app/features/permission-catalogs/pages/permission-catalog-container/permission-catalog-container.component.ts:76:4:
+[37m      76 │     [32mprivate router: Router[37m,
+         ╵     [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Application bundle generation failed. [0.161 seconds]
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'route' does not exist on type 'PermissionCatalogContainerComponent'. Did you mean 'router'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/permission-catalogs/pages/permission-catalog-container/permission-catalog-container.component.ts:250:60:
+[37m      250 │ ...  this.router.navigate(['view', id], { relativeTo: this.[32mroute[37m });
+          ╵                                                            [32m~~~~~[0m
+
+  'router' is declared here.
+
+    src/app/features/permission-catalogs/pages/permission-catalog-container/permission-catalog-container.component.ts:76:4:
+[37m      76 │     [32mprivate router: Router[37m,
+         ╵     [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                                  |  Raw size
+chunk-MWVULWPS.js   | -                                      | 119.37 kB | 
+polyfills.js        | polyfills                              |  89.77 kB | 
+main.js             | main                                   |  72.04 kB | 
+styles.css          | styles                                 |  20.78 kB | 
+chunk-YHGDF7QX.js   | -                                      |  11.97 kB | 
+chunk-PCSJAAUA.js   | -                                      |   4.19 kB | 
+chunk-N6EJLPLT.js   | -                                      |   1.80 kB | 
+chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
+chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
+
+                    | Initial total                          | 322.83 kB
+
+Lazy chunk files    | Names                                  |  Raw size
+chunk-HTWLS5VU.js   | appearance-module                      | 184.79 kB | 
+chunk-WUHJXCEQ.js   | modules-module                         | 147.84 kB | 
+chunk-3W6P7HAG.js   | -                                      | 146.52 kB | 
+chunk-SRGSWVE3.js   | users-module                           | 104.78 kB | 
+chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
+chunk-ZGXXBGOJ.js   | permission-catalog-container-component |  43.61 kB | 
+chunk-MVUS5ZBG.js   | roles-module                           |  40.88 kB | 
+chunk-6W75OEF5.js   | permission-catalog-list-component      |  28.52 kB | 
+chunk-JLLIXIZL.js   | dashboard-module                       |  20.75 kB | 
+chunk-KTJCX3NR.js   | auth-module                            |  13.81 kB | 
+chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
+chunk-5EGJHYUU.js   | -                                      |   7.62 kB | 
+chunk-MDTUSEEG.js   | -                                      |   4.24 kB | 
+chunk-GTCFWQLT.js   | -                                      |   2.15 kB | 
+chunk-AYAQZGZ6.js   | -                                      |   2.00 kB | 
+...and 2 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [0.131 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                                  |  Raw size
+chunk-MWVULWPS.js   | -                                      | 119.37 kB | 
+polyfills.js        | polyfills                              |  89.77 kB | 
+main.js             | main                                   |  72.04 kB | 
+styles.css          | styles                                 |  20.78 kB | 
+chunk-YHGDF7QX.js   | -                                      |  11.97 kB | 
+chunk-PCSJAAUA.js   | -                                      |   4.19 kB | 
+chunk-N6EJLPLT.js   | -                                      |   1.80 kB | 
+chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
+chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
+
+                    | Initial total                          | 322.83 kB
+
+Lazy chunk files    | Names                                  |  Raw size
+chunk-HTWLS5VU.js   | appearance-module                      | 184.79 kB | 
+chunk-WUHJXCEQ.js   | modules-module                         | 147.84 kB | 
+chunk-3W6P7HAG.js   | -                                      | 146.52 kB | 
+chunk-SRGSWVE3.js   | users-module                           | 104.78 kB | 
+chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
+chunk-ZGXXBGOJ.js   | permission-catalog-container-component |  43.61 kB | 
+chunk-MVUS5ZBG.js   | roles-module                           |  40.88 kB | 
+chunk-6W75OEF5.js   | permission-catalog-list-component      |  28.52 kB | 
+chunk-JLLIXIZL.js   | dashboard-module                       |  20.75 kB | 
+chunk-KTJCX3NR.js   | auth-module                            |  13.81 kB | 
+chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
+chunk-5EGJHYUU.js   | -                                      |   7.62 kB | 
+chunk-MDTUSEEG.js   | -                                      |   4.24 kB | 
+chunk-GTCFWQLT.js   | -                                      |   2.15 kB | 
+chunk-AYAQZGZ6.js   | -                                      |   2.00 kB | 
+...and 2 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [0.196 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                                  | Raw size
+main.js             | main                                   | 72.04 kB | 
+
+Lazy chunk files    | Names                                  | Raw size
+chunk-2LJF6NRK.js   | permission-catalog-container-component | 43.68 kB | 
+
+Application bundle generation complete. [0.122 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                             | Raw size
+main.js             | main                              | 72.04 kB | 
+
+Lazy chunk files    | Names                             | Raw size
+chunk-YQM3PPEY.js   | permission-catalog-list-component | 28.59 kB | 
+
+Application bundle generation complete. [0.187 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                             | Raw size
+main.js             | main                              | 72.04 kB | 
+
+Lazy chunk files    | Names                             | Raw size
+chunk-W2NDTQQF.js   | permission-catalog-list-component | 28.57 kB | 
+
+Application bundle generation complete. [0.261 seconds]
+
+Component update sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names        | Raw size
+main.js             | main         | 72.04 kB | 
+
+Lazy chunk files    | Names        | Raw size
+chunk-B54IQZRH.js   | roles-module | 41.27 kB | 
+
+Application bundle generation complete. [0.198 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                                  |  Raw size
+main.js             | main                                   |  72.04 kB | 
+
+Lazy chunk files    | Names                                  |  Raw size
+chunk-MHWAKLGR.js   | modules-module                         | 147.84 kB | 
+chunk-R2ST7TQK.js   | -                                      | 146.61 kB | 
+chunk-RQKSO6YZ.js   | users-module                           | 104.78 kB | 
+chunk-NHPR6W6Z.js   | permission-catalog-container-component |  43.68 kB | 
+chunk-7YPYIYEH.js   | roles-module                           |  41.27 kB | 
+chunk-PS2BHMPD.js   | permission-catalog-list-component      |  28.57 kB | 
+
+Application bundle generation complete. [0.332 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                                  |  Raw size
+main.js             | main                                   |  72.04 kB | 
+
+Lazy chunk files    | Names                                  |  Raw size
+chunk-IVCNQJFP.js   | modules-module                         | 147.84 kB | 
+chunk-7QTHUHNM.js   | -                                      | 146.62 kB | 
+chunk-LNEKFBJZ.js   | users-module                           | 104.78 kB | 
+chunk-XQ4GHGTB.js   | permission-catalog-container-component |  43.68 kB | 
+chunk-WBQ3UUVF.js   | roles-module                           |  41.27 kB | 
+chunk-L4UUAXVV.js   | permission-catalog-list-component      |  28.57 kB | 
+
+Application bundle generation complete. [0.159 seconds]
 
 Component update sent to client(s).
 ❯ Changes detected. Rebuilding...
 ✔ Changes detected. Rebuilding...
 Initial chunk files | Names        |  Raw size
-main.js             | main         |  37.35 kB | 
+main.js             | main         |  72.04 kB | 
 
 Lazy chunk files    | Names        |  Raw size
-chunk-RLRPVR57.js   | users-module | 100.70 kB | 
+chunk-4U3QG5CW.js   | users-module | 104.85 kB | 
 
-Application bundle generation complete. [0.310 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names                                  |  Raw size
-main.js             | main                                   |  37.35 kB | 
-
-Lazy chunk files    | Names                                  |  Raw size
-chunk-LOBSCMHY.js   | users-module                           | 100.70 kB | 
-chunk-QNGMUCRR.js   | roles-module                           |  39.72 kB | 
-chunk-6K3TXMER.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-H7ES45PA.js   | dashboard-module                       |  20.44 kB | 
-chunk-XGPXPZTW.js   | -                                      |   7.28 kB | 
-
-Application bundle generation complete. [0.103 seconds]
-
-Page reload sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names        |  Raw size
-main.js             | main         |  37.35 kB | 
-
-Lazy chunk files    | Names        |  Raw size
-chunk-BTURRLW3.js   | users-module | 101.47 kB | 
-
-Application bundle generation complete. [0.276 seconds]
-
-Page reload sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names        |  Raw size
-main.js             | main         |  37.35 kB | 
-
-Lazy chunk files    | Names        |  Raw size
-chunk-ZLZWXD2E.js   | users-module | 101.50 kB | 
-
-Application bundle generation complete. [0.243 seconds]
-
-Page reload sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names        |  Raw size
-main.js             | main         |  37.35 kB | 
-
-Lazy chunk files    | Names        |  Raw size
-chunk-FA2LVY4C.js   | users-module | 105.05 kB | 
-
-Application bundle generation complete. [0.179 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names                                  |  Raw size
-polyfills.js        | polyfills                              |  89.77 kB | 
-main.js             | main                                   |  37.35 kB | 
-styles.css          | styles                                 |  20.91 kB | 
-chunk-UDYALH4O.js   | -                                      |  10.23 kB | 
-chunk-X6X3Y735.js   | -                                      |   3.31 kB | 
-chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
-chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
-
-                    | Initial total                          | 164.47 kB
-
-Lazy chunk files    | Names                                  |  Raw size
-chunk-DPUNOHQA.js   | appearance-module                      | 169.44 kB | 
-chunk-CODQXKFT.js   | modules-module                         | 146.51 kB | 
-chunk-FA2LVY4C.js   | users-module                           | 105.05 kB | 
-chunk-ILEXJUET.js   | -                                      | 102.50 kB | 
-chunk-LZTF33OC.js   | -                                      | 100.56 kB | 
-chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
-chunk-QNGMUCRR.js   | roles-module                           |  39.72 kB | 
-chunk-6K3TXMER.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-3JNBU2H7.js   | -                                      |  33.83 kB | 
-chunk-C5Q7RPR4.js   | permission-catalog-list-component      |  28.56 kB | 
-chunk-H7ES45PA.js   | dashboard-module                       |  20.44 kB | 
-chunk-DDTWDLHW.js   | auth-module                            |  12.34 kB | 
-chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
-chunk-XGPXPZTW.js   | -                                      |   7.28 kB | 
-chunk-HOCBOXEV.js   | -                                      |   4.24 kB | 
-...and 4 more lazy chunks files. Use "--verbose" to show all the files.
-
-Application bundle generation complete. [0.270 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names        |  Raw size
-main.js             | main         |  37.35 kB | 
-
-Lazy chunk files    | Names        |  Raw size
-chunk-I4FXGL2U.js   | users-module | 104.99 kB | 
-
-Application bundle generation complete. [0.208 seconds]
-
-Page reload sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names        |  Raw size
-main.js             | main         |  37.35 kB | 
-
-Lazy chunk files    | Names        |  Raw size
-chunk-6HPQ2MGK.js   | users-module | 105.27 kB | 
-
-Application bundle generation complete. [0.236 seconds]
+Application bundle generation complete. [0.229 seconds]
 
 Page reload sent to client(s).
 ❯ Changes detected. Rebuilding...
 ✔ Changes detected. Rebuilding...
 Initial chunk files | Names                                  |  Raw size
-polyfills.js        | polyfills                              |  89.77 kB | 
-main.js             | main                                   |  37.35 kB | 
-styles.css          | styles                                 |  20.91 kB | 
-chunk-UDYALH4O.js   | -                                      |  10.23 kB | 
-chunk-X6X3Y735.js   | -                                      |   3.31 kB | 
-chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
-chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
-
-                    | Initial total                          | 164.47 kB
+main.js             | main                                   |  72.04 kB | 
 
 Lazy chunk files    | Names                                  |  Raw size
-chunk-DPUNOHQA.js   | appearance-module                      | 169.44 kB | 
-chunk-CODQXKFT.js   | modules-module                         | 146.51 kB | 
-chunk-6HPQ2MGK.js   | users-module                           | 105.27 kB | 
-chunk-ILEXJUET.js   | -                                      | 102.50 kB | 
-chunk-LZTF33OC.js   | -                                      | 100.56 kB | 
-chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
-chunk-QNGMUCRR.js   | roles-module                           |  39.72 kB | 
-chunk-6K3TXMER.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-3JNBU2H7.js   | -                                      |  33.83 kB | 
-chunk-C5Q7RPR4.js   | permission-catalog-list-component      |  28.56 kB | 
-chunk-H7ES45PA.js   | dashboard-module                       |  20.44 kB | 
-chunk-DDTWDLHW.js   | auth-module                            |  12.34 kB | 
-chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
-chunk-XGPXPZTW.js   | -                                      |   7.28 kB | 
-chunk-HOCBOXEV.js   | -                                      |   4.24 kB | 
-...and 4 more lazy chunks files. Use "--verbose" to show all the files.
+chunk-3TQWQSSA.js   | modules-module                         | 147.84 kB | 
+chunk-SSDYOSX3.js   | -                                      | 146.61 kB | 
+chunk-X5S5NZOW.js   | users-module                           | 104.85 kB | 
+chunk-WYVNEHI6.js   | permission-catalog-container-component |  43.68 kB | 
+chunk-E23ENRHM.js   | roles-module                           |  41.27 kB | 
+chunk-EIJKXWCM.js   | permission-catalog-list-component      |  28.57 kB | 
 
-Application bundle generation complete. [0.173 seconds]
-
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names        |  Raw size
-main.js             | main         |  37.35 kB | 
-
-Lazy chunk files    | Names        |  Raw size
-chunk-ENKJPQR7.js   | users-module | 105.72 kB | 
-
-Application bundle generation complete. [0.233 seconds]
+Application bundle generation complete. [0.252 seconds]
 
 Page reload sent to client(s).
 ❯ Changes detected. Rebuilding...
 ✔ Changes detected. Rebuilding...
-Initial chunk files | Names        |  Raw size
-main.js             | main         |  37.35 kB | 
+Initial chunk files | Names          |  Raw size
+main.js             | main           |  72.04 kB | 
 
-Lazy chunk files    | Names        |  Raw size
-chunk-7Y7ZBI5W.js   | users-module | 106.55 kB | 
+Lazy chunk files    | Names          |  Raw size
+chunk-SCVNKZIO.js   | modules-module | 147.91 kB | 
 
-Application bundle generation complete. [0.365 seconds]
-
-Page reload sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names                                  |  Raw size
-polyfills.js        | polyfills                              |  89.77 kB | 
-main.js             | main                                   |  37.35 kB | 
-styles.css          | styles                                 |  20.91 kB | 
-chunk-UDYALH4O.js   | -                                      |  10.23 kB | 
-chunk-X6X3Y735.js   | -                                      |   3.31 kB | 
-chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
-chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
-
-                    | Initial total                          | 164.47 kB
-
-Lazy chunk files    | Names                                  |  Raw size
-chunk-DPUNOHQA.js   | appearance-module                      | 169.44 kB | 
-chunk-CODQXKFT.js   | modules-module                         | 146.51 kB | 
-chunk-7Y7ZBI5W.js   | users-module                           | 106.55 kB | 
-chunk-ILEXJUET.js   | -                                      | 102.50 kB | 
-chunk-LZTF33OC.js   | -                                      | 100.56 kB | 
-chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
-chunk-QNGMUCRR.js   | roles-module                           |  39.72 kB | 
-chunk-6K3TXMER.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-3JNBU2H7.js   | -                                      |  33.83 kB | 
-chunk-C5Q7RPR4.js   | permission-catalog-list-component      |  28.56 kB | 
-chunk-H7ES45PA.js   | dashboard-module                       |  20.44 kB | 
-chunk-DDTWDLHW.js   | auth-module                            |  12.34 kB | 
-chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
-chunk-XGPXPZTW.js   | -                                      |   7.28 kB | 
-chunk-HOCBOXEV.js   | -                                      |   4.24 kB | 
-...and 4 more lazy chunks files. Use "--verbose" to show all the files.
-
-Application bundle generation complete. [0.108 seconds]
-
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names        |  Raw size
-main.js             | main         |  37.35 kB | 
-
-Lazy chunk files    | Names        |  Raw size
-chunk-5VJROTCE.js   | users-module | 106.71 kB | 
-
-Application bundle generation complete. [0.276 seconds]
+Application bundle generation complete. [0.247 seconds]
 
 Page reload sent to client(s).
 ❯ Changes detected. Rebuilding...
 ✔ Changes detected. Rebuilding...
-Initial chunk files | Names                                  |  Raw size
-polyfills.js        | polyfills                              |  89.77 kB | 
-main.js             | main                                   |  37.35 kB | 
-styles.css          | styles                                 |  20.91 kB | 
-chunk-UDYALH4O.js   | -                                      |  10.23 kB | 
-chunk-X6X3Y735.js   | -                                      |   3.31 kB | 
-chunk-5YQYUX5D.js   | -                                      |   1.69 kB | 
-chunk-HVR2XT5V.js   | -                                      |   1.21 kB | 
+Initial chunk files | Names                                  | Raw size
+main.js             | main                                   | 72.04 kB | 
 
-                    | Initial total                          | 164.47 kB
+Lazy chunk files    | Names                                  | Raw size
+chunk-UYUCGW7S.js   | permission-catalog-container-component | 43.72 kB | 
 
-Lazy chunk files    | Names                                  |  Raw size
-chunk-DPUNOHQA.js   | appearance-module                      | 169.44 kB | 
-chunk-CODQXKFT.js   | modules-module                         | 146.51 kB | 
-chunk-5VJROTCE.js   | users-module                           | 106.71 kB | 
-chunk-ILEXJUET.js   | -                                      | 102.50 kB | 
-chunk-LZTF33OC.js   | -                                      | 100.56 kB | 
-chunk-I3VQMSPW.js   | role-permissions-component             |  49.34 kB | 
-chunk-QNGMUCRR.js   | roles-module                           |  39.72 kB | 
-chunk-6K3TXMER.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-3JNBU2H7.js   | -                                      |  33.83 kB | 
-chunk-C5Q7RPR4.js   | permission-catalog-list-component      |  28.56 kB | 
-chunk-H7ES45PA.js   | dashboard-module                       |  20.44 kB | 
-chunk-DDTWDLHW.js   | auth-module                            |  12.34 kB | 
-chunk-NHPZNVWE.js   | permission-catalog-edit-component      |  10.48 kB | 
-chunk-XGPXPZTW.js   | -                                      |   7.28 kB | 
-chunk-HOCBOXEV.js   | -                                      |   4.24 kB | 
-...and 4 more lazy chunks files. Use "--verbose" to show all the files.
+Application bundle generation complete. [0.125 seconds]
 
-Application bundle generation complete. [0.201 seconds]
-
+Page reload sent to client(s).
 ❯ Changes detected. Rebuilding...
 ✔ Changes detected. Rebuilding...
-Initial chunk files | Names                                  |  Raw size
-main.js             | main                                   |  37.35 kB | 
+Initial chunk files | Names                             | Raw size
+main.js             | main                              | 72.04 kB | 
 
-Lazy chunk files    | Names                                  |  Raw size
-chunk-CIQPCLDK.js   | users-module                           | 106.71 kB | 
-chunk-ZXGCC3BA.js   | roles-module                           |  39.72 kB | 
-chunk-3GLYPVZJ.js   | permission-catalog-container-component |  34.95 kB | 
-chunk-JYKFENMO.js   | dashboard-module                       |  20.44 kB | 
-chunk-W3KCOVAN.js   | -                                      |   7.33 kB | 
+Lazy chunk files    | Names                             | Raw size
+chunk-2SHBEPR7.js   | permission-catalog-list-component | 28.58 kB | 
 
-Application bundle generation complete. [0.266 seconds]
+Application bundle generation complete. [0.142 seconds]
+
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Initial chunk files | Names                             | Raw size
+main.js             | main                              | 72.04 kB | 
+
+Lazy chunk files    | Names                             | Raw size
+chunk-6L3G5VJE.js   | permission-catalog-list-component | 28.58 kB | 
+
+Application bundle generation complete. [0.174 seconds]
 
 Page reload sent to client(s).

@@ -270,7 +270,7 @@ export class SeederService implements OnModuleInit {
       { nombre: 'VerDetalles', descripcion: 'Permiso para ver detalles', icono: 'info' }
     ];
 
-    const savedCatalogs = [];
+    const savedCatalogs: PermissionCatalogEntity[] = [];
     for (const c of defaultCatalogs) {
       let cat = await catalogRepository.findOne({ where: { nombre: c.nombre } });
       if (!cat) {
@@ -281,7 +281,9 @@ export class SeederService implements OnModuleInit {
         await catalogRepository.save(cat);
         console.log(`✓ Catalog updated (icono added): ${c.nombre}`);
       }
-      savedCatalogs.push(cat);
+      if (cat) {
+        savedCatalogs.push(cat);
+      }
     }
 
     // Create permissions: give admin access to all modules with all catalogs

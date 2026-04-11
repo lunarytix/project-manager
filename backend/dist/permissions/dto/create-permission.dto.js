@@ -11,25 +11,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreatePermissionDto = void 0;
 const class_validator_1 = require("class-validator");
+const swagger_1 = require("@nestjs/swagger");
 class CreatePermissionDto {
 }
 exports.CreatePermissionDto = CreatePermissionDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: '3b6db4f4-9c2f-454f-a06e-08d6e16f24db' }),
     (0, class_validator_1.IsUUID)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreatePermissionDto.prototype, "roleId", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: '9c4f2d10-4f0a-4ac8-9258-a5eb5e7f9e65' }),
     (0, class_validator_1.IsUUID)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreatePermissionDto.prototype, "moduleId", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 'ceac4aa4-f78b-4f35-97aa-8f8f8bd8f335' }),
     (0, class_validator_1.IsUUID)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreatePermissionDto.prototype, "permissionCatalogId", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ example: true }),
     (0, class_validator_1.IsBoolean)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)

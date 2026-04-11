@@ -204,10 +204,48 @@ export class AppearanceFormComponent implements OnInit {
     },
     {
       name: 'Login',
+      icon: 'login',
       fields: [
-        { key: 'loginBackgroundColor', label: 'Fondo (Login)', default: '#F8FAFC' },
-        { key: 'loginFormBgColor', label: 'Formulario (Login) - Fondo', default: '#FFFFFF' },
-        { key: 'loginHeaderColor', label: 'Header (Login) - Color', default: '#3B82F6' }
+        { key: 'loginBackgroundColor', label: 'Fondo (Login)', default: '#F8FAFC', type: 'color' },
+        { key: 'loginFormBgColor', label: 'Formulario (Login) - Fondo', default: '#FFFFFF', type: 'color' },
+        { key: 'loginHeaderColor', label: 'Header (Login) - Color', default: '#3B82F6', type: 'color' },
+        { key: 'loginBackgroundImage', label: 'Imagen de Fondo (URL)', default: '', type: 'text' },
+        {
+          key: 'loginBackgroundSize', label: 'Tamaño de Fondo', default: 'cover', type: 'select',
+          options: [
+            { value: 'cover', label: 'Cover (Cubrir todo)' },
+            { value: 'contain', label: 'Contain (Contener)' },
+            { value: '100% 100%', label: 'Estirar' },
+            { value: 'auto', label: 'Auto (Original)' }
+          ]
+        },
+        {
+          key: 'loginBackgroundPosition', label: 'Posición de Fondo', default: 'center', type: 'select',
+          options: [
+            { value: 'center', label: 'Centro' },
+            { value: 'top', label: 'Arriba' },
+            { value: 'bottom', label: 'Abajo' },
+            { value: 'left', label: 'Izquierda' },
+            { value: 'right', label: 'Derecha' },
+            { value: 'top left', label: 'Arriba Izquierda' },
+            { value: 'top right', label: 'Arriba Derecha' },
+            { value: 'bottom left', label: 'Abajo Izquierda' },
+            { value: 'bottom right', label: 'Abajo Derecha' }
+          ]
+        },
+        {
+          key: 'loginBackgroundRepeat', label: 'Repetición de Fondo', default: 'no-repeat', type: 'select',
+          options: [
+            { value: 'no-repeat', label: 'Sin repetir' },
+            { value: 'repeat', label: 'Repetir' },
+            { value: 'repeat-x', label: 'Repetir horizontal' },
+            { value: 'repeat-y', label: 'Repetir vertical' }
+          ]
+        },
+        {
+          key: 'loginBackgroundOverlayOpacity', label: 'Opacidad del Overlay', default: '0.5', type: 'range',
+          min: '0', max: '1', step: '0.05'
+        }
       ]
     }
   ];
@@ -314,9 +352,16 @@ export class AppearanceFormComponent implements OnInit {
 
     // Add component style fields
     this.componentStyles.forEach(section => {
-      section.fields.forEach(field => {
-        // color fields - validate hex
-        formConfig[field.key] = [field.default, [Validators.required, this.hexColorValidator]];
+      section.fields.forEach((field: any) => {
+        if (field.type === 'color' || (!field.type)) {
+          // color fields - validate hex
+          formConfig[field.key] = [field.default, [Validators.required, this.hexColorValidator]];
+        } else if (field.type === 'range') {
+          formConfig[field.key] = [field.default];
+        } else {
+          // text, select fields
+          formConfig[field.key] = [field.default];
+        }
       });
     });
 

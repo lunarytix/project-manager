@@ -179,6 +179,66 @@ __decorate([
     __metadata("design:type", String)
 ], AppearanceEntity.prototype, "inputPadding", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ default: '#FFFFFF' }),
+    __metadata("design:type", String)
+], AppearanceEntity.prototype, "gridHeaderBgColor", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: '#FFFFFF' }),
+    __metadata("design:type", String)
+], AppearanceEntity.prototype, "gridBodyBgColor", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: '#3B82F6' }),
+    __metadata("design:type", String)
+], AppearanceEntity.prototype, "gridIconColor", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: '#F8FAFC' }),
+    __metadata("design:type", String)
+], AppearanceEntity.prototype, "tableHeaderBgColor", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: '#FFFFFF' }),
+    __metadata("design:type", String)
+], AppearanceEntity.prototype, "tableRowBgColor", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: '#FFFFFF' }),
+    __metadata("design:type", String)
+], AppearanceEntity.prototype, "menuBgColor", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: '#111827' }),
+    __metadata("design:type", String)
+], AppearanceEntity.prototype, "menuTextColor", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: '#FFFFFF' }),
+    __metadata("design:type", String)
+], AppearanceEntity.prototype, "loginBackgroundColor", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: '#FFFFFF' }),
+    __metadata("design:type", String)
+], AppearanceEntity.prototype, "loginFormBgColor", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: '#111827' }),
+    __metadata("design:type", String)
+], AppearanceEntity.prototype, "loginHeaderColor", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true, default: '' }),
+    __metadata("design:type", String)
+], AppearanceEntity.prototype, "loginBackgroundImage", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: 'cover' }),
+    __metadata("design:type", String)
+], AppearanceEntity.prototype, "loginBackgroundSize", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: 'center' }),
+    __metadata("design:type", String)
+], AppearanceEntity.prototype, "loginBackgroundPosition", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: 'no-repeat' }),
+    __metadata("design:type", String)
+], AppearanceEntity.prototype, "loginBackgroundRepeat", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: 0.5 }),
+    __metadata("design:type", Number)
+], AppearanceEntity.prototype, "loginBackgroundOverlayOpacity", void 0);
+__decorate([
     (0, typeorm_1.Column)({ default: true }),
     __metadata("design:type", Boolean)
 ], AppearanceEntity.prototype, "isActive", void 0);

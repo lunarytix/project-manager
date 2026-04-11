@@ -11,13 +11,14 @@ import { Role } from '../../../../core/models/role.model';
 import { DynamicFormComponent, DynamicFormConfig } from '../../../../shared/components/dynamic-form/dynamic-form.component';
 import { GenericTableComponent, TableColumn } from '../../../../shared/components/generic-table/generic-table.component';
 import { SearchFilterBarComponent, SearchFilterConfig } from '../../../../shared/components/search-filter-bar/search-filter-bar.component';
-import { ActionDropdownComponent, ActionItem, ActionDropdownConfig } from '../../../../shared/components/action-dropdown/action-dropdown.component';
+import { ActionItem, ActionDropdownConfig } from '../../../../shared/components/action-dropdown/action-dropdown.component';
 import { ViewMode } from '../../../../shared/components/view-toggle/view-toggle.component';
+import { StandardGridComponent, GridConfig, GridItem } from '../../../../shared/components/standard-grid/standard-grid.component';
 
 @Component({
   selector: 'app-usuario-container',
   standalone: true,
-  imports: [CommonModule, DynamicFormComponent, GenericTableComponent, SearchFilterBarComponent, ActionDropdownComponent],
+  imports: [CommonModule, DynamicFormComponent, GenericTableComponent, SearchFilterBarComponent, StandardGridComponent],
   templateUrl: './usuario-container.component.html',
   styleUrls: ['./usuario-container.component.scss']
 })
@@ -29,6 +30,7 @@ export class UsuarioContainerComponent implements OnInit {
   error: string | null = null;
   editingId: string | null = null;
   userFormConfig!: DynamicFormConfig;
+  formInitialValues: { [key: string]: any } = {};
   currentView: ViewMode = 'grid';
   showForm = false;
   currentUser: any = null;
@@ -41,6 +43,32 @@ export class UsuarioContainerComponent implements OnInit {
   currentPage = 1;
   pageSize = 6;
   filteredUsers: User[] = [];
+
+  // Grid configuration
+  gridConfig: GridConfig = {
+    cardHeaderClass: 'module-header',
+    showIcon: true,
+    iconName: 'person',
+    gridColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+    gap: '1.5rem'
+  };
+
+  get gridItems(): GridItem[] {
+    return this.paginatedUsers.map(u => ({
+      id: u.id || '',
+      name: u.nombre,
+      description: u.email,
+      status: u.activo,
+      icon: 'person',
+      roleId: u.roleId
+    } as GridItem));
+  }
+
+  getUserActionsForGrid = (item: GridItem): ActionItem[] => {
+    const user = this.users.find(u => u.id === item.id);
+    if (!user) return [];
+    return this.getUserActions(user);
+  };
 
 
   // Table configuration
@@ -70,7 +98,15 @@ export class UsuarioContainerComponent implements OnInit {
   }
 
 
-  onSearchChange(e: any) { this.onSearch(e); }
+  onSearchChange(term: string | any) {
+    if (typeof term === 'string') {
+      this.searchTerm = term;
+      this.currentPage = 1;
+      this.applyFilters();
+    } else {
+      this.onSearch(term);
+    }
+  }
   onViewChange(e: any) { this.currentView = e; }
   onCreateClick() { this.onCreate(); }
   onPageChange(p: number) { this.currentPage = p; }
@@ -82,7 +118,13 @@ export class UsuarioContainerComponent implements OnInit {
     return r ? (r.nombre || '') : '';
   }
 
-  get tableData(): any[] { return this.filteredUsers; }
+  get tableData(): any[] {
+    return this.paginatedUsers.map(user => ({
+      ...user,
+      role_name: this.getRoleName(user.roleId),
+      created_at: user.fechaCreacion || user.createdAt || ''
+    }));
+  }
   get tableExtraActions(): ActionItem[] { return this.getTableExtraActions(); }
   get actionDropdownConfig(): any { return {
     buttonVariant: 'outline', position: 'bottom-right'
@@ -90,6 +132,17 @@ export class UsuarioContainerComponent implements OnInit {
 
   onTableEdit(e: any) { this.editUser(e); }
   onTableDelete(e: any) { this.deleteUser(e.id); }
+
+  onGridEdit(item: GridItem): void {
+    const user = this.users.find(u => u.id === item.id);
+    if (user) this.editUser(user);
+  }
+
+  onGridAction(event: { action: ActionItem, item: GridItem }): void {
+    const user = this.users.find(u => u.id === event.item.id);
+    if (!user) return;
+    this.onUserAction(event.action, user);
+  }
 
   getTableExtraActions(): ActionItem[] {
     const actions: ActionItem[] = [];
@@ -227,6 +280,7 @@ export class UsuarioContainerComponent implements OnInit {
       next: users => {
         this.users = users;
         this.filteredUsers = [...this.users];
+        this.currentPage = 1;
         this.loading = false;
       },
       error: error => {
@@ -288,6 +342,16 @@ export class UsuarioContainerComponent implements OnInit {
         }
       ]
       } as any; // cast because DynamicFormConfig in this codebase is minimal
+
+    if (!this.editingId) {
+      this.formInitialValues = {
+        nombre: '',
+        email: '',
+        password: '',
+        roleId: '',
+        activo: true
+      };
+    }
   }
 
   onFormSubmit(formData: any): void {
@@ -320,6 +384,13 @@ export class UsuarioContainerComponent implements OnInit {
   editUser(user: User): void {
     this.editingId = user.id!;
     this.initUserFormConfig();
+    this.formInitialValues = {
+      nombre: user.nombre || '',
+      email: user.email || '',
+      password: '',
+      roleId: user.roleId || '',
+      activo: !!user.activo
+    };
     this.showForm = true;
   }
 
@@ -338,6 +409,7 @@ export class UsuarioContainerComponent implements OnInit {
   }
 
   private applyFilters(): void {
+    this.currentPage = 1;
     this.filteredUsers = this.users.filter(user => {
       const searchMatch = !this.searchTerm ||
         user.nombre.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
@@ -350,6 +422,13 @@ export class UsuarioContainerComponent implements OnInit {
   onCreate(): void {
     this.editingId = null;
     this.initUserFormConfig();
+    this.formInitialValues = {
+      nombre: '',
+      email: '',
+      password: '',
+      roleId: '',
+      activo: true
+    };
     this.showForm = true;
   }
 
@@ -360,7 +439,7 @@ export class UsuarioContainerComponent implements OnInit {
   }
 
   get totalPages(): number {
-    return Math.ceil(this.filteredUsers.length / this.pageSize);
+    return Math.max(1, Math.ceil(this.filteredUsers.length / this.pageSize));
   }
 
   nextPage(): void {

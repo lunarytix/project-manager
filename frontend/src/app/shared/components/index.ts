@@ -1,5 +1,6 @@
 // Export all shared components
 export * from './input-text/input-text.component';
+export * from './input-password/input-password.component';
 export * from './input-select/input-select.component';
 export * from './input-checkbox/input-checkbox.component';
 export * from './input-number/input-number.component';

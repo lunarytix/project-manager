@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { PermissionCheckerService, DynamicModulePermissions } from '../../../../core/services/permission-checker.service';
 import { PermissionCatalogService } from '../../../../core/services/permission-catalog.service';
 import { AuthService } from '../../../../core/services/auth.service';
@@ -15,6 +15,7 @@ import { SearchFilterBarComponent, SearchFilterConfig } from '../../../../shared
 import { ActionItem } from '../../../../shared/components/action-dropdown/action-dropdown.component';
 import { ViewMode } from '../../../../shared/components/view-toggle/view-toggle.component';
 import { StandardGridComponent, GridConfig, GridItem } from '../../../../shared/components/standard-grid/standard-grid.component';
+import { DynamicFormComponent, DynamicFormConfig } from '../../../../shared/components/dynamic-form/dynamic-form.component';
 
 @Component({
   selector: 'app-permission-catalog-container',
@@ -28,8 +29,8 @@ import { StandardGridComponent, GridConfig, GridItem } from '../../../../shared/
     MatCardModule,
     GenericTableComponent,
     SearchFilterBarComponent,
-
-    StandardGridComponent
+    StandardGridComponent,
+    DynamicFormComponent
   ],
   templateUrl: './permission-catalog-container.component.html',
   styleUrls: ['./permission-catalog-container.component.scss']
@@ -47,6 +48,11 @@ export class PermissionCatalogContainerComponent implements OnInit {
   pageSize = 6;
   filteredCatalogs: any[] = [];
   currentView: ViewMode = 'table';
+  submitting = false;
+  showForm = false;
+  editingId: string | null = null;
+  catalogFormConfig!: DynamicFormConfig;
+  catalogFormInitialValues: { [key: string]: any } = {};
 
   // Table configuration
   tableColumns: TableColumn[] = [
@@ -68,7 +74,6 @@ export class PermissionCatalogContainerComponent implements OnInit {
     private permissionCatalogService: PermissionCatalogService,
     public permissionChecker: PermissionCheckerService,
     private router: Router,
-    private route: ActivatedRoute,
     private authService: AuthService,
     private permissionService: PermissionService
   ) {}
@@ -80,7 +85,51 @@ export class PermissionCatalogContainerComponent implements OnInit {
     this.currentUser = this.authService.getCurrentUser();
     this.loadUserPermissions();
     this.initializeSearchFilterConfig();
+    this.initCatalogFormConfig();
     this.loadCatalogs();
+  }
+
+  private initCatalogFormConfig(): void {
+    this.catalogFormConfig = {
+      submitButton: {
+        label: this.editingId
+          ? (this.submitting ? 'Guardando...' : 'Actualizar')
+          : (this.submitting ? 'Creando...' : 'Crear')
+      },
+      resetButton: {
+        label: 'Cancelar',
+        variant: 'secondary'
+      },
+      fields: [
+        {
+          key: 'nombre',
+          label: 'Nombre',
+          type: 'text',
+          required: true,
+          placeholder: 'Ej: Editar'
+        },
+        {
+          key: 'descripcion',
+          label: 'Descripción',
+          type: 'text',
+          placeholder: 'Descripción del permiso'
+        },
+        {
+          key: 'icono',
+          label: 'Icono',
+          type: 'text',
+          placeholder: 'Ej: edit'
+        }
+      ]
+    };
+  }
+
+  private refreshFormButtonState(): void {
+    if (!this.catalogFormConfig?.submitButton) return;
+    this.catalogFormConfig.submitButton.label = this.editingId
+      ? (this.submitting ? 'Guardando...' : 'Actualizar')
+      : (this.submitting ? 'Creando...' : 'Crear');
+    this.catalogFormConfig.submitButton.loading = this.submitting;
   }
 
   private loadUserPermissions(): void {
@@ -184,14 +233,21 @@ export class PermissionCatalogContainerComponent implements OnInit {
   // Action methods
   createCatalog() {
     if (this.permissionChecker.hasPermission(this.modulePermissions, 'Crear')) {
-      this.router.navigate(['create'], { relativeTo: this.route });
+      this.editingId = null;
+      this.showForm = true;
+      this.catalogFormInitialValues = {
+        nombre: '',
+        descripcion: '',
+        icono: ''
+      };
+      this.refreshFormButtonState();
     }
   }
 
   viewCatalog(id?: string) {
     if (!id) return;
     if (this.permissionChecker.hasPermission(this.modulePermissions, 'VerDetalles')) {
-      this.router.navigate(['view', id], { relativeTo: this.route });
+      this.router.navigate(['/permission-catalogs/view', id]);
     }
   }
 
@@ -205,8 +261,62 @@ export class PermissionCatalogContainerComponent implements OnInit {
   editCatalog(id?: string) {
     if (!id) return;
     if (this.permissionChecker.hasPermission(this.modulePermissions, 'Editar')) {
-      this.router.navigate(['edit', id], { relativeTo: this.route });
+      this.editingId = id;
+      this.showForm = true;
+      this.submitting = false;
+      this.refreshFormButtonState();
+      this.permissionCatalogService.get(id).subscribe({
+        next: (catalog) => {
+          this.catalogFormInitialValues = {
+            nombre: catalog?.nombre || '',
+            descripcion: catalog?.descripcion || '',
+            icono: catalog?.icono || ''
+          };
+        },
+        error: (error) => {
+          console.error('Error cargando catálogo para edición:', error);
+          this.showForm = false;
+          this.editingId = null;
+        }
+      });
     }
+  }
+
+  onCatalogFormSubmit(formData: any): void {
+    this.submitting = true;
+    this.refreshFormButtonState();
+
+    const payload = {
+      nombre: formData.nombre,
+      descripcion: formData.descripcion,
+      icono: formData.icono
+    };
+
+    const operation = this.editingId
+      ? this.permissionCatalogService.update(this.editingId, payload)
+      : this.permissionCatalogService.create(payload);
+
+    operation.subscribe({
+      next: () => {
+        this.submitting = false;
+        this.refreshFormButtonState();
+        this.closeCatalogForm();
+        this.loadCatalogs();
+      },
+      error: (error) => {
+        this.submitting = false;
+        this.refreshFormButtonState();
+        console.error('Error guardando catálogo:', error);
+      }
+    });
+  }
+
+  closeCatalogForm(): void {
+    this.showForm = false;
+    this.editingId = null;
+    this.submitting = false;
+    this.catalogFormInitialValues = {};
+    this.refreshFormButtonState();
   }
 
   deleteCatalog(id?: string) {
@@ -258,6 +368,7 @@ export class PermissionCatalogContainerComponent implements OnInit {
   // Event handlers - Remove onPageSizeChanged since search-filter-bar doesn't emit it
   onSearchChanged(searchTerm: string) {
     this.searchTerm = searchTerm;
+    this.currentPage = 1;
     this.filterCatalogs();
   }
 
@@ -287,7 +398,7 @@ export class PermissionCatalogContainerComponent implements OnInit {
   }
 
   getTotalPages(): number {
-    return Math.ceil(this.filteredCatalogs.length / this.pageSize);
+    return Math.max(1, Math.ceil(this.filteredCatalogs.length / this.pageSize));
   }
 
   // Grid helper methods

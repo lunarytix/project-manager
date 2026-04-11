@@ -20,13 +20,13 @@ import { StandardGridComponent, GridConfig, GridItem } from '../../../../shared/
 export class PermissionCatalogListComponent extends BaseDynamicPermissionsComponent {
   catalogs: any[] = [];
   loading = false;
-  
+
   // Search and Pagination
   searchTerm = '';
   currentPage = 1;
   pageSize = 6;
   currentView: ViewMode = 'table';
-  
+
   // Configurations
   searchFilterConfig: SearchFilterConfig = {
     placeholder: 'Buscar catálogos...',
@@ -43,7 +43,7 @@ export class PermissionCatalogListComponent extends BaseDynamicPermissionsCompon
     buttonVariant: 'outline',
     position: 'bottom-right'
   };
-  
+
   // Table configuration
   tableColumns: TableColumn[] = [
     { key: 'nombre', label: 'Nombre' },
@@ -123,9 +123,9 @@ export class PermissionCatalogListComponent extends BaseDynamicPermissionsCompon
   // Filtered and paginated data
   get filteredCatalogs(): any[] {
     if (!this.searchTerm) return this.catalogs;
-    
+
     const term = this.searchTerm.toLowerCase();
-    return this.catalogs.filter(catalog => 
+    return this.catalogs.filter(catalog =>
       catalog.nombre.toLowerCase().includes(term) ||
       (catalog.descripcion && catalog.descripcion.toLowerCase().includes(term))
     );
@@ -139,7 +139,7 @@ export class PermissionCatalogListComponent extends BaseDynamicPermissionsCompon
   }
 
   get totalPages(): number {
-    return Math.ceil(this.filteredCatalogs.length / this.pageSize);
+    return Math.max(1, Math.ceil(this.filteredCatalogs.length / this.pageSize));
   }
 
   get tableData(): any[] {

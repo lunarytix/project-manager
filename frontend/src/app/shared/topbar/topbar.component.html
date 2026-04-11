@@ -18,12 +18,22 @@
 
 <!-- Left sidebar (menu) -->
 <aside class="sidebar left" [class.open]="showMenu" [attr.aria-hidden]="!showMenu">
-  <div class="sidebar-header">
+  <div class="sidebar-header left-header">
+    <div class="left-brand">
+      <div class="left-brand-title">Navegación</div>
+      <div class="left-brand-subtitle">Project Manager</div>
+    </div>
     <button class="close" (click)="toggleMenu()">✕</button>
   </div>
-  <nav class="sidebar-nav">
-    <button class="menu-item" (click)="goBack()">← Volver</button>
-    <button class="menu-item" (click)="goDashboard()">🏠 Dashboard</button>
+
+  <div class="left-hero">
+    <div class="left-hero-dot"></div>
+  </div>
+
+  <nav class="sidebar-nav left-nav">
+    <div class="left-section-title">Accesos rápidos</div>
+    <button class="menu-item left-item" (click)="goBack()">← Volver</button>
+    <button class="menu-item left-item" (click)="goDashboard()">🏠 Dashboard</button>
   </nav>
 </aside>
 
@@ -33,19 +43,75 @@
     <div class="cover-overlay"></div>
   </div>
   <div class="profile-body">
-    <div class="avatar-large">
-      <img *ngIf="user?.photo" [src]="user.photo" alt="avatar" />
-      <span *ngIf="!user?.photo">{{ user?.nombre ? user.nombre.charAt(0) : 'U' }}</span>
-    </div>
-    <div class="info">
-      <div class="name">{{ user?.nombre || 'Usuario' }}</div>
-      <div class="subtitle">{{ user?.roleName || 'Administrador' }}</div>
-      <div class="email">{{ user?.email || '' }}</div>
-    </div>
+    <ng-container *ngIf="!showProfileEdit">
+      <div class="avatar-large">
+        <img *ngIf="user?.photo" [src]="user.photo" alt="avatar" />
+        <span *ngIf="!user?.photo">{{ user?.nombre ? user.nombre.charAt(0) : 'U' }}</span>
+      </div>
+      <div class="info">
+        <div class="name">{{ user?.nombre || 'Usuario' }}</div>
+        <div class="subtitle">{{ user?.roleName || 'Administrador' }}</div>
+        <div class="email">{{ user?.email || '' }}</div>
+      </div>
 
-    <div class="sidebar-actions bold">
-      <button class="menu-item primary" (click)="goSettings()">⚙️ Configuración</button>
-      <button class="menu-item outline" (click)="logout()">🔓 Cerrar sesión</button>
+      <div class="sidebar-actions bold">
+        <button class="menu-item primary" (click)="goSettings()">⚙️ Configuración</button>
+        <button class="menu-item outline" (click)="logout()">🔓 Cerrar sesión</button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="showProfileEdit">
+      <div class="profile-edit-header">
+        <button class="menu-item outline small" (click)="closeSettings()">← Volver</button>
+      </div>
+
+      <div class="avatar-large editable" (click)="openImageSelector()" (keydown.enter)="openImageSelector()" (keydown.space)="openImageSelector(); $event.preventDefault()" [attr.aria-label]="user?.photo ? 'Cambiar foto de perfil' : 'Subir foto de perfil'" role="button" tabindex="0">
+        <img *ngIf="user?.photo" [src]="user.photo" alt="avatar" />
+        <span *ngIf="!user?.photo">{{ user?.nombre ? user.nombre.charAt(0) : 'U' }}</span>
+      </div>
+
+      <small class="photo-help" *ngIf="profileUploading">Subiendo imagen...</small>
+      <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" hidden />
+
+      <div class="profile-form-card">
+        <app-dynamic-form
+          [config]="profileFormConfig"
+          [initialValues]="profileInitialValues"
+          (formSubmit)="onProfileFormSubmit($event)">
+        </app-dynamic-form>
+      </div>
+
+      <p class="message ok" *ngIf="profileSuccess">{{ profileSuccess }}</p>
+      <p class="message error" *ngIf="profileError">{{ profileError }}</p>
+
+      <div class="sidebar-actions bold">
+        <button class="menu-item outline" (click)="logout()">🔓 Cerrar sesión</button>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="editor-modal" *ngIf="showEditor">
+    <div class="editor-card">
+      <h3>Editar imagen</h3>
+      <p>Recorta el centro y ajusta el zoom antes de guardar.</p>
+
+      <canvas #editorCanvas width="260" height="260"></canvas>
+
+      <label class="zoom-label" for="zoomRangeMenu">Zoom: {{ editorZoom.toFixed(1) }}x</label>
+      <input
+        id="zoomRangeMenu"
+        type="range"
+        min="1"
+        max="3"
+        step="0.1"
+        [value]="editorZoom"
+        (input)="onZoomChange($any($event.target).value)"
+      />
+
+      <div class="editor-actions">
+        <button class="menu-item outline small" (click)="cancelEditImage()">Cancelar</button>
+        <button class="menu-item primary small" (click)="applyEditedImage()">Guardar edición</button>
+      </div>
     </div>
   </div>
 </aside>

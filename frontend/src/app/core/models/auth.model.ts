@@ -9,6 +9,7 @@ export interface LoginResponse {
   nombre: string;
   email: string;
   roleId: string;
+  photo?: string;
 }
 
 export interface AuthState {
@@ -18,6 +19,7 @@ export interface AuthState {
     nombre: string;
     email: string;
     roleId: string;
+    photo?: string;
   };
   token?: string;
 }

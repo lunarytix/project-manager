@@ -28,6 +28,7 @@
 
       <app-dynamic-form
         [config]="userFormConfig"
+        [initialValues]="formInitialValues"
         (formSubmit)="onFormSubmit($event)"
         (formReset)="onFormReset()">
       </app-dynamic-form>
@@ -54,48 +55,29 @@
       <pre>{{ modulePermissions | json }}</pre>
     </div>
     <!-- Grid View -->
-    <div class="users-grid" *ngIf="currentView === 'grid'">
-      <div *ngFor="let user of paginatedUsers" class="user-card">
-        <div class="card-header">
-          <div class="user-avatar">
-            <span class="material-icons">person</span>
+    <app-standard-grid
+      *ngIf="currentView === 'grid'"
+      [items]="gridItems"
+      [config]="gridConfig"
+      [actionDropdownConfig]="actionDropdownConfig"
+      [showEditButton]="permissionChecker.hasPermission(modulePermissions, 'Editar')"
+      [actionsProvider]="getUserActionsForGrid"
+      (edit)="onGridEdit($event)"
+      (action)="onGridAction($event)">
+
+      <ng-template #bodyTemplate let-item>
+        <div class="user-details">
+          <div class="detail-item">
+            <span class="detail-label">ID:</span>
+            <span class="detail-value">{{ item.id }}</span>
           </div>
-          <div class="user-main-info">
-            <h4 class="user-name">{{ user.nombre }}</h4>
-            <p class="user-email">{{ user.email }}</p>
-          </div>
-          <div class="user-status" [class.active]="user.activo">
-            <span class="status-dot"></span>
-            <span class="status-text">{{ user.activo ? 'Activo' : 'Inactivo' }}</span>
+          <div class="detail-item">
+            <span class="detail-label">ROL:</span>
+            <span class="detail-value role-badge">{{ getRoleName(item.roleId) }}</span>
           </div>
         </div>
-
-        <div class="card-body">
-          <div class="user-details">
-            <div class="detail-item">
-              <span class="detail-label">ID:</span>
-              <span class="detail-value">{{ user.id }}</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">Rol:</span>
-              <span class="detail-value role-badge">{{ getRoleName(user.roleId) }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-actions">
-          <button type="button" class="btn btn-sm btn-outline" (click)="editUser(user)" title="Editar">
-            <span class="material-icons">edit</span>
-          </button>
-
-          <app-action-dropdown
-            [config]="actionDropdownConfig"
-            [actions]="getUserActions(user)"
-            (actionClick)="onUserAction($event, user)">
-          </app-action-dropdown>
-        </div>
-      </div>
-    </div>
+      </ng-template>
+    </app-standard-grid>
 
     <!-- Table View -->
     <app-generic-table

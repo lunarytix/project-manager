@@ -49,17 +49,21 @@ export class SearchFilterBarComponent {
   }
 
   onPageChange(page: number): void {
-    if (page >= 1 && page <= this.totalPages && page !== this.currentPage) {
+    if (page >= 1 && page <= this.safeTotalPages && page !== this.currentPage) {
       this.currentPage = page;
       this.pageChange.emit(page);
     }
   }
 
+  get safeTotalPages(): number {
+    return Math.max(1, Number(this.totalPages) || 1);
+  }
+
   get pageNumbers(): number[] {
     const pages: number[] = [];
     const start = Math.max(1, this.currentPage - 2);
-    const end = Math.min(this.totalPages, this.currentPage + 2);
-    
+    const end = Math.min(this.safeTotalPages, this.currentPage + 2);
+
     for (let i = start; i <= end; i++) {
       pages.push(i);
     }
@@ -71,6 +75,6 @@ export class SearchFilterBarComponent {
   }
 
   get showNextEllipsis(): boolean {
-    return this.currentPage < this.totalPages - 2;
+    return this.currentPage < this.safeTotalPages - 2;
   }
 }

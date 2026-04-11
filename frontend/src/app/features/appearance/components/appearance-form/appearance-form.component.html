@@ -246,6 +246,79 @@
       </div>
     </div>
 
+    <!-- Components Tab -->
+    <div class="tab-panel" *ngIf="activeTab === 'components'">
+      <form [formGroup]="form" class="form-grid">
+        <div class="form-section" *ngFor="let section of componentStyles">
+          <h3>
+            <span class="material-icons">
+              {{ section.name === 'Grid' ? 'grid_view' : section.name === 'Tabla' ? 'table_chart' : section.name === 'Menús' ? 'menu' : 'login' }}
+            </span>
+            {{ section.name }}
+          </h3>
+          <div class="color-group">
+            <div class="form-group" *ngFor="let field of section.fields">
+              <label [for]="field.key">{{ field.label }}</label>
+
+              <!-- Color picker -->
+              <div class="color-input-wrapper" *ngIf="!$any(field).type || $any(field).type === 'color'">
+                <input type="color"
+                       [id]="field.key"
+                       [formControlName]="field.key"
+                       class="color-picker">
+                <input type="text"
+                       [formControlName]="field.key"
+                       class="color-text form-control"
+                       [class.error]="form.get(field.key)?.invalid && form.get(field.key)?.touched">
+              </div>
+
+              <!-- Text input -->
+              <div *ngIf="$any(field).type === 'text'">
+                <input type="text"
+                       [id]="field.key"
+                       [formControlName]="field.key"
+                       class="form-control"
+                       [placeholder]="field.label">
+              </div>
+
+              <!-- Select input -->
+              <div *ngIf="$any(field).type === 'select'">
+                <select [id]="field.key"
+                        [formControlName]="field.key"
+                        class="form-control form-select">
+                  <option *ngFor="let opt of $any(field).options" [value]="opt.value">{{ opt.label }}</option>
+                </select>
+              </div>
+
+              <!-- Range input -->
+              <div class="range-wrapper" *ngIf="$any(field).type === 'range'">
+                <input type="range"
+                       [id]="field.key"
+                       [formControlName]="field.key"
+                       [min]="$any(field).min"
+                       [max]="$any(field).max"
+                       [step]="$any(field).step"
+                       class="form-range">
+                <span class="range-value">{{ form.get(field.key)?.value }}</span>
+              </div>
+
+              <!-- Image preview for background image URL -->
+              <div class="image-preview" *ngIf="field.key === 'loginBackgroundImage' && form.get('loginBackgroundImage')?.value">
+                <img [src]="form.get('loginBackgroundImage')?.value"
+                     alt="Vista previa"
+                     (error)="$any($event.target).style.display='none'"
+                     (load)="$any($event.target).style.display='block'">
+              </div>
+
+              <div class="error-message" *ngIf="form.get(field.key)?.invalid && form.get(field.key)?.touched">
+                {{ getFieldError(field.key) }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
   </div>
 
   <!-- Loading State -->

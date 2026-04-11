@@ -1,0 +1,58 @@
+<section class="profile-page">
+  <header class="profile-header">
+    <h2>Configuración de perfil</h2>
+    <p>Edita tus datos de usuario. El cambio de contraseña se mantiene fuera de esta pantalla.</p>
+  </header>
+
+  <div class="profile-layout">
+    <aside class="photo-card">
+      <div class="photo-wrap">
+        <img *ngIf="profilePhoto" [src]="profilePhoto" alt="Foto de perfil" />
+        <span *ngIf="!profilePhoto">{{ formInitialValues['nombre'] ? formInitialValues['nombre'].charAt(0) : 'U' }}</span>
+      </div>
+
+      <button type="button" class="btn-primary" (click)="openImageSelector()" [disabled]="uploading">
+        {{ uploading ? 'Subiendo...' : 'Cambiar foto' }}
+      </button>
+      <small>Al elegir una imagen se te preguntará si quieres cambiarla directamente o editarla.</small>
+
+      <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" hidden />
+    </aside>
+
+    <article class="form-card">
+      <app-dynamic-form
+        [config]="profileFormConfig"
+        [initialValues]="formInitialValues"
+        (formSubmit)="onFormSubmit($event)">
+      </app-dynamic-form>
+
+      <p class="message ok" *ngIf="success">{{ success }}</p>
+      <p class="message error" *ngIf="error">{{ error }}</p>
+    </article>
+  </div>
+
+  <div class="editor-modal" *ngIf="showEditor">
+    <div class="editor-card">
+      <h3>Editar imagen</h3>
+      <p>Recorta el centro de la imagen y ajusta el zoom antes de guardar.</p>
+
+      <canvas #editorCanvas width="280" height="280"></canvas>
+
+      <label class="zoom-label" for="zoomRange">Zoom: {{ editorZoom.toFixed(1) }}x</label>
+      <input
+        id="zoomRange"
+        type="range"
+        min="1"
+        max="3"
+        step="0.1"
+        [value]="editorZoom"
+        (input)="onZoomChange($any($event.target).value)"
+      />
+
+      <div class="editor-actions">
+        <button type="button" class="btn-light" (click)="cancelEditImage()">Cancelar</button>
+        <button type="button" class="btn-primary" (click)="applyEditedImage()">Guardar edición</button>
+      </div>
+    </div>
+  </div>
+</section>

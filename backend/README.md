@@ -18,6 +18,33 @@ API endpoints (high level):
 
 This backend uses TypeORM with SQLite (`data/sqlite.db`).
 
+## API Docs (OpenAPI / Swagger)
+
+When backend is running, open:
+
+- `http://localhost:3001/api/docs`
+
+From this view you can:
+
+- See all endpoint types (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`)
+- Inspect request/response schemas
+- Execute requests directly from Swagger UI
+
+## Unit tests for endpoints
+
+Run controller endpoint unit tests with:
+
+```bash
+npm test
+```
+
+Useful variants:
+
+```bash
+npm run test:watch
+npm run test:cov
+```
+
 ## Useful API curl examples
 
 Below are quick curl commands you can use during development. Replace HOST and IDs as needed (default backend host: `http://localhost:3001`).

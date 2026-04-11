@@ -11,9 +11,9 @@
           [placeholder]="config.placeholder || 'Buscar...'"
           [value]="searchTerm"
           (input)="onSearchChange($any($event.target).value)">
-        <button 
-          *ngIf="searchTerm" 
-          class="clear-search" 
+        <button
+          *ngIf="searchTerm"
+          class="clear-search"
           (click)="onSearchChange('')">
           <span class="material-icons">clear</span>
         </button>
@@ -31,8 +31,8 @@
 
     <!-- Create Button -->
     <div class="create-button-container" *ngIf="config.showCreateButton !== false">
-      <button 
-        type="button" 
+      <button
+        type="button"
         class="btn btn-primary create-btn"
         (click)="onCreateClick()">
         <span class="material-icons">{{ config.createButtonIcon || 'add' }}</span>
@@ -42,17 +42,17 @@
   </div>
 
   <!-- Pagination Row -->
-  <div class="pagination-row" *ngIf="config.showPagination && totalPages > 1">
+  <div class="pagination-row" *ngIf="config.showPagination">
     <div class="pagination-info">
       <span class="pagination-text">
-        Página {{ currentPage }} de {{ totalPages }}
+        Página {{ currentPage }} de {{ safeTotalPages }}
         <span *ngIf="config.totalItems">({{ config.totalItems }} elementos)</span>
       </span>
     </div>
 
     <div class="pagination-controls">
       <!-- First Page -->
-      <button 
+      <button
         class="pagination-btn"
         [class.disabled]="currentPage === 1"
         (click)="onPageChange(1)"
@@ -61,7 +61,7 @@
       </button>
 
       <!-- Previous Page -->
-      <button 
+      <button
         class="pagination-btn"
         [class.disabled]="currentPage === 1"
         (click)="onPageChange(currentPage - 1)"
@@ -73,7 +73,7 @@
       <span class="pagination-ellipsis" *ngIf="showPrevEllipsis">...</span>
 
       <!-- Page Numbers -->
-      <button 
+      <button
         *ngFor="let page of pageNumbers"
         class="pagination-btn page-number"
         [class.active]="page === currentPage"
@@ -85,20 +85,20 @@
       <span class="pagination-ellipsis" *ngIf="showNextEllipsis">...</span>
 
       <!-- Next Page -->
-      <button 
+      <button
         class="pagination-btn"
-        [class.disabled]="currentPage === totalPages"
+        [class.disabled]="currentPage === safeTotalPages"
         (click)="onPageChange(currentPage + 1)"
-        [disabled]="currentPage === totalPages">
+        [disabled]="currentPage === safeTotalPages">
         <span class="material-icons">chevron_right</span>
       </button>
 
       <!-- Last Page -->
-      <button 
+      <button
         class="pagination-btn"
-        [class.disabled]="currentPage === totalPages"
-        (click)="onPageChange(totalPages)"
-        [disabled]="currentPage === totalPages">
+        [class.disabled]="currentPage === safeTotalPages"
+        (click)="onPageChange(safeTotalPages)"
+        [disabled]="currentPage === safeTotalPages">
         <span class="material-icons">last_page</span>
       </button>
     </div>

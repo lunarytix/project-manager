@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppearanceController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const appearance_service_1 = require("./appearance.service");
 const create_appearance_dto_1 = require("./dto/create-appearance.dto");
 const update_appearance_dto_1 = require("./dto/update-appearance.dto");
@@ -46,6 +47,7 @@ let AppearanceController = class AppearanceController {
 };
 exports.AppearanceController = AppearanceController;
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Crear configuracion de apariencia' }),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -53,18 +55,21 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AppearanceController.prototype, "create", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Listar configuraciones de apariencia' }),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], AppearanceController.prototype, "findAll", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Obtener apariencia por defecto' }),
     (0, common_1.Get)('default'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], AppearanceController.prototype, "findDefault", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Obtener configuracion de apariencia por ID' }),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -72,6 +77,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AppearanceController.prototype, "findOne", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Actualizar configuracion de apariencia' }),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -80,6 +86,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AppearanceController.prototype, "update", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Eliminar configuracion de apariencia' }),
     (0, common_1.Delete)(':id'),
     (0, common_1.HttpCode)(common_1.HttpStatus.NO_CONTENT),
     __param(0, (0, common_1.Param)('id')),
@@ -88,6 +95,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AppearanceController.prototype, "remove", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Marcar apariencia como predeterminada' }),
     (0, common_1.Post)(':id/set-default'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -95,6 +103,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AppearanceController.prototype, "setAsDefault", null);
 exports.AppearanceController = AppearanceController = __decorate([
+    (0, swagger_1.ApiTags)('Appearance'),
     (0, common_1.Controller)('appearance'),
     (0, common_1.UseGuards)(permission_guard_1.PermissionGuard),
     __metadata("design:paramtypes", [appearance_service_1.AppearanceService])

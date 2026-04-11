@@ -20,14 +20,14 @@
   </app-search-filter-bar>
 
   <!-- Grid View -->
-  <app-standard-grid 
+  <app-standard-grid
     *ngIf="currentView === 'grid'"
     [items]="gridItems"
     [config]="gridConfig"
     [actionsProvider]="getCatalogActionsForGrid"
     (edit)="onGridEdit($event)"
     (action)="onGridAction($event)">
-    
+
     <!-- Custom content for each catalog -->
     <ng-template #bodyContent let-item let-originalItem="originalItem">
       <div class="catalog-info-section">
@@ -35,7 +35,7 @@
           <span class="material-icons">category</span>
           <span class="info-title">Información del Catálogo</span>
         </div>
-        
+
         <div class="info-summary">
           <div class="info-stat">
             <span class="stat-label">Catálogo de Permisos</span>
@@ -78,9 +78,10 @@
 
   <!-- Table View -->
   <div *ngIf="currentView === 'table'" class="catalogs-table">
-    <app-generic-table 
+    <app-generic-table
       [data]="paginatedCatalogs"
       [columns]="tableColumns"
+      [enableSearch]="false"
       (edit)="edit($event.id)"
       (delete)="remove($event.id)">
     </app-generic-table>
@@ -98,8 +99,8 @@
       <p *ngIf="!searchTerm">
         Comienza creando tu primer catálogo de permisos
       </p>
-      <button *ngIf="!searchTerm && permissions.canCreate" 
-              type="button" 
+      <button *ngIf="!searchTerm && permissions.canCreate"
+              type="button"
               class="btn btn-primary"
               (click)="edit()">
         <i class="fas fa-plus"></i>

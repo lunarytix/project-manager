@@ -35,6 +35,7 @@
       <app-generic-table
         [data]="getPaginatedCatalogs()"
         [columns]="tableColumns"
+        [enableSearch]="false"
         [canEdit]="permissionChecker.hasPermission(modulePermissions, 'Editar')"
         [canDelete]="permissionChecker.hasPermission(modulePermissions, 'Eliminar')"
         [extraActions]="getTableExtraActions()"
@@ -84,4 +85,23 @@
   <button mat-stroked-button (click)="goBack()">
     Volver al Dashboard
   </button>
+</div>
+
+<!-- Modal Form -->
+<div *ngIf="showForm" class="modal-overlay" (click)="closeCatalogForm()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="form-header">
+      <h2>{{ editingId ? 'Editar catálogo' : 'Nuevo catálogo' }}</h2>
+      <button type="button" class="btn-close" (click)="closeCatalogForm()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+
+    <app-dynamic-form
+      [config]="catalogFormConfig"
+      [initialValues]="catalogFormInitialValues"
+      (formSubmit)="onCatalogFormSubmit($event)"
+      (formReset)="closeCatalogForm()">
+    </app-dynamic-form>
+  </div>
 </div>

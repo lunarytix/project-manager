@@ -32,6 +32,7 @@ let AuthService = class AuthService {
             nombre: user.nombre,
             email: user.email,
             roleId: user.roleId,
+            photo: user.photo,
             token: 'fake-jwt-token-' + user.id
         };
     }
