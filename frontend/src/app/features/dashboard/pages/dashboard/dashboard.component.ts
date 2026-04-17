@@ -6,6 +6,7 @@ import { ModuleService } from '../../../../core/services/module.service';
 import { PermissionService } from '../../../../core/services/permission.service';
 import { PermissionCheckerService } from '../../../../core/services/permission-checker.service';
 import { Module as AppModule } from '../../../../core/models/module.model';
+import { FrontendAuditService } from '../../../../core/services/frontend-audit.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -33,6 +34,7 @@ export class DashboardComponent implements OnInit {
     private moduleService: ModuleService,
     private permissionService: PermissionService,
     private permissionChecker: PermissionCheckerService,
+    private frontendAudit: FrontendAuditService,
     private router: Router
   ) {}
 
@@ -75,6 +77,11 @@ export class DashboardComponent implements OnInit {
 
   navigateTo(ruta: string): void {
     if (ruta) {
+      const selectedModule = this.visibleModules.find(m => m.ruta === ruta);
+      this.frontendAudit.logAction('Seleccion de modulo desde dashboard', {
+        moduleRuta: ruta,
+        moduleNombre: selectedModule?.nombre || null,
+      }, 'DashboardComponent');
       this.router.navigate([ruta]);
     }
   }

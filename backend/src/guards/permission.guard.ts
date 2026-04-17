@@ -20,6 +20,9 @@ export class PermissionGuard implements CanActivate {
     // Skip auth routes
     if (path.startsWith('/api/auth')) return true;
 
+    // Frontend audit event ingestion should not require module CRUD permissions.
+    if (path.startsWith('/api/audit/frontend-event')) return true;
+
     // Only enforce for state-changing methods
     if (!['POST', 'PUT', 'PATCH', 'DELETE'].includes(method)) return true;
 

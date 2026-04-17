@@ -435,29 +435,41 @@ export class RolesContainerComponent implements OnInit {
   onRoleAction(action: ActionItem, role: any): void {
     if (action.disabled) return;
 
-    switch (action.key) {
+    const roleId = role?.id || role?.data?.id;
+    const actionKey = (action?.key || '').toString();
+
+    switch (actionKey) {
       case 'edit':
         this.editRole(role);
         break;
       case 'permissions':
-        this.navigateToPermissions(role.id);
+      case 'ConfigurarPermisos':
+        if (roleId) this.navigateToPermissions(roleId);
         break;
       case 'users':
-        this.navigateToUsers(role.id);
+      case 'details':
+        if (roleId) this.navigateToUsers(roleId);
         break;
       case 'delete':
-        this.deleteRole(role.id);
+        if (roleId) this.deleteRole(roleId);
         break;
     }
   }
 
   onTableAction(event: { key: string; row: any }): void {
-    switch (event.key) {
+    const roleId = event?.row?.id || event?.row?.data?.id;
+    const actionKey = (event?.key || '').toString();
+
+    switch (actionKey) {
       case 'permissions':
-        this.navigateToPermissions(event.row.id);
+      case 'ConfigurarPermisos':
+      case 'extra:permissions':
+        if (roleId) this.navigateToPermissions(roleId);
         break;
       case 'users':
-        this.navigateToUsers(event.row.id);
+      case 'details':
+      case 'extra:details':
+        if (roleId) this.navigateToUsers(roleId);
         break;
     }
   }

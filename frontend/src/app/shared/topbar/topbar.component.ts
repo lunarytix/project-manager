@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { DynamicFormComponent, DynamicFormConfig } from '../components/dynamic-form/dynamic-form.component';
 import { UserService } from '../../core/services/user.service';
 import { environment } from '../../../environments/environment';
+import { FrontendAuditService } from '../../core/services/frontend-audit.service';
 
 @Component({
   selector: 'app-topbar',
@@ -41,7 +42,8 @@ export class TopbarComponent implements OnDestroy {
     private location: Location,
     private auth: AuthService,
     private moduleService: ModuleService,
-    private userService: UserService
+    private userService: UserService,
+    private frontendAudit: FrontendAuditService
   ) {
     this.user = this.auth.getCurrentUser();
     this.initProfileFormConfig();
@@ -93,8 +95,17 @@ export class TopbarComponent implements OnDestroy {
     if (!path) return;
     // ensure leading slash
     const p = path.startsWith('/') ? path : '/' + path;
+    this.frontendAudit.logAction('Navegacion desde menu lateral', {
+      targetPath: p,
+    }, 'TopbarComponent');
     this.router.navigate([p]);
     this.showMenu = false;
+  }
+
+  get isAdmin(): boolean {
+    const roleName = (this.user?.roleName || '').toString().toLowerCase();
+    const roleId = (this.user?.roleId || '').toString().toLowerCase();
+    return roleName === 'admin' || roleName === 'administrador' || roleId === 'admin';
   }
 
   private initProfileFormConfig(): void {
@@ -285,7 +296,7 @@ export class TopbarComponent implements OnDestroy {
     this.subs.forEach(s => s.unsubscribe());
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
+  @HostListener('document:keydown.escape')
   onEscape(): void {
     if (this.showMenu || this.showProfile) {
       this.showMenu = false;

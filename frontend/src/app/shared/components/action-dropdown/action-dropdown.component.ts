@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FrontendAuditService } from '../../../core/services/frontend-audit.service';
 
 export interface ActionItem {
   key: string;
@@ -38,7 +39,10 @@ export class ActionDropdownComponent {
   isOpen = false;
   searchTerm = '';
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(
+    private elementRef: ElementRef,
+    private readonly frontendAudit: FrontendAuditService,
+  ) {}
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event): void {
@@ -58,6 +62,10 @@ export class ActionDropdownComponent {
 
   onActionClick(action: ActionItem): void {
     if (!action.disabled) {
+      this.frontendAudit.logAction('Seleccion de accion en dropdown', {
+        actionKey: action.key,
+        actionLabel: action.label,
+      }, 'ActionDropdownComponent');
       this.actionClick.emit(action);
       this.isOpen = false;
     }

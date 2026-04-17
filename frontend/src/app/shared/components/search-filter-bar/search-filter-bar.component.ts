@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ViewToggleComponent, ViewMode, ViewToggleConfig } from '../view-toggle/view-toggle.component';
+import { FrontendAuditService } from '../../../core/services/frontend-audit.service';
 
 export interface SearchFilterConfig {
   placeholder?: string;
@@ -22,6 +23,8 @@ export interface SearchFilterConfig {
   styleUrls: ['./search-filter-bar.component.scss']
 })
 export class SearchFilterBarComponent {
+  constructor(private readonly frontendAudit: FrontendAuditService) {}
+
   @Input() config: SearchFilterConfig = {};
   @Input() currentView: ViewMode = 'grid';
   @Input() viewConfig: ViewToggleConfig = { gridLabel: 'Grid', tableLabel: 'Table' };
@@ -41,16 +44,26 @@ export class SearchFilterBarComponent {
 
   onViewChange(view: ViewMode): void {
     this.currentView = view;
+    this.frontendAudit.logAction('Cambio de vista en barra de filtros', {
+      view,
+    }, 'SearchFilterBarComponent');
     this.viewChange.emit(view);
   }
 
   onCreateClick(): void {
+    this.frontendAudit.logAction('Click en crear desde barra de filtros', {
+      currentView: this.currentView,
+    }, 'SearchFilterBarComponent');
     this.createClick.emit();
   }
 
   onPageChange(page: number): void {
     if (page >= 1 && page <= this.safeTotalPages && page !== this.currentPage) {
       this.currentPage = page;
+      this.frontendAudit.logAction('Cambio de pagina desde barra de filtros', {
+        page,
+        totalPages: this.safeTotalPages,
+      }, 'SearchFilterBarComponent');
       this.pageChange.emit(page);
     }
   }

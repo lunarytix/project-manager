@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
+const core_2 = require("@nestjs/core");
 const permission_guard_1 = require("./guards/permission.guard");
 const typeorm_1 = require("@nestjs/typeorm");
 const modules_module_1 = require("./modules/modules.module");
@@ -21,8 +22,10 @@ const permissions_module_1 = require("./permissions/permissions.module");
 const permission_catalogs_module_1 = require("./permission-catalogs/permission-catalogs.module");
 const users_module_1 = require("./users/users.module");
 const appearance_module_1 = require("./appearance/appearance.module");
+const audit_module_1 = require("./audit/audit.module");
 const seeder_service_1 = require("./seeder/seeder.service");
 const typeorm_2 = require("typeorm");
+const audit_log_interceptor_1 = require("./audit/interceptors/audit-log.interceptor");
 let AppModule = class AppModule {
     constructor(dataSource) {
         this.dataSource = dataSource;
@@ -45,11 +48,13 @@ exports.AppModule = AppModule = __decorate([
             permissions_module_1.PermissionsModule,
             permission_catalogs_module_1.PermissionCatalogsModule,
             users_module_1.UsersModule,
-            appearance_module_1.AppearanceModule
+            appearance_module_1.AppearanceModule,
+            audit_module_1.AuditModule
         ],
         providers: [
             seeder_service_1.SeederService,
-            { provide: core_1.APP_GUARD, useClass: permission_guard_1.PermissionGuard }
+            { provide: core_1.APP_GUARD, useClass: permission_guard_1.PermissionGuard },
+            { provide: core_2.APP_INTERCEPTOR, useClass: audit_log_interceptor_1.AuditLogInterceptor }
         ]
     }),
     __metadata("design:paramtypes", [typeorm_2.DataSource])

@@ -43,6 +43,16 @@ export const routes: Routes = [
 		canActivate: [authGuard]
 	},
 	{
+		path: 'audit',
+		loadChildren: () => import('./features/audit/audit.module').then(m => m.AuditModule),
+		canActivate: [authGuard]
+	},
+	{
+		path: 'project-control',
+		loadComponent: () => import('./features/project-control/pages/project-control-page/project-control-page.component').then(m => m.ProjectControlPageComponent),
+		canActivate: [authGuard]
+	},
+	{
 		path: '**',
 		redirectTo: 'dashboard'
 	}

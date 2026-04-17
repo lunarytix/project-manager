@@ -1,0 +1,147 @@
+<div class="audit-page">
+  <header class="page-header">
+    <h1>Auditoria y Modo Debug</h1>
+    <p>Controla el debug y revisa que hizo cada usuario por modulo.</p>
+  </header>
+
+  <section class="card" *ngIf="settings">
+    <h2>Configuracion global</h2>
+    <div class="settings-grid">
+      <label class="toggle-item">
+        <input type="checkbox" [(ngModel)]="settings.debugModeEnabled" />
+        <span>Activar modo debug (detalles y trazas)</span>
+      </label>
+
+      <label class="toggle-item">
+        <input type="checkbox" [(ngModel)]="settings.trackReadQueries" />
+        <span>Registrar consultas (GET) en logs</span>
+      </label>
+    </div>
+
+    <div class="actions">
+      <button class="btn primary" (click)="saveSettings()" [disabled]="savingSettings">
+        {{ savingSettings ? 'Guardando...' : 'Guardar configuracion' }}
+      </button>
+      <button class="btn" (click)="loadSettings()" [disabled]="loadingSettings">Recargar</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Filtros de logs</h2>
+    <div class="filters-grid">
+      <label>
+        Modulo (ruta)
+        <input type="text" [(ngModel)]="filters.moduleRuta" placeholder="/users, /roles, /audit" />
+      </label>
+
+      <label>
+        Metodo
+        <select [(ngModel)]="filters.method">
+          <option value="">Todos</option>
+          <option value="GET">GET</option>
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+          <option value="PATCH">PATCH</option>
+          <option value="DELETE">DELETE</option>
+        </select>
+      </label>
+
+      <label>
+        Accion
+        <select [(ngModel)]="filters.actionType">
+          <option value="">Todas</option>
+          <option value="CONSULTA">CONSULTA</option>
+          <option value="INSERTAR">INSERTAR</option>
+          <option value="MODIFICAR">MODIFICAR</option>
+          <option value="ELIMINAR">ELIMINAR</option>
+        </select>
+      </label>
+
+      <label>
+        Registros por pagina
+        <select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange()">
+          <option [ngValue]="25">25</option>
+          <option [ngValue]="50">50</option>
+          <option [ngValue]="100">100</option>
+          <option [ngValue]="200">200</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="actions">
+      <button class="btn primary" (click)="applyFilters()" [disabled]="loadingLogs">Aplicar filtros</button>
+      <button class="btn" (click)="clearFilters()" [disabled]="loadingLogs">Limpiar</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Registro de actividad</h2>
+
+    <div *ngIf="loadingLogs" class="loading">Cargando logs...</div>
+
+    <div *ngIf="!loadingLogs && logs.length === 0" class="empty">
+      No hay movimientos para los filtros seleccionados.
+    </div>
+
+    <div class="table-wrap" *ngIf="!loadingLogs && logs.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Usuario</th>
+            <th>Modulo</th>
+            <th>Accion</th>
+            <th>Metodo</th>
+            <th>URL consultada</th>
+            <th>Query/Body</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let log of logs">
+            <td>{{ log.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td>
+              <div>{{ log.userNombre || 'Anonimo' }}</div>
+              <small>{{ log.userEmail || '-' }}</small>
+            </td>
+            <td>
+              <div>{{ log.moduleNombre || log.moduleRuta }}</div>
+              <small>{{ log.moduleRuta }}</small>
+            </td>
+            <td>{{ log.actionType }}</td>
+            <td>{{ log.method }}</td>
+            <td>
+              <div class="mono">{{ log.endpoint }}</div>
+            </td>
+            <td>
+              <details>
+                <summary>Ver detalle</summary>
+                <div class="detail-block">
+                  <strong>Query</strong>
+                  <pre>{{ formatJson(log.queryData) }}</pre>
+                </div>
+                <div class="detail-block">
+                  <strong>Body</strong>
+                  <pre>{{ formatJson(log.bodyData) }}</pre>
+                </div>
+                <div class="detail-block" *ngIf="log.note">
+                  <strong>Nota</strong>
+                  <pre>{{ log.note }}</pre>
+                </div>
+              </details>
+            </td>
+            <td>{{ log.statusCode }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination" *ngIf="!loadingLogs && logs.length > 0">
+      <button class="btn" (click)="changePage(-1)" [disabled]="page <= 1">Anterior</button>
+      <span>Pagina {{ page }} de {{ totalPages }} · Total {{ total }}</span>
+      <button class="btn" (click)="changePage(1)" [disabled]="page >= totalPages">Siguiente</button>
+    </div>
+  </section>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+</div>

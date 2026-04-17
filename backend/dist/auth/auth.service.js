@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("../users/user.entity");
+const role_entity_1 = require("../roles/role.entity");
 let AuthService = class AuthService {
-    constructor(userRepository) {
+    constructor(userRepository, roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
     async login(dto) {
         const { email, password } = dto;
@@ -27,11 +29,17 @@ let AuthService = class AuthService {
         if (!user || user.password !== password) {
             throw new common_1.UnauthorizedException('Invalid credentials');
         }
+        let roleName = user.roleId;
+        if (user.roleId && user.roleId.length >= 40) {
+            const role = await this.roleRepository.findOne({ where: { id: user.roleId } });
+            roleName = role?.nombre || user.roleId;
+        }
         return {
             id: user.id,
             nombre: user.nombre,
             email: user.email,
             roleId: user.roleId,
+            roleName,
             photo: user.photo,
             token: 'fake-jwt-token-' + user.id
         };
@@ -41,5 +49,7 @@ exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.UserEntity)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, typeorm_1.InjectRepository)(role_entity_1.RoleEntity)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository])
 ], AuthService);

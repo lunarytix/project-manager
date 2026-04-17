@@ -1,0 +1,41 @@
+<div class="project-control-page">
+  <header class="page-header">
+    <h1>Control de Proyectos de Software</h1>
+    <p>
+      Crea proyectos, define rama git a instalar, inicializa base de datos con SQL
+      y controla acciones de despliegue/reinicio desde este sistema.
+    </p>
+  </header>
+
+  <section class="card">
+    <h2>Nuevo proyecto</h2>
+    <app-dynamic-form
+      [config]="formConfig"
+      (formSubmit)="onCreateProject($event)">
+    </app-dynamic-form>
+
+    <p class="info" *ngIf="info">{{ info }}</p>
+    <p class="error" *ngIf="error">{{ error }}</p>
+  </section>
+
+  <section class="card">
+    <h2>Proyectos registrados</h2>
+
+    <div *ngIf="loading" class="loading">Procesando...</div>
+
+    <app-generic-table
+      *ngIf="!loading"
+      [columns]="tableColumns"
+      [data]="projects"
+      [enableSearch]="true"
+      [canEdit]="false"
+      [canDelete]="false"
+      [extraActions]="projectActions"
+      [useMatSelect]="false"
+      [useNgSelect]="false"
+      [useNativeSelect]="false"
+      [useRowIconForActions]="false"
+      (action)="onProjectAction($event)">
+    </app-generic-table>
+  </section>
+</div>

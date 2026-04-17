@@ -33,21 +33,37 @@ export class AuthService {
     };
   }
 
+  private isUuid(value?: string): boolean {
+    if (!value) return false;
+    return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
+  }
+
   private initializeAuth(): void {
     const token = localStorage.getItem('token');
     const usuario = localStorage.getItem('usuario');
     if (token && usuario) {
       const userObj = this.normalizeUser(JSON.parse(usuario));
-      // if roleId looks like a role name (not a UUID), try to resolve to actual role id
-      if (userObj && userObj.roleId && typeof userObj.roleId === 'string' && userObj.roleId.length < 40) {
+
+      const needsRoleHydration =
+        userObj &&
+        userObj.roleId &&
+        (!userObj.roleName || this.isUuid(userObj.roleName) || this.isUuid(userObj.roleId));
+
+      if (needsRoleHydration) {
         fetch(`${environment.apiUrl}/roles`)
           .then(r => r.json())
           .then((roles: any[]) => {
-            const found = roles.find(r => r.nombre === userObj.roleId);
-            if (found) {
-              userObj.roleId = found.id;
-              localStorage.setItem('usuario', JSON.stringify(userObj));
+            const byName = roles.find(r => r.nombre === userObj.roleId);
+            const byId = roles.find(r => r.id === userObj.roleId);
+
+            if (byName) {
+              userObj.roleName = byName.nombre;
+              userObj.roleId = byName.id;
+            } else if (byId) {
+              userObj.roleName = byId.nombre;
             }
+
+            localStorage.setItem('usuario', JSON.stringify(userObj));
             this.authState.next({ isAuthenticated: true, token, usuario: userObj });
           })
           .catch(() => {
@@ -72,6 +88,7 @@ export class AuthService {
             nombre: response.nombre,
             email: response.email,
             roleId: response.roleId,
+            roleName: response.roleName,
             photo: response.photo
           });
           localStorage.setItem('token', response.token);

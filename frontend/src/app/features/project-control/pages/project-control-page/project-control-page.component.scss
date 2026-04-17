@@ -1,0 +1,48 @@
+.project-control-page {
+  padding: 24px;
+  display: grid;
+  gap: 16px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.page-header p {
+  margin: 8px 0 0;
+  color: #4b5563;
+  max-width: 980px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.card h2 {
+  margin: 0 0 12px;
+}
+
+.loading {
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.info {
+  color: #166534;
+  font-weight: 600;
+}
+
+.error {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .project-control-page {
+    padding: 12px;
+  }
+}

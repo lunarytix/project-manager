@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, TemplateRef, ContentChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActionDropdownComponent, ActionItem } from '../action-dropdown/action-dropdown.component';
+import { FrontendAuditService } from '../../../core/services/frontend-audit.service';
 
 export interface GridConfig {
   showIcon?: boolean;
@@ -30,6 +31,8 @@ export interface GridItem {
   styleUrls: ['./standard-grid.component.scss']
 })
 export class StandardGridComponent {
+  constructor(private readonly frontendAudit: FrontendAuditService) {}
+
   @Input() items: GridItem[] = [];
   @Input() config?: GridConfig;
   @Input() actionDropdownConfig?: any;
@@ -57,10 +60,20 @@ export class StandardGridComponent {
   }
 
   onEdit(item: GridItem): void {
+    this.frontendAudit.logAction('Click editar en card de grid', {
+      itemId: item.id,
+      itemName: item.name,
+    }, 'StandardGridComponent');
     this.edit.emit(item);
   }
 
   onAction(action: ActionItem, item: GridItem): void {
+    this.frontendAudit.logAction('Click accion en card de grid', {
+      actionKey: action.key,
+      actionLabel: action.label,
+      itemId: item.id,
+      itemName: item.name,
+    }, 'StandardGridComponent');
     this.action.emit({ action, item });
   }
 

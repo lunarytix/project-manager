@@ -130,6 +130,17 @@ let SeederService = class SeederService {
             });
             console.log('✓ Module created: Apariencia');
         }
+        const auditModule = await moduleRepository.findOne({ where: { nombre: 'Auditoría' } });
+        if (!auditModule) {
+            await moduleRepository.save({
+                nombre: 'Auditoría',
+                descripcion: 'Logs de movimientos y modo debug',
+                ruta: '/audit',
+                icono: 'bug_report',
+                activo: true
+            });
+            console.log('✓ Module created: Auditoría');
+        }
         // Create default appearance theme
         const defaultTheme = await appearanceRepository.findOne({ where: { name: 'Tema Azul Clásico' } });
         if (!defaultTheme) {
@@ -319,6 +330,8 @@ let SeederService = class SeederService {
             const limitedCatalogs = savedCatalogs.filter(c => ['Vista', 'Leer', 'VerDetalles'].includes(c.nombre));
             if (limitedCatalogs.length > 0) {
                 for (const mod of modules) {
+                    if (mod.ruta === '/audit')
+                        continue;
                     for (const catalog of limitedCatalogs) {
                         const exists = await permissionRepository.findOne({
                             where: {

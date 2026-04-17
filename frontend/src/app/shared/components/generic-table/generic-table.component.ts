@@ -6,10 +6,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { FrontendAuditService } from '../../../core/services/frontend-audit.service';
 
-export type TableColumn = { 
-  key: string; 
-  label: string; 
+export type TableColumn = {
+  key: string;
+  label: string;
   format?: 'text' | 'bool' | 'icon';
   sortable?: boolean;
   type?: 'text' | 'boolean' | 'number' | 'date';
@@ -23,6 +24,8 @@ export type TableColumn = {
   styleUrls: ['./generic-table.component.scss']
 })
 export class GenericTableComponent {
+  constructor(private readonly frontendAudit: FrontendAuditService) {}
+
   @Input() columns: TableColumn[] = [];
   @Input() data: any[] = [];
   @Input() pageSize = 10;
@@ -81,9 +84,29 @@ export class GenericTableComponent {
     return Array.from({ length: this.totalPages });
   }
 
-  onEdit(row: any) { this.edit.emit(row); }
-  onDelete(row: any) { this.delete.emit(row); }
-  onAction(key: string, row: any) { this.action.emit({ key, row }); }
+  onEdit(row: any) {
+    this.frontendAudit.logAction('Accion editar en tabla', {
+      rowId: row?.id || row?._id || null,
+      keys: Object.keys(row || {}),
+    }, 'GenericTableComponent');
+    this.edit.emit(row);
+  }
+
+  onDelete(row: any) {
+    this.frontendAudit.logAction('Accion eliminar en tabla', {
+      rowId: row?.id || row?._id || null,
+      keys: Object.keys(row || {}),
+    }, 'GenericTableComponent');
+    this.delete.emit(row);
+  }
+
+  onAction(key: string, row: any) {
+    this.frontendAudit.logAction('Accion custom en tabla', {
+      actionKey: key,
+      rowId: row?.id || row?._id || null,
+    }, 'GenericTableComponent');
+    this.action.emit({ key, row });
+  }
 
   // handle selection from mat-select (value is 'edit'|'delete'|'extra:<key>')
   onSelectAction(value: string, row: any) {
@@ -98,7 +121,7 @@ export class GenericTableComponent {
       setTimeout(() => { try { this.selection[id] = ''; } catch { /* ignore */ } }, 0);
     }
   }
-  
+
   // Build action items for dropdowns
   getActionItems(row: any) {
     const items: Array<{ value: string; label: string; icon?: string }> = [];
@@ -111,7 +134,7 @@ export class GenericTableComponent {
   // Build all actions as buttons (dynamic)
   getAllActions(row: any) {
     const actions: Array<{ key: string; label: string; icon: string; type: 'extra' | 'edit' | 'delete'; cssClass: string }> = [];
-    
+
     // Add extra actions
     (this.extraActions || []).forEach(a => {
       actions.push({
@@ -162,5 +185,5 @@ export class GenericTableComponent {
         break;
     }
   }
-  
+
 }

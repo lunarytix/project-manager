@@ -9,6 +9,7 @@ import { InputSelectComponent, SelectOption } from '../input-select/input-select
 import { InputCheckboxComponent } from '../input-checkbox/input-checkbox.component';
 import { InputNumberComponent } from '../input-number/input-number.component';
 import { InputButtonComponent, ButtonVariant } from '../input-button/input-button.component';
+import { FrontendAuditService } from '../../../core/services/frontend-audit.service';
 
 export interface DynamicFormField {
   key: string;
@@ -199,7 +200,10 @@ export class DynamicFormComponent implements OnInit, OnChanges {
   form!: FormGroup;
   sortedFields: DynamicFormField[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private readonly frontendAudit: FrontendAuditService,
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -308,13 +312,22 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 
   onSubmit(): void {
     if (this.form.valid) {
+      this.frontendAudit.logAction('Submit de formulario dinamico', {
+        fields: this.sortedFields.map(f => f.key),
+      }, 'DynamicFormComponent');
       this.formSubmit.emit(this.form.value);
     } else {
+      this.frontendAudit.logAction('Submit invalido en formulario dinamico', {
+        invalidFields: Object.keys(this.form.controls).filter(k => this.form.get(k)?.invalid),
+      }, 'DynamicFormComponent');
       this.form.markAllAsTouched();
     }
   }
 
   onReset(): void {
+    this.frontendAudit.logAction('Reset de formulario dinamico', {
+      fields: this.sortedFields.map(f => f.key),
+    }, 'DynamicFormComponent');
     this.form.reset();
     this.setFormValues();
     this.formReset.emit();

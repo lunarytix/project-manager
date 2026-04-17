@@ -129,6 +129,30 @@ export class SeederService implements OnModuleInit {
       console.log('✓ Module created: Apariencia');
     }
 
+    const auditModule = await moduleRepository.findOne({ where: { nombre: 'Auditoría' } });
+    if (!auditModule) {
+      await moduleRepository.save({
+        nombre: 'Auditoría',
+        descripcion: 'Logs de movimientos y modo debug',
+        ruta: '/audit',
+        icono: 'bug_report',
+        activo: true
+      });
+      console.log('✓ Module created: Auditoría');
+    }
+
+    const projectControlModule = await moduleRepository.findOne({ where: { nombre: 'ProyectosSoftware' } });
+    if (!projectControlModule) {
+      await moduleRepository.save({
+        nombre: 'ProyectosSoftware',
+        descripcion: 'Control de proyectos de software (git, deploy, db)',
+        ruta: '/project-control',
+        icono: 'terminal',
+        activo: true
+      });
+      console.log('✓ Module created: ProyectosSoftware');
+    }
+
     // Create default appearance theme
     const defaultTheme = await appearanceRepository.findOne({ where: { name: 'Tema Azul Clásico' } });
     if (!defaultTheme) {
@@ -328,6 +352,8 @@ export class SeederService implements OnModuleInit {
 
       if (limitedCatalogs.length > 0) {
         for (const mod of modules) {
+          if (mod.ruta === '/audit') continue;
+
           for (const catalog of limitedCatalogs) {
             const exists = await permissionRepository.findOne({
               where: {

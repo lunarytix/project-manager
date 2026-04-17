@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { RoleService } from '../../../../core/services/role.service';
@@ -18,7 +18,7 @@ import { forkJoin } from 'rxjs';
   templateUrl: './role-permissions.component.html',
   styleUrls: ['./role-permissions.component.scss']
 })
-export class RolePermissionsComponent implements OnInit, AfterViewChecked, OnDestroy {
+export class RolePermissionsComponent implements OnInit {
   roleId: string = '';
   role: any = null;
   modules: any[] = [];
@@ -29,10 +29,6 @@ export class RolePermissionsComponent implements OnInit, AfterViewChecked, OnDes
 
   // Matrix to track permissions [moduleId][catalogId] = boolean
   permissionMatrix: { [moduleId: string]: { [catalogId: string]: boolean } } = {};
-  // track last counts to know when to resync row heights
-  private _lastModuleCount = 0;
-  private _lastCatalogCount = 0;
-  private _resizeHandler: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,27 +49,6 @@ export class RolePermissionsComponent implements OnInit, AfterViewChecked, OnDes
     this.loadData();
   }
 
-  ngAfterViewChecked(): void {
-    // If data changed, sync heights
-    if (this.modules.length !== this._lastModuleCount || this.permissionCatalogs.length !== this._lastCatalogCount) {
-      this._lastModuleCount = this.modules.length;
-      this._lastCatalogCount = this.permissionCatalogs.length;
-      // Delay to allow DOM render
-      setTimeout(() => this.syncRowHeights(), 50);
-    }
-    // ensure resize listener installed once
-    if (!this._resizeHandler) {
-      this._resizeHandler = () => this.syncRowHeights();
-      window.addEventListener('resize', this._resizeHandler);
-    }
-  }
-
-  ngOnDestroy(): void {
-    if (this._resizeHandler) {
-      window.removeEventListener('resize', this._resizeHandler);
-      this._resizeHandler = null;
-    }
-  }
 
   loadData(): void {
     this.loading = true;
@@ -222,27 +197,4 @@ export class RolePermissionsComponent implements OnInit, AfterViewChecked, OnDes
     return catalog.id;
   }
 
-  private syncRowHeights(): void {
-    try {
-      const leftRows = Array.from(document.querySelectorAll('.module-row-left')) as HTMLElement[];
-      const rightRows = Array.from(document.querySelectorAll('.module-row-right')) as HTMLElement[];
-      const count = Math.max(leftRows.length, rightRows.length);
-      for (let i = 0; i < count; i++) {
-        const left = leftRows[i] as HTMLElement | undefined;
-        const right = rightRows[i] as HTMLElement | undefined;
-        if (!left || !right) continue;
-        // reset heights
-        left.style.minHeight = '';
-        right.style.minHeight = '';
-        const lh = left.getBoundingClientRect().height;
-        const rh = right.getBoundingClientRect().height;
-        const maxh = Math.max(lh, rh);
-        left.style.minHeight = `${maxh}px`;
-        right.style.minHeight = `${maxh}px`;
-      }
-    } catch (err) {
-      // ignore
-      console.warn('syncRowHeights error', err);
-    }
-  }
 }

@@ -34,6 +34,7 @@
     <div class="left-section-title">Accesos rápidos</div>
     <button class="menu-item left-item" (click)="goBack()">← Volver</button>
     <button class="menu-item left-item" (click)="goDashboard()">🏠 Dashboard</button>
+    <button class="menu-item left-item" *ngIf="isAdmin" (click)="navigateTo('/audit')">🧭 Auditoría y Debug</button>
   </nav>
 </aside>
 
